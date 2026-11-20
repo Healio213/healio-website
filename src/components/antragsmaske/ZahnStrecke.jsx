@@ -13,8 +13,8 @@ import {
 } from '@/data/sdkAmbulantAntrag';
 import {
   EINSTIEG, EINWILLIGUNG, GRUND_TEXTE, HINWEIS_BEITRAG, RUECKWEICHE_TEXTE, SATZ_AUSWAHL, UKV_AUS_ZIEL, VORFRAGEN, WEICHE_TEXTE, ZAHN_SOFORT_MONAT,
-  bayerischeAlterOk, bayerischeMitBaustein, definitionFuerWeiche, fortschritt, gestellteFragen, naechsterSchritt, rueckweiche,
-  ukvStufen, zielAus, zusatzAnzahl,
+  bayerischeAlterOk, bayerischeMitBaustein, definitionFuerWeiche, einstiegPunkte, fortschritt, gestellteFragen, naechsterSchritt, rueckweiche,
+  seitenspalteFuss, ukvStufen, vorfragenNachWechsel, zielAus, zusatzAnzahl,
 } from '@/data/antrag/zahnWeiche';
 import { UKV_URL } from '@/components/sections/dental/dentalLinks';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
@@ -330,13 +330,15 @@ export default function ZahnStrecke({ definition }) {
             const starte = () => {
               setMaskenDaten((alt) => ({ ...alt, [produkt]: daten }));
               setWechsel({
-                von: produkt, frageId, wert, person: personDaten, zusatz: {},
+                von: produkt, frageId, wert, person: personDaten, zusatz: {}, vorher: v,
               });
               setPhase('wechsel');
             };
             if (produkt === 'zahn-ukv') {
               return {
-                titel: RUECKWEICHE_TEXTE.zurBayerischen.titel, text: RUECKWEICHE_TEXTE.zurBayerischen.text(zusatzAnzahl(v)), knopf: RUECKWEICHE_TEXTE.zurBayerischen.knopf, onKlick: starte,
+                titel: RUECKWEICHE_TEXTE.zurBayerischen.titel, text: RUECKWEICHE_TEXTE.zurBayerischen.text(zusatzAnzahl({
+                  v, vonProdukt: produkt, frageId, wert, heute,
+                })), knopf: RUECKWEICHE_TEXTE.zurBayerischen.knopf, onKlick: starte,
               };
             }
             if (lage.art !== 'wechsel') return null;
@@ -392,7 +394,8 @@ export default function ZahnStrecke({ definition }) {
       const zusatz = { ...wechsel.zusatz };
       const gegeben = ['V3', 'V3a', 'V5', 'plz'].filter((key) => zusatz[key] !== undefined);
       const weg = gegeben[gegeben.length - 1];
-      if (!weg) { setWechsel(null); setPhase('maske'); setProdukt(wechsel.von); setMaskenRunde((alt) => alt + 1); return; }
+      // Zurück zur ersten Gesellschaft: Vorfragen wie vor dem Wechsel (Nachbesserung K3).
+      if (!weg) { if (wechsel.vorher) setV(wechsel.vorher); setWechsel(null); setPhase('maske'); setProdukt(wechsel.von); setMaskenRunde((alt) => alt + 1); return; }
       delete zusatz[weg];
       setWechsel({ ...wechsel, zusatz });
       return;
@@ -426,7 +429,7 @@ export default function ZahnStrecke({ definition }) {
           <div className="min-w-0">
             <p className="font-display text-xl font-extrabold leading-tight text-home-midnight">{EINSTIEG.titel}</p>
             <ul className="mt-2 space-y-1">
-              {EINSTIEG.punkte.map((punkt) => (
+              {einstiegPunkte({ ukvBeiHealio: !ukvAus }).map((punkt) => (
                 <li key={punkt} className="flex gap-2 text-base leading-6 text-home-midnight">
                   <Check className="mt-1 h-4 w-4 shrink-0 text-emerald-700" strokeWidth={3} aria-hidden="true" />
                   <span className="min-w-0">{schuetze(punkt)}</span>
@@ -675,9 +678,10 @@ export default function ZahnStrecke({ definition }) {
         weiterKnopf = {
           text: RUECKWEICHE_TEXTE.zurBayerischen.wechseln,
           onClick: () => {
-            // Vorfragen um die Zusatzangaben ergänzen (nur im Speicher), die Antworten an die UKV verwerfen.
-            setV((alt) => ({
-              ...alt, V3: wechsel.zusatz.V3, ...(wechsel.zusatz.V3a ? { V3a: wechsel.zusatz.V3a } : {}), ...(wechsel.zusatz.V5 && !alt.V5 ? { V5: wechsel.zusatz.V5 } : {}),
+            // Vorfragen um die Lage nach der Originalantwort und die Zusatzangaben ergänzen (nur im Speicher), die Antworten an
+            // die UKV verwerfen. Nachbesserung K3: nur übernehmen, was neu gefragt wurde.
+            setV((alt) => vorfragenNachWechsel({
+              v: alt, vonProdukt: wechsel.von, frageId: wechsel.frageId, wert: wechsel.wert, zusatz: wechsel.zusatz,
             }));
             setPlz(wechsel.zusatz.plz);
             setMaskenDaten((alt) => ({ ...alt, 'zahn-ukv': undefined, zahn: undefined }));
@@ -695,6 +699,11 @@ export default function ZahnStrecke({ definition }) {
   if (phase === 'weiche' && ziel?.ziel === 'telefon') weiterKnopf = null;
 
   const stufeJetzt = phase === 'fragen' ? 0 : 1;
+  // Nachbesserung W3: Auf den Bildschirmen der Rückweiche nennt die Seitenspalte die neue Gesellschaft erst beim Ergebnis.
+  let vertrauenDef = ziel?.produkt ? DEFINITIONEN[ziel.produkt] : null;
+  if (phase === 'wechsel') vertrauenDef = rw?.art === 'wechsel' ? DEFINITIONEN[rw.zu] : null;
+  // Nachbesserung W2: Bei ausgeschalteter UKV-Maske gelten die Sätze zu Healio und E-Mail nicht, solange das Ziel die UKV sein kann.
+  const unklarObUkv = phase === 'fragen' || (phase === 'weiche' && (!ziel || ziel.produkt === 'zahn-ukv'));
   const rechts = (
     <>
       <section>
@@ -708,9 +717,9 @@ export default function ZahnStrecke({ definition }) {
             </li>
           ))}
         </ol>
-        <p className="mt-6 text-base leading-6 text-slate-300">{EINSTIEG.seitenspalteFuss}</p>
+        <p className="mt-6 text-base leading-6 text-slate-300" data-seitenspalte-fuss="">{seitenspalteFuss({ ukvBeiHealio: !(ukvAus && unklarObUkv) })}</p>
       </section>
-      <VertrauenPunkte definition={ziel?.produkt ? DEFINITIONEN[ziel.produkt] : null} className="[@media(max-height:820px)]:hidden" />
+      <VertrauenPunkte definition={vertrauenDef} ohneUnterlagen={ukvAus && unklarObUkv} className="[@media(max-height:820px)]:hidden" />
       <NitaDunkel sparte="zahn" />
     </>
   );

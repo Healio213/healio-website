@@ -105,11 +105,12 @@ export function GeteilteSeite({
 }
 
 // Vertrauenspunkte und Nita auf der Nachtblau-Fläche.
-export function VertrauenPunkte({ definition, className }) {
+// ohneUnterlagen (Zahn-Weiche bei ausgeschalteter UKV-Maske, Nachbesserung W2): ohne den Satz zu den Unterlagen per E-Mail.
+export function VertrauenPunkte({ definition, className, ohneUnterlagen = false }) {
   const punkte = [
     'Sicher übertragen. Deine Angaben gehen erst mit dem Absenden raus.',
     definition ? `Der Vertrag kommt direkt von ${definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`}.` : 'Der Vertrag kommt direkt vom Versicherer.',
-    'Alle Unterlagen bekommst du per E-Mail über einen geschützten Link.',
+    ...(ohneUnterlagen ? [] : ['Alle Unterlagen bekommst du per E-Mail über einen geschützten Link.']),
   ];
   return (
     <ul className={cx('space-y-3', className)} data-vertrauen="">

@@ -289,7 +289,7 @@ test('55 bis 58: Rückweiche', () => {
       V3: 'fertig', V5: 'nein', plz: '20095',
     },
   }).ziel.ziel, 'bayerische');
-  assert.equal(W.zusatzAnzahl(v), 4);
+  assert.equal(W.zusatzAnzahl({ v, heute: NOV }), 4);
   // 56: mit Ziehen oder fehlenden Zähnen nur Telefon.
   assert.equal(rw({ zusatz: { V3: 'steht_an', V3a: 'ja' } }).art, 'telefon');
   assert.equal(W.rueckweiche({
@@ -418,4 +418,68 @@ test('Teil 6 Nr. 2: UKV-Ziel bei ausgeschaltetem UKV-Schalter ist der heutige Li
   assert.equal(W.UKV_AUS_ZIEL, 'link');
   assert.match(STRECKE, /ukvAus && UKV_AUS_ZIEL === 'link'/);
   assert.match(STRECKE, /href=\{UKV_URL\}/);
+});
+
+// ---------------------------------------------------------------------------
+// Nachbesserung Paket C (20.11.2026): je behobenem Mangel ein Test, der gegen den Stand 42d1969 fehlschlägt.
+// ---------------------------------------------------------------------------
+
+test('Nachbesserung W2: bei ausgeschalteter UKV-Maske ohne die Sätze zu Healio, E-Mail und Absenden', () => {
+  assert.deepEqual(W.einstiegPunkte(), W.EINSTIEG.punkte);
+  assert.deepEqual(W.einstiegPunkte({ ukvBeiHealio: false }), ['Ein paar kurze Fragen, dann siehst du, wo du mit deinen Angaben online abschließen kannst und was es kostet.']);
+  assert.equal(W.seitenspalteFuss(), W.EINSTIEG.seitenspalteFuss);
+  assert.equal(W.seitenspalteFuss({ ukvBeiHealio: false }), 'Deine Antworten zu deinen Zähnen bleiben auf dieser Seite.');
+  assert.match(STRECKE, /einstiegPunkte\(\{ ukvBeiHealio: !ukvAus \}\)/);
+  assert.match(STRECKE, /ohneUnterlagen=\{ukvAus && unklarObUkv\}/);
+  assert.doesNotMatch(STRECKE, /EINSTIEG\.punkte\.map/);
+});
+
+test('Nachbesserung W3: Seitenspalte der Rückweiche nennt die neue Gesellschaft erst beim Ergebnis', () => {
+  assert.match(STRECKE, /if \(phase === 'wechsel'\) vertrauenDef = rw\?\.art === 'wechsel' \? DEFINITIONEN\[rw\.zu\] : null;/);
+  assert.match(STRECKE, /<VertrauenPunkte definition=\{vertrauenDef\}/);
+});
+
+test('Nachbesserung K2: Anzahl im Rückweiche-Kasten aus der Lage', () => {
+  const v = basis({ V3: 'nein', V4: '0' });
+  const af = 'freiwillig gesetzlich versichert in deutscher GKV';
+  assert.equal(W.zusatzAnzahl({ v, heute: NOV }), 4);
+  assert.equal(W.zusatzAnzahl({ v: { ...v, V5: 'nein' }, heute: NOV }), 3);
+  assert.equal(W.zusatzAnzahl({
+    v, frageId: 'AF_AD_0005', wert: af, heute: NOV,
+  }), 2);
+  assert.equal(W.RUECKWEICHE_TEXTE.zurBayerischen.text(2), 'Bei der Bayerischen kannst du vielleicht trotzdem online abschließen. Dafür brauchen wir noch zwei kurze Angaben.');
+  assert.equal(W.RUECKWEICHE_TEXTE.zurBayerischen.text(1), 'Bei der Bayerischen kannst du vielleicht trotzdem online abschließen. Dafür brauchen wir noch eine kurze Angabe.');
+  assert.match(STRECKE, /zusatzAnzahl\(\{\s*v, vonProdukt: produkt, frageId, wert, heute,\s*\}\)/);
+});
+
+test('Nachbesserung K3: Wechsel nach AF_AD_0005 behält V3, übernimmt die Krankenversicherung und neu Gefragtes', () => {
+  const v = basis({ V3: 'nein', V4: '0' });
+  const af = 'freiwillig gesetzlich versichert in deutscher GKV';
+  const nach = W.vorfragenNachWechsel({
+    v, vonProdukt: 'zahn-ukv', frageId: 'AF_AD_0005', wert: af, zusatz: { V5: 'nein', plz: '20095' },
+  });
+  assert.equal(nach.V3, 'nein');
+  assert.equal(nach.V2, 'freiwillig');
+  assert.equal(nach.V5, 'nein');
+  assert.equal(W.zielAus(nach, { heute: NOV }).ziel, 'bayerische');
+  const gf = W.vorfragenNachWechsel({
+    v, vonProdukt: 'zahn-ukv', frageId: 'GF0073', wert: 'ja', zusatz: { V3: 'steht_an', V3a: 'nein', V5: 'nein' },
+  });
+  assert.deepEqual([gf.V3, gf.V3a, gf.V5], ['steht_an', 'nein', 'nein']);
+  assert.equal(W.zielAus(gf, { heute: NOV }).ziel, 'bayerische-sofort');
+  assert.doesNotMatch(STRECKE, /V3: wechsel\.zusatz\.V3,/);
+  assert.match(STRECKE, /vorher: v/);
+});
+
+test('Nachbesserung K4: abgerechnete Behandlung mit Vorgeschichte oder fehlenden Zähnen hat einen eigenen Grund', () => {
+  const fall = (v) => W.fallAus(v, { heute: NOV });
+  assert.equal(fall(basis({ V3: 'fertig', V4: '0', V5: 'ja' })), 'fertigMitLuecke');
+  assert.equal(fall(basis({ V3: 'steht_an', V3a: 'nein', V4: '0', V5: 'ja' })), 'behandlungMitLuecke');
+  for (const v of [basis({ V3: 'fertig', V4: '0', V5: 'ja' }), basis({ V3: 'fertig', V4: '2' })]) {
+    const z = W.zielAus(v, { heute: NOV });
+    assert.equal(z.ziel, 'telefon');
+    assert.equal(z.grund, 'fertigMitLuecke');
+    assert.equal(W.GRUND_TEXTE[z.grund], 'Kommen eine abgerechnete Behandlung und fehlende Zähne oder eine Vorgeschichte zusammen, bieten wir online keinen Abschluss an.');
+  }
+  assert.doesNotMatch(W.GRUND_TEXTE.fertigMitLuecke, /[–—]/);
 });

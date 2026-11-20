@@ -834,7 +834,7 @@ async function ukvDurchlauf(browser) {
   const { letzter } = await mock('/__test/letzter');
   const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
   pruefe(letzter.versicherer === 'ukv' && letzter.beitragAngezeigt === 40.95 && g('TF0021') === '1' && g('tarifwahl') === 'UKVZahnPRIVAT100#', 'UKV-Antrag mit Zuschlag und Zuordnung');
-  pruefe(g('policyHolderIsEqualInsuredPerson') === 'true' && g('VP0004') === 'Versicherungsnehmer selbst' && letzter.textfassung === '2026-11-20d-ukv-zahn-online' && !('weiche' in letzter), 'UKV: sichtbare Felder in der Zuordnung, Textfassung 2026-11-20d, Einzelmaske ohne Weiche');
+  pruefe(g('policyHolderIsEqualInsuredPerson') === 'true' && g('VP0004') === 'Versicherungsnehmer selbst' && letzter.textfassung === '2026-11-20e-ukv-zahn-online' && !('weiche' in letzter), 'UKV: sichtbare Felder in der Zuordnung, Textfassung 2026-11-20e, Einzelmaske ohne Weiche');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.href === 'dienst:15605'), 'UKV 100: 15605 in den Unterlagen');
   await foto(page, '390-ukv-03-danke');
   await context.close();

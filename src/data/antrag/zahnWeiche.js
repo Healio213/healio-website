@@ -72,6 +72,12 @@ export const EINSTIEG = Object.freeze({
   seitenspalteFuss: 'Deine Antworten zu deinen Zähnen bleiben auf dieser Seite. Deinen Antrag senden wir erst, wenn du ihn bestätigst.',
 });
 
+// Nachbesserung Paket C (W2): Ist die UKV-Maske aus (Teil 6 Nr. 2), führt die Weiche UKV-Kunden per Link zur UKV. Dann gilt
+// „Du bleibst die ganze Zeit bei Healio“, „Die Bestätigung bekommst du per E-Mail“ und „Deinen Antrag senden wir …“ nicht für
+// jeden. Solange das Ziel nicht feststeht, zeigt die Seite diese Sätze dann nicht.
+export const einstiegPunkte = ({ ukvBeiHealio = true } = {}) => (ukvBeiHealio ? EINSTIEG.punkte : EINSTIEG.punkte.slice(0, 1));
+export const seitenspalteFuss = ({ ukvBeiHealio = true } = {}) => (ukvBeiHealio ? EINSTIEG.seitenspalteFuss : 'Deine Antworten zu deinen Zähnen bleiben auf dieser Seite.');
+
 export const VORFRAGEN = Object.freeze({
   V1: {
     id: 'V1', typ: 'datum', text: 'Wann bist du geboren?', hilfe: 'Davon hängt ab, welche Tarife du online abschließen kannst und was sie kosten.', platzhalter: 'TT.MM.JJJJ',
@@ -191,6 +197,8 @@ export const GRUND_TEXTE = Object.freeze({
   mehrAls3: 'Fehlen mehr als 3 Zähne, ist online bei keiner der beiden Gesellschaften ein Abschluss möglich.',
   ziehen: 'Soll ein Zahn gezogen werden, bieten wir online keinen Abschluss an.',
   behandlungMitLuecke: 'Kommen eine anstehende Behandlung und fehlende Zähne oder eine Vorgeschichte zusammen, bieten wir online keinen Abschluss an.',
+  // Nachbesserung Paket C (K4), neu ohne Vorlage in Teil 2, Frank sieht ihn an.
+  fertigMitLuecke: 'Kommen eine abgerechnete Behandlung und fehlende Zähne oder eine Vorgeschichte zusammen, bieten wir online keinen Abschluss an.',
   offen: 'Für deine Angaben nehmen wir den Antrag gemeinsam mit dir auf.',
   region: 'Deinen Beitrag können wir gerade nicht bestätigen. Versuch es später noch einmal oder vereinbare einen Termin.',
 });
@@ -199,7 +207,8 @@ export const GRUND_TEXTE = Object.freeze({
 export const RUECKWEICHE_TEXTE = Object.freeze({
   zurBayerischen: {
     titel: 'Mit dieser Antwort geht es bei der UKV online nicht weiter.',
-    text: (anzahl) => `Bei der Bayerischen kannst du vielleicht trotzdem online abschließen. Dafür brauchen wir noch ${{ 2: 'zwei', 3: 'drei', 4: 'vier' }[anzahl] || anzahl} kurze Angaben.`,
+    // Nachbesserung (K2): Anzahl aus der Lage; bei einer Angabe Einzahl (neu, Frank sieht sie an).
+    text: (anzahl) => `Bei der Bayerischen kannst du vielleicht trotzdem online abschließen. ${anzahl === 1 ? 'Dafür brauchen wir noch eine kurze Angabe.' : `Dafür brauchen wir noch ${{ 2: 'zwei', 3: 'drei', 4: 'vier' }[anzahl] || anzahl} kurze Angaben.`}`,
     knopf: 'Angaben machen',
     ergebnisTitel: 'Bei der Bayerischen kannst du mit deinen Angaben online abschließen.',
     ergebnisText: 'Deine Antworten auf die Fragen der UKV nehmen wir nicht mit. Die Bayerische stellt dir gleich ihre eigenen Fragen. Name und Geburtsdatum übernehmen wir. Die Erklärungen und die Vollmacht für die Bayerische bestätigst du neu.',
@@ -256,7 +265,7 @@ export const MATRIX = Object.freeze({
   ziehen: { klasse: 'belegt', ziel: 'telefon', grund: 'ziehen', beleg: 'Komfort/Prestige lehnen ab (Lauf 4), UKV GF0073 lehnt ab; Smart mit Sofort nicht belegt' },
   vorgeschichteUkv: { klasse: 'gleichgestellt', ziel: 'ukv', grund: null, beleg: 'UKV fragt Prothese, alten Zahnersatz und Zahnschmelzdefekt nicht; Parodontitis belegt (lauf4, lauf6, Ausschluss aus GF0074)' },
   behandlungMitLuecke: { klasse: 'belegt', ziel: 'telefon', grund: 'behandlungMitLuecke', beleg: 'Bayerische lehnt fehlende Zähne und Vorgeschichte ab (Fragen 1 bis 4), UKV lehnt die Behandlung ab (GF0073)' },
-  fertigMitLuecke: { klasse: 'belegt', ziel: 'telefon', grund: null, beleg: 'Bayerische lehnt fehlende Zähne ab (Frage 1), UKV GF0073 fragt die letzten zwei Jahre' },
+  fertigMitLuecke: { klasse: 'belegt', ziel: 'telefon', grund: 'fertigMitLuecke', beleg: 'Bayerische lehnt fehlende Zähne und Vorgeschichte ab (Fragen 1 bis 4), UKV GF0073 fragt die letzten zwei Jahre' },
   ohneGesellschaft: { klasse: 'belegt', ziel: 'telefon', grund: null, beleg: 'Weder UKV noch Bayerische nehmen nach ihren Regeln an' },
 });
 
@@ -369,7 +378,7 @@ export function fallAus(v = {}, { heute = new Date() } = {}) {
   if (v.V3 === 'steht_an' || v.V3 === 'fertig') {
     if (v.V4 !== '0') return v.V3 === 'steht_an' ? 'behandlungMitLuecke' : 'fertigMitLuecke';
     if (!bay) return 'ohneGesellschaft';
-    if (v.V5 === 'ja') return 'behandlungMitLuecke';
+    if (v.V5 === 'ja') return v.V3 === 'steht_an' ? 'behandlungMitLuecke' : 'fertigMitLuecke';
     return v.V3 === 'steht_an' ? 'behandlungSofort' : 'behandlungFertig';
   }
   // V3 nein
@@ -529,8 +538,38 @@ export function rueckweiche({
 }
 
 // Höchstzahl der Zusatzangaben für den Text „Dafür brauchen wir noch [zwei | drei | vier] kurze Angaben.“
-export function zusatzAnzahl(v = {}) {
-  return 1 + 1 + (v.V5 ? 0 : 1) + 1; // abgerechnet, Ziehen (nur bei „steht an“), V5 falls offen, PLZ
+// Nachbesserung (K2): aus der Lage nach der Originalantwort gerechnet. Gezählt werden die Bildschirme bis zum Ergebnis
+// (abgerechnet, Ziehen, V5, PLZ) auf dem längsten Weg, der bei der Bayerischen endet.
+const ZUSATZ_WERTE = {
+  W1: ['V3', ['fertig', 'steht_an']], V3a: ['V3a', ['ja', 'nein']], V5: ['V5', ['ja', 'nein']], plz: ['plz', ['20095']],
+};
+export function zusatzAnzahl({
+  v = {}, vonProdukt = 'zahn-ukv', frageId = 'GF0073', wert = 'ja', heute = new Date(),
+} = {}) {
+  const laenge = (zusatz, tiefe) => {
+    const lage = rueckweiche({
+      v, vonProdukt, frageId, wert, zusatz, heute,
+    });
+    if (lage.art === 'wechsel') return tiefe;
+    if (lage.art !== 'zusatz' || tiefe > 4) return -1;
+    const [key, werte] = ZUSATZ_WERTE[lage.fehlt[0]] || [];
+    if (!key) return -1;
+    return Math.max(...werte.map((x) => laenge({ ...zusatz, [key]: x }, tiefe + 1)));
+  };
+  return Math.max(0, laenge({}, 0));
+}
+
+// Vorfragen nach einem Wechsel (Rückweiche): die Lage nach der Originalantwort plus die Zusatzangaben, nur im Speicher der Seite.
+// Nachbesserung (K3): Was nicht neu gefragt wurde, bleibt wie in den Vorfragen (zum Beispiel V3 nach AF_AD_0005).
+export function vorfragenNachWechsel({
+  v = {}, vonProdukt, frageId, wert, zusatz = {},
+} = {}) {
+  const lage = lageNachAntwort(v, vonProdukt, frageId, wert);
+  const neu = { ...(lage ? lage.neu : v) };
+  if (zusatz.V3) neu.V3 = zusatz.V3;
+  if (zusatz.V3a) neu.V3a = zusatz.V3a;
+  if (zusatz.V5 && !neu.V5) neu.V5 = zusatz.V5;
+  return neu;
 }
 
 // ---------------------------------------------------------------------------

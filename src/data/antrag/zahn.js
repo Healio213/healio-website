@@ -137,7 +137,9 @@ const zahn = {
   // 20.11.2026 (Ebene 2, Paket A): Vorbehalt wieder mit dem Satz zum Halt.
   // 20.11.2026 (Paket C, C6): Einwilligung Gesundheitsangaben (Text 6 und Kurzfassung) ohne „Größe und Gewicht“; auf dem Weg über
   // die Weiche gelten zusätzlich die Texte aus zahnWeiche.js (definitionFuerWeiche). Der Dienst nimmt 2026-11-20b weiter an.
-  textfassung: '2026-11-20c-bayerische-zahn',
+  // 20.11.2026 (Nachbesserung Paket C): Beschriftung und Bausteinpreis bei jährlicher Zahlung wie im Original, Texte der Weiche
+  // (Einstieg bei ausgeschalteter UKV-Maske, Rückweiche, Grund bei abgerechneter Behandlung). Der Dienst nimmt 2026-11-20c weiter an.
+  textfassung: '2026-11-20d-bayerische-zahn',
   quelle: 'Online-Strecke der Bayerischen (Bayculator release-1.53.24), erfasst 12.11.2026',
   versicherer: {
     id: 'bayerische', name: BA, kurz: 'Bayerische', beiDer: 'der Bayerischen',
@@ -168,12 +170,15 @@ const zahn = {
   ],
   tarifVorgabe: 'PRESTIGE',
   tarifHinweis: 'Monatlicher Gesamtbeitrag der versicherten Person',
+  // Nachbesserung Paket C (K1): bei jährlicher Zahlung wie das Original (gegenpruefung/bayerische-zahn/raender/mitschnitt/02c).
+  tarifHinweisJe: { jaehrlich: 'Jährlicher Gesamtbeitrag der versicherten Person' },
   tarifFussnote: 'Sie sind bei uns immer für zunächst zwei Jahre versichert. Nach Ablauf der zwei Jahre verlängert sich der Vertrag automatisch, wenn Sie nicht mit einer Frist von einem Monat kündigen.',
   bausteine: [{
     id: 'ZAHN_SOFORT',
     name: 'ZAHN Sofort',
     kennzeichen: 'Unsere Empfehlung',
     preisText: '+ 29,90 € monatlich',
+    preisTextJe: { jaehrlich: '+ 351,60 € jährlich' },
     original: 'KZV_ZAHN_SOFORT',
     leistungen: ['bereits angeratene Behandlungen (rückwirkender Schutz)', 'bereits begonnene Behandlungen (rückwirkender Schutz)'],
     erklaerungen: [

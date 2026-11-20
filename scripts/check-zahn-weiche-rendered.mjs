@@ -3,8 +3,10 @@
 // 55 bis 61. Fotos bei 390 px (ganze Seite) und 1280 px.
 //
 // Aufruf: node scripts/check-zahn-weiche-rendered.mjs [--fotos <ordner>] [--variante <url>]
-// Startet die Attrappe (8812) und zwei Vite-Server: 3038 alle Schalter an, 3039 Maske an, UKV-Schalter aus.
-// --variante: zusätzlich eine bereits laufende Vite-Seite mit WAHLREGEL „beide“ (nur für das Foto der Rückweiche Bayerische zur UKV).
+// Startet die Attrappe (8812) und drei Vite-Server: 3038 alle Schalter an (Telefonweg Zahn aus, Ausgang Termin), 3039 Maske an,
+// UKV-Schalter aus, 3040 wie 3038 mit Telefonweg Zahn (Ausgang Telefon, nur Fotos und Knopftext).
+// --variante: zusätzlich eine bereits laufende Vite-Seite mit WAHLREGEL „beide“ (nur für die Rückweiche Bayerische zur UKV).
+// Nachbesserung Paket C (20.11.2026): Fotos bei 390 und 1280 px für alle Motive, W2, W3, K1, K2, K3 gerendert.
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import fs from 'node:fs';
@@ -21,9 +23,11 @@ const VARIANTE = arg('--variante', null);
 const API_PORT = Number(arg('--api-port', 8812));
 const AN_PORT = Number(arg('--an-port', 3038));
 const UKVAUS_PORT = Number(arg('--ukvaus-port', 3039));
+const TEL_PORT = Number(arg('--tel-port', 3040));
 const API = `http://127.0.0.1:${API_PORT}`;
 const AN = `http://127.0.0.1:${AN_PORT}`;
 const UKVAUS = `http://127.0.0.1:${UKVAUS_PORT}`;
+const TEL = `http://127.0.0.1:${TEL_PORT}`;
 
 const require = createRequire(import.meta.url);
 function ladePlaywright() {
@@ -45,7 +49,7 @@ async function warteAuf(url, ms = 90000) {
 }
 async function starteServer() {
   prozesse.push(spawn(process.execPath, ['scripts/antrag-selbst-mock.mjs'], {
-    cwd: ROOT, env: { ...process.env, ANTRAG_SELBST_MOCK_PORT: String(API_PORT), ANTRAG_ERLAUBTE_HERKUNFT: `${AN},${UKVAUS}${VARIANTE ? `,${VARIANTE}` : ''}` }, stdio: 'ignore',
+    cwd: ROOT, env: { ...process.env, ANTRAG_SELBST_MOCK_PORT: String(API_PORT), ANTRAG_ERLAUBTE_HERKUNFT: `${AN},${UKVAUS},${TEL}${VARIANTE ? `,${VARIANTE}` : ''}` }, stdio: 'ignore',
   }));
   const vite = (port, env) => spawn(path.join(ROOT, 'node_modules/.bin/vite'), ['--host', '127.0.0.1', '--port', String(port), '--strictPort'], {
     cwd: ROOT, env: { ...process.env, VITE_ANTRAG_API: `${API}/antrag/api`, ...env }, stdio: 'ignore',
@@ -56,9 +60,13 @@ async function starteServer() {
   prozesse.push(vite(UKVAUS_PORT, {
     VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '0', VITE_ANTRAGSMASKE_UKV_ZAHN: '0', VITE_ANTRAG_TELEFON: '0',
   }));
+  prozesse.push(vite(TEL_PORT, {
+    VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAGSMASKE_UKV_ZAHN: '1', VITE_ANTRAG_TELEFON: 'ambulant,zahn',
+  }));
   await warteAuf(`${API}/antrag/gesund`);
   await warteAuf(`${AN}/antrag/zahn`);
   await warteAuf(`${UKVAUS}/antrag/zahn`);
+  await warteAuf(`${TEL}/antrag/zahn`);
 }
 const stoppe = () => prozesse.forEach((kind) => { try { kind.kill('SIGTERM'); } catch { /* weg */ } });
 const mock = (pfad, methode = 'GET') => fetch(`${API}${pfad}`, { method: methode }).then((antwort) => antwort.json());
@@ -141,6 +149,7 @@ async function ukvWeg(browser, breite) {
   await pruefeSeite(page, `${name} Einstieg`);
   const einstieg = await page.textContent('[data-zahn-vorab]');
   pruefe(einstieg.includes('Zahnzusatzversicherung online beantragen') && einstieg.includes('Erstinformation') && einstieg.includes('Frage 1 von 6'), 'Einstieg mit Erstinformation und Fortschritt');
+  pruefe(einstieg.includes('Du bleibst die ganze Zeit bei Healio.') && einstieg.includes('Die Bestätigung bekommst du per E-Mail.') && (await page.textContent('[data-vertrauen]')).includes('Alle Unterlagen bekommst du per E-Mail'), 'W2: mit UKV-Maske alle Einstiegssätze');
   pruefe(!/Bayerische|UKV/.test(await page.textContent('[data-vorab-frage="V1"]')), 'Vorfragen ohne Gesellschaftsnamen');
   await vorfragen(page, {
     antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '0']], name, einwilligungFehler: true,
@@ -167,11 +176,11 @@ async function ukvWeg(browser, breite) {
   await bildschirm(page, 'tarif');
   pruefe(await page.locator('input[name="tarif"][value="Z90"]').isChecked(), 'Stufe nach Zurück erhalten');
   // 47: anderer Beginn, andere Altersgruppe? Bei 1990 bleibt die Gruppe; Hinweis nur bei Sprung (siehe ukvBeginn).
-  if (breite > 600) { await context.close(); return; }
   await ukvBisFragen(page);
   // 45: Originalfragen leer.
   pruefe(await page.locator('input[name="frage-TF0021"]:checked').count() === 0 && await page.locator('[data-vorbelegt]').count() === 0, 'TF0021 leer, keine Vorbelegung');
   await foto(page, `${name}-04-maske-leere-frage`);
+  if (breite > 600) { await context.close(); return; }
   // 48: andere Zahl als in V4: neuer Beitrag mit Hinweis.
   await page.locator('label:has(input[name="frage-TF0021"][value="2"])').click();
   await weiter(page);
@@ -230,7 +239,7 @@ async function ukvWeg(browser, breite) {
   await page.waitForSelector('[data-danke]');
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.weiche === true && letzter.erklaerungen.weicheEinwilligung === true && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'weicheEinwilligung' && /^\d{4}-\d\d-\d\dT/.test(b.um)), '53: Einwilligung mit Zeitpunkt im Antrag');
-  pruefe(letzter.textfassung === '2026-11-20d-ukv-zahn-online' && letzter.beitragAngezeigt === 51.85, 'Fassung und Beitrag');
+  pruefe(letzter.textfassung === '2026-11-20e-ukv-zahn-online' && letzter.beitragAngezeigt === 51.85, 'Fassung und Beitrag');
   pruefe(!JSON.stringify(letzter).includes('"V3"') && !JSON.stringify(letzter).includes('"V5"'), 'keine Vorfragen im Antrag');
   await foto(page, `${name}-08-danke`);
   await context.close();
@@ -263,7 +272,7 @@ async function bayerischeWege(browser, breite) {
   await mock('/__test/zuruecksetzen', 'POST');
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
   await vorfragen(page, {
-    antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'steht_an'], ['V3a', 'nein'], ['V4', '0'], ['V5', 'nein']], name: breite < 600 ? name : null,
+    antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'steht_an'], ['V3a', 'nein'], ['V4', '0'], ['V5', 'nein']], name,
   });
   await page.waitForSelector('[data-weiche-ergebnis="bayerische-sofort"]');
   pruefe(await page.locator('[data-weiche-stufe]').count() === 0, 'ohne PLZ kein Preis');
@@ -280,28 +289,42 @@ async function bayerischeWege(browser, breite) {
   await bildschirm(page, 'tarif');
   pruefe(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked() && await page.locator('input[name="tarif"][value="PRESTIGE"]').isChecked() && await page.inputValue('#feld-plzTarif') === '20095', 'Maske: Vorauswahl des Originals, Baustein, PLZ');
   await page.waitForSelector('[data-gesamtbeitrag]');
+  if (breite < 600) {
+    // Nachbesserung K1: jährlich wie das Original.
+    pruefe((await page.textContent('[data-tarif-hinweis]')) === 'Monatlicher Gesamtbeitrag der versicherten Person' && (await page.textContent('[data-baustein-preis]')) === '+ 29,90 € monatlich', 'K1: monatlich wie das Original');
+    await page.locator('label:has(input[name="zahlweise"][value="jaehrlich"])').click();
+    await page.waitForFunction(() => document.querySelector('[data-tarif-hinweis]')?.textContent === 'Jährlicher Gesamtbeitrag der versicherten Person');
+    pruefe((await page.textContent('[data-baustein-preis]')) === '+ 351,60 € jährlich', 'K1: jährlich Beschriftung und Bausteinpreis wie das Original');
+    await page.waitForSelector('[data-gesamtbeitrag]');
+    await foto(page, `${name}-03b-maske-tarif-jaehrlich`);
+    await page.locator('label:has(input[name="zahlweise"][value="monatlich"])').click();
+    await page.waitForSelector('[data-gesamtbeitrag]');
+  }
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
   await bildschirm(page, 'frage:z1');
   pruefe(await page.locator('[data-bildschirm="frage:z1"] [aria-pressed="true"]').count() === 0 && await page.locator('[data-vorbelegt]').count() === 0, '45: Frage 1 der Bayerischen leer');
-  if (breite < 600) await foto(page, `${name}-04-maske-leere-frage`);
+  await foto(page, `${name}-04-maske-leere-frage`);
   await context.close();
 
-  if (breite > 600) return;
-  // Telefon: mehr als 3 Zähne; privat vor der Einwilligung.
-  const seite = await browser.newPage({ viewport: { width: 390, height: 844 } });
-  await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-  await vorfragen(seite, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '>3']] });
-  await seite.waitForSelector('[data-weiche-ergebnis="telefon"]');
-  pruefe((await seite.textContent('[data-weiche-ergebnis]')).includes('Fehlen mehr als 3 Zähne, ist online bei keiner der beiden Gesellschaften ein Abschluss möglich.') && (await seite.textContent('[data-weiche-ergebnis]')).includes('Deine Antworten von hier nehmen wir nicht mit.'), 'Telefon mit Grund');
-  await pruefeSeite(seite, '390 Telefon');
-  await foto(seite, '390-weiche-telefon-mehr-als-3');
-  await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-  await vorfragen(seite, { antworten: [['V2', 'privat']] });
-  await seite.waitForSelector('[data-weiche-ergebnis="telefon"]');
-  pruefe(await seite.locator('[data-einwilligung]').count() === 0 && (await seite.textContent('[data-weiche-ergebnis]')).includes('Die beiden Zahntarife hier ergänzen eine gesetzliche Krankenversicherung.'), '39: privat endet vor der Einwilligung');
-  await foto(seite, '390-weiche-telefon-privat');
+  // Ausgang Termin (Telefonweg Zahn aus, wie heute) und Ausgang Telefon (Telefonweg Zahn an): mehr als 3 Zähne; privat vor der Einwilligung.
+  const seite = await browser.newPage({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
+  for (const [basis, art, knopf] of [[AN, 'termin', 'Termin vereinbaren'], [TEL, 'telefon', 'Mit Nita am Telefon']]) {
+    await seite.goto(`${basis}/antrag/zahn`, { waitUntil: 'networkidle' });
+    await vorfragen(seite, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '>3']] });
+    await seite.waitForSelector('[data-weiche-ergebnis="telefon"]');
+    pruefe((await seite.textContent('[data-weiche-ergebnis]')).includes('Fehlen mehr als 3 Zähne, ist online bei keiner der beiden Gesellschaften ein Abschluss möglich.') && (await seite.textContent('[data-weiche-ergebnis]')).includes('Deine Antworten von hier nehmen wir nicht mit.'), `Ausgang ${art} mit Grund`);
+    pruefe((await seite.textContent('[data-weiche-ergebnis] [data-weiche-telefon]')).trim() === knopf, `Ausgang ${art}: Knopf „${knopf}“`);
+    await pruefeSeite(seite, `${breite} Ausgang ${art}`);
+    await foto(seite, `${breite}-ausgang-${art}-mehr-als-3`);
+    await seite.goto(`${basis}/antrag/zahn`, { waitUntil: 'networkidle' });
+    await vorfragen(seite, { antworten: [['V2', 'privat']] });
+    await seite.waitForSelector('[data-weiche-ergebnis="telefon"]');
+    pruefe(await seite.locator('[data-einwilligung]').count() === 0 && (await seite.textContent('[data-weiche-ergebnis]')).includes('Die beiden Zahntarife hier ergänzen eine gesetzliche Krankenversicherung.'), `39: privat endet vor der Einwilligung (${art})`);
+    await foto(seite, `${breite}-ausgang-${art}-privat`);
+  }
+  if (breite > 600) { await seite.close(); return; }
   // 49: Region der Bayerischen ungeprüft: kein Preis, kein Wechsel zur UKV.
   await mock('/__test/region-weg', 'POST');
   await seite.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
@@ -341,6 +364,7 @@ async function rueckweicheZurBayerischen(browser, breite) {
   await foto(page, `${name}-01-kasten`);
   await page.click('[data-rueckweiche-knopf]');
   await bildschirm(page, 'wechsel:W1');
+  pruefe(!(await page.textContent('[data-vertrauen]')).includes('UKV') && (await page.textContent('[data-vertrauen]')).includes('Der Vertrag kommt direkt vom Versicherer.'), 'W3: Zusatzangaben ohne Gesellschaft in der Seitenspalte');
   await foto(page, `${name}-02-abgerechnet`);
   await page.click('[data-vorab-antwort="steht_an"]');
   await bildschirm(page, 'wechsel:V3a');
@@ -356,6 +380,7 @@ async function rueckweicheZurBayerischen(browser, breite) {
   const ergebnis = await page.textContent('[data-wechsel-ergebnis]');
   pruefe(ergebnis.includes('Bei der Bayerischen kannst du mit deinen Angaben online abschließen.') && ergebnis.includes('Deine Antworten auf die Fragen der UKV nehmen wir nicht mit.') && (await page.textContent('[data-weiche-stufe="PRESTIGE"]')).includes('74,00 EUR'), '55: neuer Preis vor dem Klick');
   await pruefeSeite(page, `${name} Ergebnis`);
+  pruefe((await page.textContent('[data-vertrauen]')).includes('Der Vertrag kommt direkt von der Bayerischen.') && !(await page.textContent('[data-vertrauen]')).includes('UKV'), 'W3: Ergebnis der Rückweiche mit der Bayerischen in der Seitenspalte');
   await foto(page, `${name}-04-ergebnis`);
   await page.click('[data-wechsel-weiter]');
   await bildschirm(page, 'tarif');
@@ -378,16 +403,80 @@ async function rueckweicheZurBayerischen(browser, breite) {
 }
 
 // 52 und Teil 6 Nr. 2: UKV-Ziel bei ausgeschaltetem UKV-Schalter: heutiger Link zur UKV, kein Antrag bei Healio.
-async function ukvSchalterAus(browser) {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+async function ukvSchalterAus(browser, breite = 390) {
+  const page = await browser.newPage({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
   await page.goto(`${UKVAUS}/antrag/zahn`, { waitUntil: 'networkidle' });
+  // Nachbesserung W2: ohne die Sätze, die für UKV-Kunden mit Link nicht gelten.
+  await page.waitForSelector('[data-vorab-frage="V1"]');
+  const einstieg = await page.textContent('[data-zahn-vorab]');
+  pruefe(!einstieg.includes('Du bleibst die ganze Zeit bei Healio.') && !einstieg.includes('Die Bestätigung bekommst du per E-Mail.') && einstieg.includes('Ein paar kurze Fragen'), 'W2: Einstieg ohne „bei Healio“ und „per E-Mail“');
+  pruefe(!(await page.textContent('[data-vertrauen]')).includes('Alle Unterlagen bekommst du per E-Mail') && (await page.textContent('[data-seitenspalte-fuss]')) === 'Deine Antworten zu deinen Zähnen bleiben auf dieser Seite.', 'W2: Seitenspalte ohne Unterlagen per E-Mail und ohne „Deinen Antrag senden wir“');
+  await foto(page, `${breite}-ukv-schalter-aus-00-einstieg`);
   await vorfragen(page, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '1']] });
   await page.waitForSelector('[data-weiche-ergebnis="ukv"]');
   const link = await page.getAttribute('[data-weiche-ukv-link]', 'href');
   pruefe(/mandant=vmk/.test(link || '') && await page.locator('[data-weiche-weiter]').count() === 0, `52: Link zum Online-Abschluss der UKV (${link})`);
   pruefe((await page.textContent('[data-weiche-ergebnis]')).includes('Dir fehlt 1 Zahn, der noch nicht ersetzt ist.'), 'UKV mit Zuschlag: Grund');
-  await foto(page, '390-weiche-ukv-schalter-aus');
+  pruefe(!(await page.textContent('[data-vertrauen]')).includes('Alle Unterlagen bekommst du per E-Mail'), 'W2: Weiche zur UKV per Link ohne Unterlagen per E-Mail');
+  await foto(page, `${breite}-weiche-ukv-schalter-aus`);
+  // Ziel Bayerische: der Weg bleibt bei Healio, die Seitenspalte nennt die Unterlagen wieder.
+  await page.goto(`${UKVAUS}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await vorfragen(page, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'fertig'], ['V4', '0'], ['V5', 'nein']] });
+  await page.waitForSelector('[data-weiche-ergebnis="bayerische"]');
+  pruefe((await page.textContent('[data-vertrauen]')).includes('Alle Unterlagen bekommst du per E-Mail'), 'W2: Ziel Bayerische mit Unterlagen per E-Mail');
   await page.close();
+}
+
+// Nachbesserung K2 und K3: Rückweiche nach AF_AD_0005 „freiwillig“ (zwei Angaben), V3 bleibt, Zurück aus der Maske zum Ergebnis.
+async function rueckweicheNachVersicherung(browser, breite) {
+  const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
+  const page = await context.newPage();
+  const name = `${breite}-rueckweiche-freiwillig-zur-bayerischen`;
+  await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
+  await vorfragen(page, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '0']] });
+  await page.waitForSelector('[data-weiche-ergebnis="ukv"]');
+  await page.click('[data-weiche-weiter]');
+  await ukvBisFragen(page);
+  await page.locator('label:has(input[name="frage-TF0021"][value="0"])').click();
+  await weiter(page);
+  for (const [id, wert] of [['GF0073', 'nein'], ['GF0074', 'nein']]) {
+    await bildschirm(page, `frage:${id}`);
+    await page.waitForTimeout(650);
+    await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="${wert}"]`);
+  }
+  await bildschirm(page, 'frage:VP0004');
+  await page.locator('label:has(input[name="frage-VP0004"])').click();
+  await weiter(page);
+  await bildschirm(page, 'frage:AF0010');
+  await page.waitForTimeout(650);
+  await page.click('[data-antwort="nein"]');
+  await bildschirm(page, 'frage:AF_AD_0001');
+  await page.locator('label:has(input[name="frage-AF_AD_0001"])').click();
+  await weiter(page);
+  await bildschirm(page, 'frage:AF_AD_0005');
+  await page.locator('label:has(input[name="frage-AF_AD_0005"][value="freiwillig gesetzlich versichert in deutscher GKV"])').click();
+  await page.waitForSelector('[data-rueckweiche]');
+  pruefe((await page.textContent('[data-rueckweiche]')).includes('Dafür brauchen wir noch zwei kurze Angaben.'), 'K2: nach AF_AD_0005 zwei Angaben');
+  await foto(page, `${name}-01-kasten`);
+  await page.click('[data-rueckweiche-knopf]');
+  await bildschirm(page, 'wechsel:V5');
+  await page.click('[data-vorab-antwort="nein"]');
+  await bildschirm(page, 'wechsel:plz');
+  await page.fill('#wechsel-plz', '20095');
+  await page.click('[data-wechsel-plz-weiter]');
+  await bildschirm(page, 'wechsel:wechsel');
+  await page.waitForFunction(() => document.querySelectorAll('[data-weiche-stufe]').length === 3);
+  pruefe(await page.locator('text=mit ZAHN Sofort').count() === 0, 'K3: ohne ZAHN Sofort (nichts angeraten)');
+  await foto(page, `${name}-02-ergebnis`);
+  await page.click('[data-wechsel-weiter]');
+  await bildschirm(page, 'tarif');
+  pruefe(!(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked()) && await page.inputValue('#feld-plzTarif') === '20095', 'K3: Maske der Bayerischen ohne Baustein, PLZ übernommen');
+  await page.waitForSelector('[data-gesamtbeitrag]');
+  // K3: Zurück führt zum Ergebnis der Rückweiche, nicht zur Frage nach der abgerechneten Behandlung.
+  await page.click('[data-leiste] button[aria-label="Zurück"]');
+  await page.waitForSelector('[data-bildschirm^="wechsel:"]');
+  pruefe(await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm') === 'wechsel:wechsel', `K3: Zurück zum Ergebnis (${await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm')})`);
+  await context.close();
 }
 
 // 61: Prüfseite ohne Rückweiche (Ablehnung bleibt Telefon).
@@ -408,14 +497,14 @@ async function pruefseiteOhneRueckweiche(browser) {
 }
 
 // Rückweiche Bayerische zur UKV: nur mit WAHLREGEL „beide“ erreichbar (Variante im Zwischenordner, --variante).
-async function rueckweicheZurUkv(browser, basis) {
-  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+async function rueckweicheZurUkv(browser, basis, breite = 390) {
+  const page = await browser.newPage({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
   await page.goto(`${basis}/antrag/zahn`, { waitUntil: 'networkidle' });
   await vorfragen(page, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '0'], ['V5', 'nein']] });
   await page.waitForSelector('[data-weiche-ergebnis="beide"]');
   await page.fill('#weiche-plz', '20095');
   await page.waitForSelector('[data-weiche-waehle="zahn"]');
-  await foto(page, '390-weiche-beide-variante');
+  await foto(page, `${breite}-weiche-beide-variante`);
   await page.click('[data-weiche-waehle="zahn"]');
   await bildschirm(page, 'tarif');
   await page.waitForSelector('[data-gesamtbeitrag]');
@@ -434,11 +523,11 @@ async function rueckweicheZurUkv(browser, basis) {
   await page.waitForSelector('[data-rueckweiche]');
   const kasten = await page.textContent('[data-rueckweiche]');
   pruefe(kasten.includes('Mit dieser Antwort geht es bei der Bayerischen online nicht weiter.') && kasten.includes('ZahnPRIVAT 100') && /\d+,\d\d EUR im Monat/.test(kasten), 'Rückweiche zur UKV mit neuem Preis');
-  await foto(page, '390-rueckweiche-bayerische-zur-ukv-01-kasten');
+  await foto(page, `${breite}-rueckweiche-bayerische-zur-ukv-01-kasten`);
   await page.click('[data-rueckweiche-knopf]');
   await bildschirm(page, 'tarif');
   pruefe(await page.inputValue('#feld-geburtsdatum') === '05.03.1990' && (await page.textContent('body')).includes('ZahnPRIVAT'), 'Wechsel zur UKV-Maske');
-  await foto(page, '390-rueckweiche-bayerische-zur-ukv-02-maske');
+  await foto(page, `${breite}-rueckweiche-bayerische-zur-ukv-02-maske`);
   await page.close();
 }
 
@@ -453,9 +542,12 @@ try {
   await bayerischeWege(browser, 1280);
   await rueckweicheZurBayerischen(browser, 390);
   await rueckweicheZurBayerischen(browser, 1280);
-  await ukvSchalterAus(browser);
+  await ukvSchalterAus(browser, 390);
+  await ukvSchalterAus(browser, 1280);
+  await rueckweicheNachVersicherung(browser, 390);
+  await rueckweicheNachVersicherung(browser, 1280);
   await pruefseiteOhneRueckweiche(browser);
-  if (VARIANTE) await rueckweicheZurUkv(browser, VARIANTE);
+  if (VARIANTE) { await rueckweicheZurUkv(browser, VARIANTE, 390); await rueckweicheZurUkv(browser, VARIANTE, 1280); }
   console.log(`Zahn-Weiche gerendert: ${punkte} Prüfungen grün.`);
 } finally {
   await browser?.close();

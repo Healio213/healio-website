@@ -690,7 +690,7 @@ test('Paket 2: Bayerische Adressprüfung und Bonität im Wortlaut des Originals'
   assert.match(ADRESSE_NICHT_ERKANNT, /^Die angegebene Adresse wurde von unserem System nicht erkannt\. Bitte korrigieren Sie die Adresse oder bestätigen Sie, dass diese Adresse existiert:$/);
   assert.equal(zahn.erklaerungen.flatMap((teil) => teil.eintraege).at(-1), BONITAET, 'Kasten nach allen Einwilligungen');
   assert.equal(BONITAET.schluss, 'Mit dieser Bonitätsprüfung bin ich einverstanden. Meine Einwilligung ist jederzeit widerruflich.');
-  assert.equal(zahn.textfassung, '2026-11-20c-bayerische-zahn'); // Paket C (20.11.2026): Text 6 ohne Größe und Gewicht (vorher 2026-11-20b)
+  assert.equal(zahn.textfassung, '2026-11-20d-bayerische-zahn'); // Nachbesserung Paket C (vorher 2026-11-20c, davor 2026-11-20b)
 });
 
 // ---------------------------------------------------------------------------
@@ -754,14 +754,30 @@ test('Ebene 1 B9/B10: ehrlicher Hinweis stationär, Vorbehalt der Annahme, „ei
     assert.doesNotMatch(def.absenden.vorbehalt, /[–—]/);
     assert.match(def.absenden.nachEingang, /^Eingegangen heißt noch nicht angenommen\./);
     // Paket C (C6): die Bayerische mit eigener Fassung 2026-11-20c (Text 6 für Zahn), die SDK unverändert 2026-11-20b.
-    assert.match(def.textfassung, def === zahn ? /^2026-11-20c-/ : /^2026-11-20b-/);
+    assert.match(def.textfassung, def === zahn ? /^2026-11-20d-/ : /^2026-11-20b-/);
   }
   // Paket C (C13, 20.11.2026): Der Einreicher vergleicht auch bei der UKV den Preis, der Satz zum Halt steht wieder da; Fassung 2026-11-20c.
   // Paket C (C6): Texte der Weiche-Strecke, Fassung 2026-11-20d.
-  assert.equal(zahnUkv.textfassung, '2026-11-20d-ukv-zahn-online');
+  assert.equal(zahnUkv.textfassung, '2026-11-20e-ukv-zahn-online'); // Nachbesserung Paket C (vorher 2026-11-20d)
   for (const v of [zahnUkv.absenden.vorbehalt, zahnUkv.beitrag.vorbehalt]) {
     assert.equal(v, 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV. Zeigt die UKV beim Einreichen einen anderen Beitrag, reicht Healio nichts ein und meldet sich bei dir.');
     assert.doesNotMatch(v, /fragt Healio|[–—]/);
   }
   assert.equal(zahnUkv.absenden.nachEingang, undefined);
+});
+
+// Nachbesserung Paket C (K1, 20.11.2026): Bayerische bei jährlicher Zahlung mit Beschriftung und Bausteinpreis des Originals
+// (gegenpruefung/bayerische-zahn/raender/mitschnitt/02c-komfort-sofort-jaehrlich.txt). Schlägt gegen 42d1969 fehl.
+test('Nachbesserung K1: Bayerische jährlich wie das Original', async () => {
+  const { default: zahn } = await import('../src/data/antrag/zahn.js');
+  const { bayerischeJeZahlweise } = await import('../src/data/antrag/zahnWeiche.js');
+  assert.equal(zahn.tarifHinweis, 'Monatlicher Gesamtbeitrag der versicherten Person');
+  assert.equal(zahn.tarifHinweisJe?.jaehrlich, 'Jährlicher Gesamtbeitrag der versicherten Person');
+  const sofort = zahn.bausteine.find((b) => b.id === 'ZAHN_SOFORT');
+  assert.equal(sofort.preisText, '+ 29,90 € monatlich');
+  assert.equal(sofort.preisTextJe?.jaehrlich, '+ 351,60 € jährlich');
+  assert.equal(bayerischeJeZahlweise(29.9, 'jaehrlich'), 351.6, 'Text passt zur Rundung der Bayerischen');
+  const quelle = fs.readFileSync(new URL('../src/components/antragsmaske/SchrittTarif.jsx', import.meta.url), 'utf8');
+  assert.match(quelle, /definition\.tarifHinweisJe\?\.\[daten\.zahlweise\] \|\| definition\.tarifHinweis/);
+  assert.match(quelle, /baustein\.preisTextJe\?\.\[daten\.zahlweise\] \|\| baustein\.preisText/);
 });

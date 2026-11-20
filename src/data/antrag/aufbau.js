@@ -26,7 +26,8 @@
 //   erklaerungen    [{ teil, eintraege: [Eintrag] }]
 //   zusammenfassung { titel }, absenden { satz, vorbehalt, knopf }, danke { punkte }
 //   gesundheitFuerVertrag  Funktion (antworten, { tarif, bausteine }): Antworten in das Format des Servers
-// Freiwillig: bausteine [{ id, name, kennzeichen, preisText, leistungen, erklaerungen, bedingung? }],
+// Freiwillig: bausteine [{ id, name, kennzeichen, preisText, preisTextJe?: { zahlweise: Text }, leistungen, erklaerungen, bedingung? }],
+//   tarifHinweisJe?: { zahlweise: Text } (Beschriftung je Zahlweise wie im Original),
 //   zahlweiseImTarif (Zahlweise schon in Schritt 1, weil sie den Beitrag ändert), tarifFussnote,
 //   tarifVorgabe (vorausgewählt wie im Original).
 //

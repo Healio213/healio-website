@@ -6,3 +6,5 @@ dist-guided-preview
 .DS_Store
 .vercel
 .worktrees/
+# Handy-Fotos des Handy-Durchlaufs (scripts/check-antragsmaske-mobil.mjs, Standardziel)
+tmp-maske-mobil/

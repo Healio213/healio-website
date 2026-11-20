@@ -331,7 +331,7 @@ export default function SchrittTarif({
 
       <fieldset id="stufenwahl" className="min-w-0" data-fehlerblock="">
         <legend className="font-display text-xl font-extrabold leading-tight text-home-midnight">Wähle deine Stufe</legend>
-        {definition.tarifHinweis && <p className="mt-1 text-base leading-6 text-home-slate">{schuetze(definition.tarifHinweis)}</p>}
+        {definition.tarifHinweis && <p className="mt-1 text-base leading-6 text-home-slate" data-tarif-hinweis="">{schuetze(definition.tarifHinweisJe?.[daten.zahlweise] || definition.tarifHinweis)}</p>}
         <FehlerText id="fehler-tarif">{fehler.tarif}</FehlerText>
         {/* Handy: Wischkarten; ab Tablet nebeneinander, gleich groß. */}
         <div
@@ -391,7 +391,7 @@ export default function SchrittTarif({
                   <span className="min-w-0 flex-1">
                     <span className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                       <span className="font-display text-lg font-extrabold text-home-midnight">Dazu: {baustein.name}</span>
-                      <span className="whitespace-nowrap font-display text-lg font-extrabold text-home-midnight">{baustein.preisText}</span>
+                      <span className="whitespace-nowrap font-display text-lg font-extrabold text-home-midnight" data-baustein-preis="">{baustein.preisTextJe?.[daten.zahlweise] || baustein.preisText}</span>
                     </span>
                     {baustein.kennzeichen && <span className="mt-1 inline-flex rounded-full bg-home-mint/20 px-2.5 py-0.5 text-base font-bold text-emerald-900">{baustein.kennzeichen}</span>}
                     <span className="mt-2 block text-base leading-6 text-home-midnight">Schutz auch für Behandlungen, die schon angeraten oder begonnen sind:</span>

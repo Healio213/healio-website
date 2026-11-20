@@ -176,7 +176,9 @@ const zahnUkv = {
   // Der Dienst nimmt 2026-11-20b weiter an, 2026-11-12 nicht mehr (Ergänzung 1.20: C7 und C9 ändern Regeln).
   // 20.11.2026 (Paket C, C6): Text 6 und Kurzfassung ohne „Größe und Gewicht“, Satz nach GF0074 „Ja“, Unterlagen „Von Healio“ nur mit
   // Datei. Auf dem Weg über die Weiche zusätzlich die Texte aus zahnWeiche.js. Der Dienst nimmt 2026-11-20c und 2026-11-20b weiter an.
-  textfassung: '2026-11-20d-ukv-zahn-online',
+  // 20.11.2026 (Nachbesserung Paket C): Texte der Weiche (Einstieg bei ausgeschalteter UKV-Maske, Anzahl im Rückweiche-Kasten,
+  // Grund bei abgerechneter Behandlung). Der Dienst nimmt 2026-11-20d, 2026-11-20c und 2026-11-20b weiter an.
+  textfassung: '2026-11-20e-ukv-zahn-online',
   quelle: 'Online-Strecke der UKV (Level Nine, mandant vmk), erfasst 12.11.2026',
   versicherer: {
     id: 'ukv', name: UKV, kurz: 'UKV', beiDer: 'der UKV',
