@@ -347,13 +347,16 @@ export default function SchrittFrage({
     <div className="space-y-4">
       <div>
         <h2 ref={ueberschriftRef} tabIndex={-1} className="flex flex-wrap items-baseline gap-x-3 font-display text-xl font-extrabold leading-tight text-home-midnight outline-none">
-          <span className="min-w-0">{frage.titel || `Frage ${nummer}`}</span>
-          <span className="sr-only">, </span>
-          <span className="whitespace-nowrap text-base font-bold text-emerald-800">{nummer} von {anzahl}</span>
+          {/* Nachbesserung 20.11.2026: ein Zähler „Frage 5 von 10“ ohne zweiten Balken. Vorher standen „Schritt 5 von 10“
+              (Schrittleiste) und „Frage 5 · 5 von 10“ mit Balken übereinander. */}
+          <span className="min-w-0">{frage.titel || `Frage ${nummer} von ${anzahl}`}</span>
+          {frage.titel && (
+            <>
+              <span className="sr-only">, </span>
+              <span className="whitespace-nowrap text-base font-bold text-emerald-800">Frage {nummer} von {anzahl}</span>
+            </>
+          )}
         </h2>
-        <div className="mt-2 flex gap-1" aria-hidden="true">
-          {Array.from({ length: anzahl }, (_, stelle) => <span key={stelle} className={cx('h-1 flex-1 rounded-full', stelle < nummer ? 'bg-emerald-600' : 'bg-home-midnight/10')} />)}
-        </div>
         {nummer === 1 && !definition.gesundheit.vorspann && <p className="mt-3 text-base leading-7 text-home-slate">{WARUM_GESUNDHEIT}</p>}
       </div>
       {vorbelegt && (

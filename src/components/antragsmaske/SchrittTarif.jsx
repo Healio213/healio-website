@@ -7,6 +7,7 @@ import { euro } from '@/lib/antragsmaske/regeln';
 import {
   Aufklapper, Callout, FOKUS, FehlerText, Field, Gruppe, LINK, NeuerTab, OptionCard, TRENNUNG, buttonClass, cx, eingabeKlasse, fieldAria, schuetze,
 } from '@/components/antrag/ui';
+import { antragTelefonAktiv } from '@/config/contactChannels';
 import { TERMIN_LINK, telefonLink } from './teile';
 import {
   ALLE_STUFEN_HINWEIS, NICHT, anzeigeZeilen, feldHinweis, feldLabel,
@@ -98,10 +99,17 @@ function DienstBeitrag({
   if (dienst.fehler) {
     return (
       <Callout tone="hinweis" title="Dein Beitrag lädt gerade nicht." data-beitrag-fehler="">
-        <p>Versuch es gleich noch einmal oder mach den Antrag zusammen mit uns am Telefon.</p>
+        {/* Telefonweg nur, wenn er für die Sparte an ist (Nachbesserung 20.11.2026), sonst der Termin. */}
+        <p>{antragTelefonAktiv(sparte) ? 'Versuch es gleich noch einmal oder mach den Antrag zusammen mit uns am Telefon.' : 'Versuch es gleich noch einmal oder vereinbare einen Termin mit uns.'}</p>
         <div className="mt-3 flex flex-wrap gap-2">
           <button type="button" onClick={dienst.nochmal} className={buttonClass('secondary')}>Noch einmal versuchen</button>
-          <a href={telefonLink(sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Zusammen am Telefon</a>
+          {antragTelefonAktiv(sparte)
+            ? <a href={telefonLink(sparte)} data-zaehler-ignorieren="" className={buttonClass('secondary')}>Zusammen am Telefon</a>
+            : (
+              <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={buttonClass('secondary')}>
+                Termin vereinbaren<NeuerTab />
+              </a>
+            )}
         </div>
       </Callout>
     );
@@ -298,9 +306,14 @@ export default function SchrittTarif({
           {grenze && (
             <Callout tone="hinweis" data-altersgrenze="">
               <p className="font-bold">{grenze.text}</p>
+              {/* Altersgrenze: „Zusammen am Telefon“ nur, wenn der Telefonweg für die Sparte an ist
+                  (Nachbesserung 20.11.2026, sonst landete Stationär in Nitas Antrag für ambulant). Sonst ist
+                  der Termin der Hauptknopf. */}
               <div className="mt-2 flex flex-wrap gap-2">
-                <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('primary')}>Zusammen am Telefon</a>
-                <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={buttonClass('secondary')}>
+                {antragTelefonAktiv(definition.sparte) && (
+                  <a href={telefonLink(definition.sparte)} data-zaehler-ignorieren="" className={buttonClass('primary')}>Zusammen am Telefon</a>
+                )}
+                <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={buttonClass(antragTelefonAktiv(definition.sparte) ? 'secondary' : 'primary')}>
                   Termin vereinbaren<NeuerTab />
                 </a>
               </div>

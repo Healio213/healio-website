@@ -3,10 +3,10 @@ import { euro, ibanOhneLeer } from '@/lib/antragsmaske/regeln';
 import { auftragSatz, beitragsAnzeige } from '@/lib/antragsmaske/vertrag';
 import { AendernKnopf } from '@/components/antrag/Antworten';
 import {
-  Button, Callout, FOKUS, bodyText, cx, schuetze,
+  Button, Callout, FOKUS, NeuerTab, bodyText, buttonClass, cx, schuetze,
 } from '@/components/antrag/ui';
 import Antwortenliste from './Antwortenliste';
-import { Haken, TeilKopf } from './teile';
+import { Haken, TERMIN_LINK, TeilKopf } from './teile';
 
 // Schritt 7: alles auf einen Blick, „ändern“ an jeder Angabe, dann Absenden.
 
@@ -108,6 +108,16 @@ export default function SchrittZusammenfassung({
       {sendeFehler && (
         <Callout tone="hinweis" title={sendeFehler.titel} data-sendefehler="" role="alert">
           {sendeFehler.text && <p>{sendeFehler.text}</p>}
+          {sendeFehler.termin && (
+            <>
+              <p>Deine Angaben bleiben hier stehen. Klappt es weiter nicht, vereinbare gern einen Termin mit uns.</p>
+              <div className="mt-3">
+                <a href={TERMIN_LINK} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" data-sendefehler-termin="" className={buttonClass('secondary')}>
+                  Termin vereinbaren<NeuerTab />
+                </a>
+              </div>
+            </>
+          )}
           {sendeFehler.felder?.length > 0 && (
             <ul className="mt-2 space-y-1">
               {sendeFehler.felder.map((feld) => (

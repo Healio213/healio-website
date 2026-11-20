@@ -34,6 +34,10 @@ export default function SchrittBeitrag({
   const zahlweise = definition.zahlung.zahlweisen.find((eintrag) => eintrag.id === daten.zahlweise);
   const bausteine = (definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id));
   const zuschlagText = [beitrag.zuschlagProzent > 0 && `${beitrag.zuschlagProzent} %`, beitrag.zuschlagEuro > 0 && euro(beitrag.zuschlagEuro)].filter(Boolean).join(' und ');
+  // Nachbesserung 20.11.2026: Entscheidet der Versicherer erst nach Eingang (SDK stationär) und gibt es
+  // mindestens ein „Ja“, steht hier kein „ohne Zuschlag“ und kein „keiner“, das klänge wie eine Zusage.
+  const zuschlagNachEingang = !mitZuschlag && Boolean(definition.beitrag?.hinweisNachEingang) && Object.values(daten.antworten || {}).includes('ja');
+  const versicherer = definition.versicherer?.kurz ? `die ${definition.versicherer.kurz}` : 'der Versicherer';
   return (
     <div className="space-y-5">
       <div className="rounded-[1.4rem] bg-home-midnight p-5 text-white" data-beitrag="">
@@ -41,7 +45,7 @@ export default function SchrittBeitrag({
         <p className="mt-1 whitespace-nowrap font-display text-4xl font-extrabold tracking-[-0.03em]" data-beitrag-wert="">{euro(beitrag.beitrag)}</p>
         {!beitrag.dienst && (
           <p className="mt-1 text-base leading-6 text-slate-100">
-            {mitZuschlag ? `darin ${zuschlagText} Zuschlag aus deinen Antworten` : 'ohne Zuschlag'}
+            {mitZuschlag ? `darin ${zuschlagText} Zuschlag aus deinen Antworten` : zuschlagNachEingang ? `Ob ein Zuschlag dazukommt, entscheidet ${versicherer} nach Eingang.` : 'ohne Zuschlag'}
           </p>
         )}
         {beitrag.folgejahr && (
@@ -64,7 +68,7 @@ export default function SchrittBeitrag({
               <Zeile label="Beitragszuschlag" unten={beitrag.gruende?.length > 0 ? `Wegen: ${beitrag.gruende.join(', ')}` : null}>{zuschlagText}</Zeile>
             </>
           )
-          : <Zeile label="Beitragszuschlag">keiner</Zeile>}
+          : <Zeile label="Beitragszuschlag">{zuschlagNachEingang ? <span data-zuschlag-nach-eingang="">entscheidet {versicherer} nach Eingang</span> : 'keiner'}</Zeile>}
       </ul>
 
       <div>

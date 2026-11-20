@@ -105,12 +105,47 @@ function mitPruefDaten(start, pruefDaten) {
   return { ...start, ...pruefDaten, ...(pruefDaten.antworten ? { antworten: { ...start.antworten, ...pruefDaten.antworten } } : {}) };
 }
 
+// Bildschirme in der Reihenfolge der Definition (ablauf, wie im Original)
+// oder im Standardablauf. Leere Teile (z. B. SPU: Schritt Gesundheitsfragen entfällt)
+// fallen weg; die Schrittnummer zählt die vorhandenen Abschnitte.
+function baueBildschirme(definition, fragen) {
+  const ablauf = definition.ablauf || standardAblauf(definition);
+  const liste = [];
+  let schritt = 0;
+  let letzterTitel = null;
+  ablauf.forEach((eintrag) => {
+    let teilListe = [];
+    if (eintrag.id === 'hinweis') {
+      if (definition.gesundheit.vorspann && fragen.length) teilListe = [{ id: 'hinweis' }];
+    } else if (eintrag.id === 'fragen') {
+      teilListe = fragen.map((frage, stelle) => ({ id: `frage:${frage.id}`, frage, nummer: stelle + 1 }));
+    } else if (eintrag.id === 'unterlagenDownload') {
+      if (definition.unterlagenDownload) teilListe = [{ id: 'unterlagenDownload' }];
+    } else if (eintrag.id.startsWith('erkl:')) {
+      const schluessel = eintrag.id.slice(5);
+      const teil = definition.erklaerungen.find((t, stelle) => (t.id ?? String(stelle)) === schluessel);
+      if (teil) teilListe = [{ id: eintrag.id, teil }];
+    } else teilListe = [{ id: eintrag.id }];
+    if (!teilListe.length) return;
+    if (eintrag.titel !== letzterTitel) { schritt += 1; letzterTitel = eintrag.titel; }
+    teilListe.forEach((teil) => liste.push({ ...teil, schritt, titel: eintrag.titel }));
+  });
+  // Teile der Erklärungen innerhalb eines Abschnitts zählen („Teil 2 von 3“).
+  liste.filter((eintrag) => eintrag.teil).forEach((eintrag) => {
+    const gruppe = liste.filter((anderer) => anderer.teil && anderer.schritt === eintrag.schritt);
+    eintrag.nummer = gruppe.indexOf(eintrag) + 1;
+    eintrag.anzahl = gruppe.length;
+  });
+  return liste;
+}
+
 // Danke-Seite (Franks Vorgabe 12.11.2026): ehrlich, ohne Fristversprechen.
 export function dankePunkte(definition, email, mitAntrag = true) {
   const beiDer = definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`;
   return [
     'Dein Antrag ist bei Healio eingegangen. Du bekommst gleich eine Eingangsbestätigung von Healio per E-Mail.',
-    `Healio reicht deinen Antrag jetzt in deinem Namen bei ${beiDer} ein.`,
+    // Nachbesserung 20.11.2026: „als Nächstes“ statt „jetzt“, Healio reicht nach einer Prüfung von Hand ein.
+    `Healio reicht deinen Antrag als Nächstes in deinem Namen bei ${beiDer} ein.`,
     `Die Antragsbestätigung ${beiDer} kommt per E-Mail${email ? ` an ${email}` : ''}.`,
     mitAntrag ? 'In unserer Eingangsbestätigung steht ein geschützter Link zu deinem Antrag und allen Unterlagen.' : 'In unserer Eingangsbestätigung steht ein geschützter Link zu allen Unterlagen.',
     definition.absenden?.vorbehalt,
@@ -355,40 +390,16 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
 
   // ---- Bildschirme -----------------------------------------------------------
   const fragen = sichtbareFragen(definition, kontext);
-  // Bildschirme in der Reihenfolge der Definition (ablauf, wie im Original)
-  // oder im Standardablauf. Leere Teile (z. B. SPU: Schritt Gesundheitsfragen entfällt)
-  // fallen weg; die Schrittnummer zählt die vorhandenen Abschnitte.
-  const bildschirme = useMemo(() => {
-    const ablauf = definition.ablauf || standardAblauf(definition);
-    const liste = [];
-    let schritt = 0;
-    let letzterTitel = null;
-    ablauf.forEach((eintrag) => {
-      let teilListe = [];
-      if (eintrag.id === 'hinweis') {
-        if (definition.gesundheit.vorspann && fragen.length) teilListe = [{ id: 'hinweis' }];
-      } else if (eintrag.id === 'fragen') {
-        teilListe = fragen.map((frage, stelle) => ({ id: `frage:${frage.id}`, frage, nummer: stelle + 1 }));
-      } else if (eintrag.id === 'unterlagenDownload') {
-        if (definition.unterlagenDownload) teilListe = [{ id: 'unterlagenDownload' }];
-      } else if (eintrag.id.startsWith('erkl:')) {
-        const schluessel = eintrag.id.slice(5);
-        const teil = definition.erklaerungen.find((t, stelle) => (t.id ?? String(stelle)) === schluessel);
-        if (teil) teilListe = [{ id: eintrag.id, teil }];
-      } else teilListe = [{ id: eintrag.id }];
-      if (!teilListe.length) return;
-      if (eintrag.titel !== letzterTitel) { schritt += 1; letzterTitel = eintrag.titel; }
-      teilListe.forEach((teil) => liste.push({ ...teil, schritt, titel: eintrag.titel }));
-    });
-    // Teile der Erklärungen innerhalb eines Abschnitts zählen („Teil 2 von 3“).
-    liste.filter((eintrag) => eintrag.teil).forEach((eintrag) => {
-      const gruppe = liste.filter((anderer) => anderer.teil && anderer.schritt === eintrag.schritt);
-      eintrag.nummer = gruppe.indexOf(eintrag) + 1;
-      eintrag.anzahl = gruppe.length;
-    });
-    return liste;
-  }, [definition, fragen.map((frage) => frage.id).join('|')]); // eslint-disable-line react-hooks/exhaustive-deps
-  const schrittAnzahl = bildschirme.length ? bildschirme[bildschirme.length - 1].schritt : 1;
+  // Bildschirme siehe baueBildschirme.
+  const bildschirme = useMemo(() => baueBildschirme(definition, fragen), [definition, fragen.map((frage) => frage.id).join('|')]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Nachbesserung 20.11.2026: Vor der Tarifwahl zählt die Schrittleiste die Gesundheitsfragen mit, wenn eine
+  // Stufe sie hat (SDK stationär: SP1 und SP2 mit, SPU ohne). Sonst stand dort „von 9“ und nach der Wahl „von 10“.
+  // Nur Anzeige: Ohne Stufe geht es nicht über den ersten Schritt hinaus.
+  const fragenVorWahl = tarif ? null : definition.tarife
+    .map((eintrag) => sichtbareFragen(definition, { ...kontext, tarif: eintrag.id }))
+    .reduce((laengste, liste) => (liste.length > laengste.length ? liste : laengste), fragen);
+  const bildschirmeAnzeige = fragenVorWahl && fragenVorWahl.length > fragen.length ? baueBildschirme(definition, fragenVorWahl) : bildschirme;
+  const schrittAnzahl = bildschirmeAnzeige.length ? bildschirmeAnzeige[bildschirmeAnzeige.length - 1].schritt : 1;
   const indexVon = (id) => bildschirme.findIndex((eintrag) => eintrag.id === id);
   const aktuell = bildschirme[Math.max(0, indexVon(pos.id))];
 
@@ -621,7 +632,8 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         });
         setSendeFehler({ titel: fehlerText(code), felder: ziele });
       } else {
-        setSendeFehler({ titel: fehlerText(code) });
+        // Nachbesserung 20.11.2026: Bei Verbindungs- und sonstigen Fehlern zeigt der Hinweis auch den Termin.
+        setSendeFehler({ titel: fehlerText(code), termin: true });
       }
       window.setTimeout(() => {
         const ziel = document.querySelector('[data-sendefehler], [data-beitrag-neu]');
@@ -851,7 +863,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
 
   // Abschnitte mit Kurznamen für die Schrittleiste (reine Anzeige).
   const abschnitte = [];
-  bildschirme.forEach((eintrag) => { if (!abschnitte[eintrag.schritt - 1]) abschnitte[eintrag.schritt - 1] = { name: kurzName(eintrag.titel) }; });
+  bildschirmeAnzeige.forEach((eintrag) => { if (!abschnitte[eintrag.schritt - 1]) abschnitte[eintrag.schritt - 1] = { name: kurzName(eintrag.titel) }; });
 
   // Beitrag für „Dein Schutz“ und die Handy-Leiste. Vor dem Beitragsbildschirm
   // zeigt die Maske nur den Beitrag aus Schritt 1 (ohne Zuschlag), nie einen
