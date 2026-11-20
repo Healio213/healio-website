@@ -109,7 +109,8 @@ export function gezeigteUnterlagen(definition, kontext = {}) {
 }
 
 // Server-Fehlerfelder (z. B. „angaben.formular.plz“) auf Bildschirme der Maske.
-export function bildschirmFuerFeld(pfad) {
+// definition (freiwillig): Titel des Bestätigungssatzes der Gesellschaft (SDK oder UKV, Abschluss UKV 20.11.2026).
+export function bildschirmFuerFeld(pfad, definition = null) {
   const teile = String(pfad).split('.');
   const [kopf, zweit, dritt] = teile;
   if (kopf === 'angaben') {
@@ -119,7 +120,7 @@ export function bildschirmFuerFeld(pfad) {
   }
   if (kopf === 'gesundheit') return { bildschirm: 'zusammenfassung', label: 'Gesundheitsfragen' };
   if (kopf === 'unterlagen') return { bildschirm: 'unterlagenDownload', label: 'Deine Unterlagen' };
-  if (kopf === 'erklaerungen' && zweit === 'angabenBestaetigt') return { bildschirm: 'zusammenfassung', label: 'Bestätigung für die SDK' };
+  if (kopf === 'erklaerungen' && zweit === 'angabenBestaetigt') return { bildschirm: 'zusammenfassung', label: definition?.absenden?.bestaetigung?.titel || 'Bestätigung für die SDK' };
   if (kopf === 'zahlung' || (kopf === 'erklaerungen' && zweit === 'sepa')) return { bildschirm: 'zahlung', label: 'Zahlung und IBAN' };
   if (kopf === 'erklaerungen') return { bildschirm: 'erklaerungen', label: 'Erklärungen' };
   return null;

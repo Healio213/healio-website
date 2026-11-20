@@ -13,7 +13,7 @@ import zahnUkv, { UKV_BELEGT } from '../src/data/antrag/zahnUkv.js';
 import ambulant from '../src/data/antrag/ambulant.js';
 import stationaer from '../src/data/antrag/stationaer.js';
 import { baueSelbstantrag } from '../src/lib/antragsmaske/vertrag.js';
-import { bedingungErfuellt } from '../src/lib/antragsmaske/regeln.js';
+import { bedingungErfuellt, wirkungen } from '../src/lib/antragsmaske/regeln.js';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const QUELLE = path.join(ROOT, 'src/data/antrag/zahnWeiche.js');
@@ -25,6 +25,7 @@ const basis = (extra = {}) => ({
   geburt: g(1990), V2: 'pflicht', einwilligung: '2026-11-20T10:00:00.000Z', ...extra,
 });
 const ziel = (v, heute = NOV) => W.zielAus(v, { heute });
+const wirkungenUkv = (antworten) => wirkungen(zahnUkv, { tarif: 'Z100', antworten: { TF0021: '0', ...antworten } }).keineAufnahme;
 
 // Kopie der Regel mit anderen Voreinstellungen (Konstanten als eine Zeile, Teil 5).
 async function mitKonstanten(ersatz) {
@@ -42,6 +43,29 @@ async function mitKonstanten(ersatz) {
   return import(pathToFileURL(datei).href);
 }
 
+// Abschluss UKV (20.11.2026): Kopie von zahnUkv.js mit anderen UKV_BELEGT-Werten und eine Weiche, die diese Kopie liest. So bleibt
+// geprüft, dass eine Konstante auf false den Fall wieder zum Telefon schickt (Voreinstellung vor der Messung).
+const ANTRAG = path.join(ROOT, 'src/data/antrag');
+const OFFEN_ALLE = {
+  z90DreiZaehne: false, z75ZweiZaehne: false, kfo1819: false, freiwilligGkv: false, alter71bis80: false,
+};
+async function mitBelegt(ersatz) {
+  const ordner = fs.mkdtempSync(path.join(os.tmpdir(), 'zahnweiche-belegt-'));
+  const absolut = (text) => text.replace(/from '(\.\.?\/[^']+)'/g, (_, rel) => `from '${pathToFileURL(path.resolve(ANTRAG, rel)).href}'`);
+  let ukv = absolut(fs.readFileSync(path.join(ANTRAG, 'zahnUkv.js'), 'utf8'));
+  Object.entries(ersatz).forEach(([name, wert]) => {
+    const muster = new RegExp(`(\\n  ${name}: )(true|false),`);
+    assert.match(ukv, muster, name);
+    ukv = ukv.replace(muster, `$1${wert},`);
+  });
+  const ukvDatei = path.join(ordner, 'zahnUkv.mjs');
+  fs.writeFileSync(ukvDatei, ukv);
+  const weiche = absolut(fs.readFileSync(QUELLE, 'utf8').replace("from './zahnUkv.js'", `from '${pathToFileURL(ukvDatei).href}'`));
+  const weicheDatei = path.join(ordner, 'zahnWeiche.mjs');
+  fs.writeFileSync(weicheDatei, weiche);
+  return { W: await import(pathToFileURL(weicheDatei).href), ukv: (await import(pathToFileURL(ukvDatei).href)) };
+}
+
 // Alle Wege für eine Reihe von Geburtsdaten (Regelalter, Grenzen, offene Altersfälle) und zwei Tage.
 const GEBURTEN = [g(1990), g(2008, 1, 1), g(2007, 12, 31), g(2006, 6, 1), g(1956, 6, 1), g(1950, 6, 1), g(1946, 6, 1), g(1940, 6, 1)];
 function alleFaelle(modul = W) {
@@ -52,7 +76,7 @@ function alleFaelle(modul = W) {
   return liste;
 }
 
-test('35: jede Antwortkombination ergibt genau ein Ziel, jeder Fall steht in der Matrix', () => {
+test('35: jede Antwortkombination ergibt genau ein Ziel, jeder Fall steht in der Matrix', async () => {
   const faelle = alleFaelle();
   assert.ok(faelle.length > 100, `nur ${faelle.length} Wege`);
   faelle.forEach(({ v, heute }) => {
@@ -70,12 +94,22 @@ test('35: jede Antwortkombination ergibt genau ein Ziel, jeder Fall steht in der
   const fall = (v, heute) => ziel(v, heute).fall;
   assert.equal(fall({ geburt: g(2010) }), 'unter18');
   assert.equal(fall({ geburt: g(1940) }), 'ab81');
-  assert.equal(fall({ geburt: g(1950), V2: 'pflicht' }), 'alter71bis80');
   assert.equal(fall({ geburt: g(2008, 1, 1), V2: 'pflicht' }), 'alter1819');
   assert.equal(fall({ geburt: g(1990), V2: 'privat' }), 'privat');
   assert.equal(fall({ geburt: g(1990), V2: 'heilfuersorge' }), 'heilfuersorge');
-  assert.equal(fall(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'nein' })), 'freiwilligBay');
-  assert.equal(fall(basis({ V2: 'freiwillig', V3: 'nein', V4: '1' })), 'freiwilligOffen');
+  // Abschluss UKV (20.11.2026): Eintrittsalter 71 bis 80 und „freiwillig gesetzlich“ gehen wie der Regelfall zur UKV (UKV_BELEGT).
+  assert.equal(W.naechsterSchritt({ geburt: g(1950), V2: 'pflicht' }, { heute: NOV }), 'einwilligung');
+  assert.equal(fall(basis({ geburt: g(1950), V3: 'nein', V4: '0' })), 'regelfall');
+  assert.equal(fall(basis({ V2: 'freiwillig', V3: 'nein', V4: '0' })), 'regelfall');
+  assert.equal(fall(basis({ V2: 'freiwillig', V3: 'nein', V4: '1' })), 'luecke');
+  // Mit den Konstanten vor der Messung (alle false) bleiben die offenen Zeilen erreichbar und gehen zum Telefon.
+  const { W: offen } = await mitBelegt(OFFEN_ALLE);
+  const fallOffen = (v, heute = NOV) => offen.zielAus(v, { heute }).fall;
+  assert.equal(fallOffen({ geburt: g(1950), V2: 'pflicht' }), 'alter71bis80');
+  assert.equal(fallOffen(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'nein' })), 'freiwilligBay');
+  assert.equal(fallOffen(basis({ V2: 'freiwillig', V3: 'nein', V4: '1' })), 'freiwilligOffen');
+  assert.equal(fallOffen(basis({ geburt: g(1990), V3: 'nein', V4: '3' })), 'luecke', 'Z100 mit 3 bleibt auch vor der Messung');
+  assert.equal(offen.zielAus({ geburt: g(1950), V2: 'pflicht' }, { heute: NOV }).ziel, 'telefon');
   assert.equal(fall(basis({ V3: 'nein', V4: '0' })), 'regelfall');
   assert.equal(fall(basis({ V3: 'nein', V4: '2' })), 'luecke');
   assert.equal(fall(basis({ V3: 'nein', V4: '>3' })), 'mehrAls3');
@@ -92,11 +126,16 @@ test('35: jede Antwortkombination ergibt genau ein Ziel, jeder Fall steht in der
   assert.equal(ziel(basis({ V3: 'fertig', V4: '0', V5: 'nein' })).ziel, 'bayerische');
 });
 
-test('22/35: offene UKV-Kombinationen (90er mit 3, 75er mit 2) fehlen an der Weiche, 100er mit 3 bleibt', () => {
-  assert.equal(UKV_BELEGT.z90DreiZaehne, false);
-  assert.equal(UKV_BELEGT.z75ZweiZaehne, false);
-  const drei = ziel(basis({ V3: 'nein', V4: '3' })).stufen.map((s) => s.id);
-  const zwei = ziel(basis({ V3: 'nein', V4: '2' })).stufen.map((s) => s.id);
+test('22/35: 90er mit 3 und 75er mit 2 seit der Messung an der Weiche (Preis wie das Original); mit false fehlen sie, 100er mit 3 bleibt', async () => {
+  assert.equal(UKV_BELEGT.z90DreiZaehne, true);
+  assert.equal(UKV_BELEGT.z75ZweiZaehne, true);
+  const stufe = (V4, id) => ziel(basis({ V3: 'nein', V4 })).stufen.find((s) => s.id === id);
+  // Messung 20.11.2026 Fall 4 und 5 (Jahrgang 1990): 22,77 + 3 × 9,00 = 49,77 und 11,70 + 2 × 6,10 = 23,90.
+  assert.deepEqual([stufe('3', 'Z90').grundbeitrag, stufe('3', 'Z90').beitrag], [22.77, 49.77]);
+  assert.deepEqual([stufe('2', 'Z75').grundbeitrag, stufe('2', 'Z75').beitrag], [11.7, 23.9]);
+  const { W: offen } = await mitBelegt(OFFEN_ALLE);
+  const drei = offen.zielAus(basis({ V3: 'nein', V4: '3' }), { heute: NOV }).stufen.map((s) => s.id);
+  const zwei = offen.zielAus(basis({ V3: 'nein', V4: '2' }), { heute: NOV }).stufen.map((s) => s.id);
   assert.ok(drei.includes('Z100') && !drei.includes('Z90'), drei.join());
   assert.ok(zwei.includes('Z100') && !zwei.includes('Z75'), zwei.join());
   // Zuschlag wie die UKV: 100er bei 36 Jahren 30,05 + 3 × 10,90 = 62,75 (TABELLE, lauf3).
@@ -138,7 +177,8 @@ test('38: V5 nur, wenn das Ziel sonst die Bayerische wäre; V3a nur bei „steht
   assert.equal(n(basis({ V3: 'nein', V4: '2' })), null, 'Lücke ohne V5');
   assert.equal(n(basis({ V3: 'steht_an', V3a: 'nein', V4: '0' })), 'V5');
   assert.equal(n(basis({ V3: 'fertig', V4: '0' })), 'V5');
-  assert.equal(n(basis({ V2: 'freiwillig', V3: 'nein', V4: '0' })), 'V5');
+  // Abschluss UKV: „freiwillig gesetzlich“ geht wie der Regelfall zur UKV, ohne V5 (vor der Messung V5, Weg zur Bayerischen).
+  assert.equal(n(basis({ V2: 'freiwillig', V3: 'nein', V4: '0' })), null);
   assert.equal(n(basis({ V3: 'steht_an' })), 'V3a');
   assert.equal(n(basis({ V3: 'fertig' })), 'V4');
   assert.equal(n(basis({ V3: 'nein' })), 'V4');
@@ -165,10 +205,15 @@ test('39: privat, unter 18 und ab 81 enden vor der Einwilligung', () => {
   });
 });
 
-test('40: freiwillig mit V3 nein, V4 keiner, V5 nein zur Bayerischen; freiwillig mit Lücke zum Telefon', () => {
-  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'nein' })).ziel, 'bayerische');
-  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'nein', V4: '2' })).ziel, 'telefon');
-  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'ja' })).ziel, 'telefon');
+test('40: freiwillig seit der Messung wie pflicht zur UKV; vor der Messung (false) zur Bayerischen oder zum Telefon', async () => {
+  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'nein', V4: '0' })).ziel, 'ukv');
+  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'nein', V4: '2' })).ziel, 'ukv');
+  assert.equal(ziel(basis({ V2: 'freiwillig', V3: 'steht_an', V3a: 'nein', V4: '0', V5: 'nein' })).ziel, 'bayerische-sofort');
+  const { W: offen } = await mitBelegt({ freiwilligGkv: false });
+  const zo = (v) => offen.zielAus(v, { heute: NOV }).ziel;
+  assert.equal(zo(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'nein' })), 'bayerische');
+  assert.equal(zo(basis({ V2: 'freiwillig', V3: 'nein', V4: '2' })), 'telefon');
+  assert.equal(zo(basis({ V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'ja' })), 'telefon');
 });
 
 test('41: Heilfürsorge zum Telefon; mit WEICHE_HEILFUERSORGE_BAY = true zur Bayerischen', async () => {
@@ -180,16 +225,23 @@ test('41: Heilfürsorge zum Telefon; mit WEICHE_HEILFUERSORGE_BAY = true zur Bay
   assert.equal(offen.zielAus(basis({ V2: 'heilfuersorge', V3: 'nein', V4: '1' }), { heute: NOV }).ziel, 'telefon');
 });
 
-test('42: Alter mit dem Beginn, den die Maske vorbelegt; Jahrgang 1956 und 1946 an den Jahresgrenzen', () => {
+test('42: Alter mit dem Beginn, den die Maske vorbelegt; Jahrgang 1956 und 1946 an den Jahresgrenzen', async () => {
   const sofort = (geburt, heute) => W.zielAus({ ...basis({ geburt }), V3: 'steht_an', V3a: 'nein', V4: '0', V5: 'nein' }, { heute });
   // Bayerische: 1956 mit Beginn 01.12.2026 Eintrittsalter 70 (online), mit 01.01.2027 71 (gesperrt).
   assert.equal(sofort(g(1956, 6, 1), NOV).ziel, 'bayerische-sofort');
   assert.equal(sofort(g(1956, 6, 1), NOV).beginn.iso, '2026-12-01');
-  assert.equal(W.naechsterSchritt({ geburt: g(1956, 6, 1), V2: 'pflicht' }, { heute: DEZ }), null);
-  assert.equal(W.zielAus({ geburt: g(1956, 6, 1), V2: 'pflicht' }, { heute: DEZ }).fall, 'alter71bis80');
-  // UKV: 1946 im November Eintrittsalter 80 (offen, Telefon), im Dezember 81 (ab 81).
-  assert.equal(W.zielAus({ geburt: g(1946, 6, 1), V2: 'pflicht' }, { heute: NOV }).fall, 'alter71bis80');
+  // Abschluss UKV: Eintrittsalter 71 im Dezember geht zur UKV (UKV_BELEGT.alter71bis80), die Bayerische bleibt bei 70.
+  assert.equal(W.naechsterSchritt({ geburt: g(1956, 6, 1), V2: 'pflicht' }, { heute: DEZ }), 'einwilligung');
+  assert.equal(sofort(g(1956, 6, 1), DEZ).ziel, 'telefon', 'steht an, Bayerische nicht möglich, UKV lehnt Behandlung ab');
+  assert.equal(W.zielAus({ ...basis({ geburt: g(1956, 6, 1) }), V3: 'nein', V4: '0' }, { heute: DEZ }).ziel, 'ukv');
+  // UKV: 1946 im November Eintrittsalter 80 (online, 84,14 im 100er), im Dezember 81 (ab 81).
+  const achtzig = W.zielAus({ ...basis({ geburt: g(1946, 6, 1) }), V3: 'nein', V4: '0' }, { heute: NOV });
+  assert.deepEqual([achtzig.ziel, achtzig.stufen.find((s) => s.id === 'Z100').beitrag], ['ukv', 84.14]);
   assert.equal(W.zielAus({ geburt: g(1946, 6, 1) }, { heute: DEZ }).fall, 'ab81');
+  // Vor der Messung (false): beide Altersfälle zum Telefon.
+  const { W: offen } = await mitBelegt({ alter71bis80: false });
+  assert.equal(offen.zielAus({ geburt: g(1956, 6, 1), V2: 'pflicht' }, { heute: DEZ }).fall, 'alter71bis80');
+  assert.equal(offen.zielAus({ geburt: g(1946, 6, 1), V2: 'pflicht' }, { heute: NOV }).fall, 'alter71bis80');
   // Beginnfilter der Maske: 1956 bei der Bayerischen nur Dezember.
   assert.equal(W.bayerischeAlterOk({ geburt: g(1956, 6, 1), heute: NOV, beginn: { jahr: 2026, monat: 12 } }), true);
   assert.equal(W.bayerischeAlterOk({ geburt: g(1956, 6, 1), heute: NOV, beginn: { jahr: 2027, monat: 1 } }), false);
@@ -266,7 +318,7 @@ test('54: kein neuer Zähler, ANTRAGSWEG_ZIELE weiter 9', async () => {
   assert.doesNotMatch(fs.readFileSync(QUELLE, 'utf8'), /localStorage|sessionStorage|fetch\(/);
 });
 
-test('55 bis 58: Rückweiche', () => {
+test('55 bis 58: Rückweiche', async () => {
   const v = basis({ V3: 'nein', V4: '0' });
   const rw = (extra) => W.rueckweiche({
     v, vonProdukt: 'zahn-ukv', frageId: 'GF0073', wert: 'ja', heute: NOV, ...extra,
@@ -316,8 +368,10 @@ test('55 bis 58: Rückweiche', () => {
     wert: 'ja',
     heute: NOV,
   }).art, 'telefon'));
-  // Freiwillig bei der Bayerischen (V3 nein): UKV offen, also Telefon.
-  assert.equal(W.rueckweiche({
+  // Freiwillig bei der Bayerischen (V3 nein): vor der Messung UKV offen, also Telefon. Seit der Messung kommt ein solcher Kunde mit V3 nein
+  // gar nicht zur Bayerischen (Weiche zur UKV, Test 40).
+  const { W: offen } = await mitBelegt({ freiwilligGkv: false });
+  assert.equal(offen.rueckweiche({
     v: basis({
       V2: 'freiwillig', V3: 'nein', V4: '0', V5: 'nein',
     }),
@@ -439,12 +493,16 @@ test('Nachbesserung W3: Seitenspalte der Rückweiche nennt die neue Gesellschaft
   assert.match(STRECKE, /<VertrauenPunkte definition=\{vertrauenDef\}/);
 });
 
-test('Nachbesserung K2: Anzahl im Rückweiche-Kasten aus der Lage', () => {
+test('Nachbesserung K2: Anzahl im Rückweiche-Kasten aus der Lage', async () => {
   const v = basis({ V3: 'nein', V4: '0' });
   const af = 'freiwillig gesetzlich versichert in deutscher GKV';
   assert.equal(W.zusatzAnzahl({ v, heute: NOV }), 4);
   assert.equal(W.zusatzAnzahl({ v: { ...v, V5: 'nein' }, heute: NOV }), 3);
-  assert.equal(W.zusatzAnzahl({
+  // Abschluss UKV: AF_AD_0005 „freiwillig“ hat in der UKV-Maske keine Wirkung mehr, eine Rückweiche entsteht dort nicht.
+  assert.deepEqual(wirkungenUkv({ AF_AD_0005: af }), []);
+  // Vor der Messung (false): Rückweiche nach AF_AD_0005 mit zwei Angaben.
+  const { W: offen } = await mitBelegt({ freiwilligGkv: false });
+  assert.equal(offen.zusatzAnzahl({
     v, frageId: 'AF_AD_0005', wert: af, heute: NOV,
   }), 2);
   assert.equal(W.RUECKWEICHE_TEXTE.zurBayerischen.text(2), 'Bei der Bayerischen kannst du vielleicht trotzdem online abschließen. Dafür brauchen wir noch zwei kurze Angaben.');
@@ -452,16 +510,18 @@ test('Nachbesserung K2: Anzahl im Rückweiche-Kasten aus der Lage', () => {
   assert.match(STRECKE, /zusatzAnzahl\(\{\s*v, vonProdukt: produkt, frageId, wert, heute,\s*\}\)/);
 });
 
-test('Nachbesserung K3: Wechsel nach AF_AD_0005 behält V3, übernimmt die Krankenversicherung und neu Gefragtes', () => {
+test('Nachbesserung K3: Wechsel nach AF_AD_0005 behält V3, übernimmt die Krankenversicherung und neu Gefragtes', async () => {
   const v = basis({ V3: 'nein', V4: '0' });
   const af = 'freiwillig gesetzlich versichert in deutscher GKV';
-  const nach = W.vorfragenNachWechsel({
+  // Gilt nur vor der Messung (UKV_BELEGT.freiwilligGkv = false); seit der Messung gibt es diesen Wechsel nicht mehr (K2).
+  const { W: offen } = await mitBelegt({ freiwilligGkv: false });
+  const nach = offen.vorfragenNachWechsel({
     v, vonProdukt: 'zahn-ukv', frageId: 'AF_AD_0005', wert: af, zusatz: { V5: 'nein', plz: '20095' },
   });
   assert.equal(nach.V3, 'nein');
   assert.equal(nach.V2, 'freiwillig');
   assert.equal(nach.V5, 'nein');
-  assert.equal(W.zielAus(nach, { heute: NOV }).ziel, 'bayerische');
+  assert.equal(offen.zielAus(nach, { heute: NOV }).ziel, 'bayerische');
   const gf = W.vorfragenNachWechsel({
     v, vonProdukt: 'zahn-ukv', frageId: 'GF0073', wert: 'ja', zusatz: { V3: 'steht_an', V3a: 'nein', V5: 'nein' },
   });

@@ -235,11 +235,19 @@ async function ukvWeg(browser, breite) {
   await weiter(page);
   await bildschirm(page, 'zusammenfassung');
   pruefe((await page.textContent('[data-bildschirm="zusammenfassung"]')).includes('Zu einer anderen Gesellschaft wechselt Healio nur, wenn du es neu bestätigst.'), 'Vorbehalt der Weiche (2.9 Nr. 12)');
+  // Abschluss UKV: Bestätigungssatz der UKV vor dem Absenden, Pflicht.
+  await page.click('#knopf-absenden');
+  await page.waitForTimeout(300);
+  pruefe(await page.locator('#fehler-angabenBestaetigt').isVisible() && await page.locator('[data-danke]').count() === 0, 'Bestätigungssatz der UKV ist Pflicht (Weiche)');
+  pruefe((await page.textContent('[data-bestaetigung-sdk]')).includes('Hiermit bestätige ich, dass alle gemachten Angaben korrekt und vollständig sind.'), 'Satz der UKV über die Weiche');
+  await page.locator('label:has(#feld-angabenBestaetigt)').click();
+  await foto(page, `${name}-07b-bestaetigung`);
   await page.click('#knopf-absenden');
   await page.waitForSelector('[data-danke]');
   const { letzter } = await mock('/__test/letzter');
   pruefe(letzter.weiche === true && letzter.erklaerungen.weicheEinwilligung === true && letzter.unterlagen.bestaetigt.some((b) => b.erklaerung === 'weicheEinwilligung' && /^\d{4}-\d\d-\d\dT/.test(b.um)), '53: Einwilligung mit Zeitpunkt im Antrag');
-  pruefe(letzter.textfassung === '2026-11-20e-ukv-zahn-online' && letzter.beitragAngezeigt === 51.85, 'Fassung und Beitrag');
+  pruefe(letzter.textfassung === '2026-11-20f-ukv-zahn-online' && letzter.beitragAngezeigt === 51.85, 'Fassung und Beitrag');
+  pruefe(letzter.erklaerungen.angabenBestaetigt === true && letzter.original.find((e) => e.feld === 'bestaetigungsdialog')?.wert === 'true', 'Abschluss UKV: Bestätigungssatz im Antrag über die Weiche');
   pruefe(!JSON.stringify(letzter).includes('"V3"') && !JSON.stringify(letzter).includes('"V5"'), 'keine Vorfragen im Antrag');
   await foto(page, `${name}-08-danke`);
   await context.close();
@@ -386,6 +394,13 @@ async function rueckweicheZurBayerischen(browser, breite) {
   await bildschirm(page, 'tarif');
   pruefe(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked() && await page.inputValue('#feld-geburtsdatum') === '05.03.1990' && await page.inputValue('#feld-plzTarif') === '20095', '57: Geburtsdatum und PLZ übernommen, Baustein für die anstehende Behandlung');
   await page.waitForSelector('[data-gesamtbeitrag]');
+  // K3 (seit Abschluss UKV hier): Zurück aus der Maske führt zum Ergebnis der Rückweiche, nicht zur letzten Zusatzfrage.
+  await page.click('[data-leiste] button[aria-label="Zurück"]');
+  await page.waitForSelector('[data-bildschirm^="wechsel:"]');
+  pruefe(await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm') === 'wechsel:wechsel', `K3: Zurück zum Ergebnis (${await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm')})`);
+  await page.click('[data-wechsel-weiter]');
+  await bildschirm(page, 'tarif');
+  await page.waitForSelector('[data-gesamtbeitrag]');
   await weiter(page);
   await bildschirm(page, 'hinweis');
   await weiter(page);
@@ -427,14 +442,21 @@ async function ukvSchalterAus(browser, breite = 390) {
   await page.close();
 }
 
-// Nachbesserung K2 und K3: Rückweiche nach AF_AD_0005 „freiwillig“ (zwei Angaben), V3 bleibt, Zurück aus der Maske zum Ergebnis.
-async function rueckweicheNachVersicherung(browser, breite) {
+// Abschluss UKV (20.11.2026): „freiwillig gesetzlich“ ist seit der Messung (Fall 1) belegt. Die Weiche führt wie bei „pflicht“ zur UKV
+// (ohne V5), und AF_AD_0005 „freiwillig“ löst in der Maske keine Rückweiche und keinen Telefon-Ausgang mehr aus (früher K2 und K3,
+// Zurück zum Ergebnis der Rückweiche prüft jetzt rueckweicheZurBayerischen).
+async function freiwilligZurUkv(browser, breite) {
   const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
   const page = await context.newPage();
-  const name = `${breite}-rueckweiche-freiwillig-zur-bayerischen`;
+  const name = `${breite}-abschluss-freiwillig`;
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-  await vorfragen(page, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '0']] });
+  await vorfragen(page, { antworten: [['V2', 'freiwillig'], ['einwilligung'], ['V3', 'nein'], ['V4', '0']] });
   await page.waitForSelector('[data-weiche-ergebnis="ukv"]');
+  pruefe(await page.locator('[data-vorab-frage="V5"]').count() === 0, 'freiwillig: Weiche zur UKV ohne V5');
+  await page.waitForFunction(() => document.querySelectorAll('[data-weiche-stufe]').length === 3);
+  pruefe((await page.textContent('[data-weiche-stufe="Z100"]')).includes('30,05 EUR'), 'freiwillig: 100er 30,05 EUR wie das Original (Fall 1)');
+  await pruefeSeite(page, `${name} Weiche`);
+  await foto(page, `${name}-01-weiche-ukv`);
   await page.click('[data-weiche-weiter]');
   await ukvBisFragen(page);
   await page.locator('label:has(input[name="frage-TF0021"][value="0"])').click();
@@ -455,27 +477,12 @@ async function rueckweicheNachVersicherung(browser, breite) {
   await weiter(page);
   await bildschirm(page, 'frage:AF_AD_0005');
   await page.locator('label:has(input[name="frage-AF_AD_0005"][value="freiwillig gesetzlich versichert in deutscher GKV"])').click();
-  await page.waitForSelector('[data-rueckweiche]');
-  pruefe((await page.textContent('[data-rueckweiche]')).includes('Dafür brauchen wir noch zwei kurze Angaben.'), 'K2: nach AF_AD_0005 zwei Angaben');
-  await foto(page, `${name}-01-kasten`);
-  await page.click('[data-rueckweiche-knopf]');
-  await bildschirm(page, 'wechsel:V5');
-  await page.click('[data-vorab-antwort="nein"]');
-  await bildschirm(page, 'wechsel:plz');
-  await page.fill('#wechsel-plz', '20095');
-  await page.click('[data-wechsel-plz-weiter]');
-  await bildschirm(page, 'wechsel:wechsel');
-  await page.waitForFunction(() => document.querySelectorAll('[data-weiche-stufe]').length === 3);
-  pruefe(await page.locator('text=mit ZAHN Sofort').count() === 0, 'K3: ohne ZAHN Sofort (nichts angeraten)');
-  await foto(page, `${name}-02-ergebnis`);
-  await page.click('[data-wechsel-weiter]');
-  await bildschirm(page, 'tarif');
-  pruefe(!(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked()) && await page.inputValue('#feld-plzTarif') === '20095', 'K3: Maske der Bayerischen ohne Baustein, PLZ übernommen');
-  await page.waitForSelector('[data-gesamtbeitrag]');
-  // K3: Zurück führt zum Ergebnis der Rückweiche, nicht zur Frage nach der abgerechneten Behandlung.
-  await page.click('[data-leiste] button[aria-label="Zurück"]');
-  await page.waitForSelector('[data-bildschirm^="wechsel:"]');
-  pruefe(await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm') === 'wechsel:wechsel', `K3: Zurück zum Ergebnis (${await page.getAttribute('[data-bildschirm^="wechsel:"]', 'data-bildschirm')})`);
+  await page.waitForTimeout(400);
+  pruefe(await page.locator('[data-rueckweiche]').count() === 0 && await page.locator('[data-pruefung]').count() === 0, 'freiwillig: keine Rückweiche, kein Telefon-Ausgang');
+  await foto(page, `${name}-02-maske-af-ad-0005`);
+  await weiter(page);
+  await bildschirm(page, 'beitrag');
+  pruefe((await page.textContent('[data-beitrag-wert]')).includes('30,05 EUR'), 'freiwillig: Beitrag 30,05 EUR');
   await context.close();
 }
 
@@ -544,8 +551,8 @@ try {
   await rueckweicheZurBayerischen(browser, 1280);
   await ukvSchalterAus(browser, 390);
   await ukvSchalterAus(browser, 1280);
-  await rueckweicheNachVersicherung(browser, 390);
-  await rueckweicheNachVersicherung(browser, 1280);
+  await freiwilligZurUkv(browser, 390);
+  await freiwilligZurUkv(browser, 1280);
   await pruefseiteOhneRueckweiche(browser);
   if (VARIANTE) { await rueckweicheZurUkv(browser, VARIANTE, 390); await rueckweicheZurUkv(browser, VARIANTE, 1280); }
   console.log(`Zahn-Weiche gerendert: ${punkte} Prüfungen grün.`);

@@ -76,6 +76,7 @@ async function foto(page, name) {
   await page.waitForTimeout(200);
   await page.screenshot({ path: path.join(FOTOS, `${name}.png`), fullPage: true });
 }
+const fotoRoh = (page, name) => foto(page, name);
 
 async function pruefeSeite(page, wo) {
   const breite = await page.evaluate(() => ({ scroll: document.documentElement.scrollWidth, innen: window.innerWidth }));
@@ -128,6 +129,19 @@ async function sdkAbsenden(page, name = null) {
   pruefe((await page.textContent('[data-bestaetigung-sdk]')).includes('Hiermit bestätige ich, dass alle gemachten Angaben korrekt und vollständig sind.'), 'Satz der SDK im Wortlaut');
   await page.locator('label:has(#feld-angabenBestaetigt)').click();
   if (name) await foto(page, `${name}-11b-bestaetigung`);
+  await page.click('#knopf-absenden');
+}
+
+// Abschluss UKV (20.11.2026): Bestätigungssatz der UKV vor dem Absenden, Pflicht wie bei der SDK, Wortlaut aus dem Programmbündel.
+const UKV_SATZ = 'Hiermit bestätige ich, dass alle gemachten Angaben korrekt und vollständig sind. Mir ist bewusst, dass durch einen Klick auf „Kostenpflichtig Beantragen“ ein verbindlicher Antrag beim Versicherer eingereicht wird.';
+async function ukvAbsenden(page, name = null) {
+  await page.click('#knopf-absenden');
+  await page.waitForTimeout(300);
+  pruefe(await page.locator('#fehler-angabenBestaetigt').isVisible() && !(await page.locator('[data-danke]').count()), 'Bestätigungssatz der UKV ist Pflicht');
+  const kasten = await page.textContent('[data-bestaetigung-sdk]');
+  pruefe(kasten.includes('Bestätigung für die UKV') && kasten.includes(UKV_SATZ) && kasten.includes('Diesen Satz bestätigst du gegenüber der UKV.'), 'Satz der UKV im Wortlaut');
+  await page.locator('label:has(#feld-angabenBestaetigt)').click();
+  if (name) await foto(page, `${name}-bestaetigung`);
   await page.click('#knopf-absenden');
 }
 
@@ -552,10 +566,10 @@ async function zahnAblehnung(browser) {
   // statischer Ausweg „UKV“ (bei anstehender Behandlung lehnt die UKV ab); die Rückweiche greift hier nicht.
   pruefe(!/barmenia/i.test(hinweis) && !/UKV ZahnPRIVAT/.test(hinweis) && /Termin vereinbaren/.test(hinweis) && !/Zusammen am Telefon/.test(hinweis) && await page.locator('[data-rueckweiche]').count() === 0, 'Weiche: nur Termin, kein UKV-Ausweg, kein Barmenia');
   await foto(page, '390-zahn-ablehnung');
-  // Eintrittsalter 71: Weiche endet vor der Einwilligung beim Telefon (UKV offen, Bayerische bis 70).
+  // Abschluss UKV: Eintrittsalter 71 geht seit der Messung über die Weiche zur UKV (Bayerische bis 70).
   await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-  await zahnVorab(page, [], { datum: '15.05.1955', ziel: 'telefon' });
-  pruefe(await page.locator('[data-einwilligung]').count() === 0 && (await page.textContent('[data-weiche-ergebnis]')).includes('Für deine Angaben nehmen wir den Antrag gemeinsam mit dir auf.'), '71 Jahre: Telefon vor der Einwilligung');
+  await zahnVorab(page, [['V3', 'nein'], ['V4', '0']], { datum: '15.05.1955', ziel: 'ukv', starten: false });
+  pruefe(/84,14/.test(await page.textContent('[data-weiche-ergebnis]')), '71 Jahre: UKV mit dem Beitrag der Tabelle (100er 84,14 EUR)');
   await foto(page, '390-zahn-71-jahre');
   await context.close();
 }
@@ -726,8 +740,9 @@ async function stationaerDurchlauf(browser, breite, tarif) {
   await context.close();
 }
 
-async function ukvDurchlauf(browser) {
-  const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+async function ukvDurchlauf(browser, breite = 390) {
+  const context = await browser.newContext({ viewport: { width: breite, height: breite < 600 ? 844 : 900 } });
+  const foto = (seite, name) => fotoRoh(seite, name.replace(/^390-/, `${breite}-`));
   const page = await context.newPage();
   await mock('/__test/zuruecksetzen', 'POST');
   // Einzelmaske der UKV direkt (Paket C: der statische Ausweg „UKV“ gilt nur noch außerhalb der Weiche).
@@ -744,8 +759,9 @@ async function ukvDurchlauf(browser) {
   await foto(page, '390-ukv-00-alter-19');
   await page.fill('#feld-geburtsdatum', '15.05.1950');
   await page.locator('#feld-geburtsdatum').blur();
-  await page.waitForFunction(() => /gemeinsam mit dir auf/.test(document.querySelector('[data-altersgrenze]')?.textContent || ''));
-  pruefe(true, 'UKV Eintrittsalter 76: gemeinsam aufnehmen');
+  // Abschluss UKV: Eintrittsalter 76 seit der Messung online (Grenze 80 wie vor Paket C), drei Stufen ohne Altershinweis.
+  await page.waitForFunction(() => document.querySelectorAll('[data-stufe]').length === 3);
+  pruefe(await page.locator('[data-altersgrenze]').count() === 0 && /84,14 EUR/.test(await page.textContent('[data-stufe-beitrag="Z100"]')), 'UKV Eintrittsalter 76: online, 100er 84,14 EUR');
   await page.fill('#feld-geburtsdatum', '05.03.1990');
   await page.locator('#feld-geburtsdatum').blur();
   await page.waitForFunction(() => document.querySelectorAll('[data-stufe]').length === 3);
@@ -799,6 +815,11 @@ async function ukvDurchlauf(browser) {
   await page.waitForSelector('[data-pruefung]');
   pruefe((await page.textContent('[data-pruefung]')).includes('Mit dieser Antwort ist der Tarif online leider nicht möglich.'), 'UKV: private Krankenversicherung lehnt ab');
   await foto(page, '390-ukv-01c-privat');
+  // Abschluss UKV: „freiwillig gesetzlich versichert“ seit der Messung (Fall 1) ohne Telefon-Ausgang, Weiter bleibt.
+  await page.locator('label:has(input[name="frage-AF_AD_0005"][value="freiwillig gesetzlich versichert in deutscher GKV"])').click();
+  await page.waitForTimeout(300);
+  pruefe(await page.locator('[data-pruefung]').count() === 0 && await page.locator('[data-weiter]').count() > 0, 'UKV: freiwillig gesetzlich ohne Telefon-Ausgang');
+  await foto(page, '390-ukv-01d-freiwillig');
   await page.locator('label:has(input[name="frage-AF_AD_0005"][value="pflichtversichert in deutscher GKV"])').click();
   await weiter(page);
   await bildschirm(page, 'beitrag');
@@ -829,12 +850,13 @@ async function ukvDurchlauf(browser) {
   await bildschirm(page, 'zusammenfassung');
   pruefe((await page.textContent('[data-auftrag]')).includes('bei der UKV') && (await page.textContent('[data-auftrag]')).includes('Monatsbeitrag von 40,95 EUR'), 'Auftragssatz UKV');
   pruefe((await page.textContent('[data-antwortenliste]')).includes('Fehlen Zähne, die noch nicht ersetzt sind?'), 'UKV-Fragen im Wortlaut');
-  await page.click('#knopf-absenden');
+  await ukvAbsenden(page, `${breite}-ukv-02c-zusammenfassung`);
   await page.waitForSelector('[data-danke]');
   const { letzter } = await mock('/__test/letzter');
   const g = (feld) => letzter.original.find((e) => e.feld === feld)?.wert;
   pruefe(letzter.versicherer === 'ukv' && letzter.beitragAngezeigt === 40.95 && g('TF0021') === '1' && g('tarifwahl') === 'UKVZahnPRIVAT100#', 'UKV-Antrag mit Zuschlag und Zuordnung');
-  pruefe(g('policyHolderIsEqualInsuredPerson') === 'true' && g('VP0004') === 'Versicherungsnehmer selbst' && letzter.textfassung === '2026-11-20e-ukv-zahn-online' && !('weiche' in letzter), 'UKV: sichtbare Felder in der Zuordnung, Textfassung 2026-11-20e, Einzelmaske ohne Weiche');
+  pruefe(g('policyHolderIsEqualInsuredPerson') === 'true' && g('VP0004') === 'Versicherungsnehmer selbst' && letzter.textfassung === '2026-11-20f-ukv-zahn-online' && !('weiche' in letzter), 'UKV: sichtbare Felder in der Zuordnung, Textfassung 2026-11-20f, Einzelmaske ohne Weiche');
+  pruefe(letzter.erklaerungen.angabenBestaetigt === true && g('bestaetigungsdialog') === 'true', 'UKV: Bestätigungssatz vom Kunden, Zuordnung bestaetigungsdialog');
   pruefe(letzter.unterlagen.gezeigt.some((u) => u.href === 'dienst:15605'), 'UKV 100: 15605 in den Unterlagen');
   await foto(page, '390-ukv-03-danke');
   await context.close();
@@ -905,7 +927,7 @@ async function pruefseiteLevelnine(browser, art) {
     await weiter(page);
   }
   await bildschirm(page, 'zusammenfassung');
-  if (art === 'stationaer') await sdkAbsenden(page); else await page.click('#knopf-absenden');
+  if (art === 'stationaer') await sdkAbsenden(page); else await ukvAbsenden(page, '390-pruefseite-ukv-zusammenfassung');
   await page.waitForSelector('[data-danke], [data-sendefehler]');
   if (await page.locator('[data-sendefehler]').count()) throw new Error(`Sendefehler ${art}: ${await page.textContent('[data-sendefehler]')}`);
   const { letzter } = await mock('/__test/letzter');
@@ -1213,7 +1235,8 @@ async function alleWeiteren(browser) {
     await stationaerDurchlauf(browser, 390, 'SP2');
     await stationaerDurchlauf(browser, 1280, 'SPU');
     await stationaerDurchlauf(browser, 1280, 'SP2');
-    await ukvDurchlauf(browser);
+    await ukvDurchlauf(browser, 390);
+    await ukvDurchlauf(browser, 1280);
     await unterlagenLeerListe(browser);
     await pruefseiteZahn(browser);
     await pruefseiteAmbulantOnline(browser);

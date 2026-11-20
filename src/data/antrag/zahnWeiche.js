@@ -248,17 +248,23 @@ export const HINWEIS_BEITRAG = Object.freeze({
 export const MATRIX = Object.freeze({
   unter18: { klasse: 'grenze', ziel: 'telefon', grund: 'unter18', beleg: 'Healio-Grenze; UKV online nur ab 18 für sich selbst (zahnUkv.js alter.min)' },
   ab81: { klasse: 'grenze', ziel: 'telefon', grund: 'ab81', beleg: 'Healio-Grenze wie B12, Original rechnet (raender); Teil 5 Nr. 23' },
-  alter71bis80: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'UKV Preis bis 80 gesehen, Annahme nie (raender A11/B10, UKV_BELEGT.alter71bis80); Bayerische Healio-Grenze 70' },
-  alter1819: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'UKV KFO-Frage 6.2.4 bei 90/100 nie geprüft (TABELLE Nr. 25, UKV_BELEGT.kfo1819), Z75 bis 5 Euro nicht angeboten (C8); Bayerische nie gesehen (WEICHE_BAY_1819)' },
+  // Abschluss UKV (20.11.2026): Mit UKV_BELEGT.alter71bis80 = true geht Eintrittsalter 71 bis 80 über regelfall oder luecke zur UKV. Diese
+  // Zeile greift nur noch, wenn die Konstante wieder auf false steht.
+  alter71bis80: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'Nur bei UKV_BELEGT.alter71bis80 = false. Seit 20.11.2026 true: Grenze 80 wie vor Paket C (56844d7), Beiträge 71 bis 80 aus den Antworten des Originals (ukv-tabelle.log 12.11.2026), Wächter 20.11.2026 bei 80, Messung 20.11.2026 Fall 3 (74, Z75, bis zur Bankseite gleich); Bayerische Healio-Grenze 70' },
+  alter1819: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'UKV stellt bei 90/100 und Eintrittsalter 19 die KFO-Zusatzfrage (Messung 20.11.2026 Fall 2, Einreicher kennt sie nicht, Annahme nicht gemessen, UKV_BELEGT.kfo1819 = false bis Franks Entscheidung), Z75 bis 5 Euro nicht angeboten (C8); Bayerische nie gesehen (WEICHE_BAY_1819)' },
   privat: { klasse: 'belegt', ziel: 'telefon', grund: 'privat', beleg: 'UKV lehnt ab (netz lauf4 wh3); Bayerische laut PIB nur GKV oder freie Heilfürsorge' },
   heilfuersorge: { klasse: 'belegt', ziel: 'telefon', grund: 'heilfuersorge', beleg: 'UKV lehnt ab (lauf4); Bayerische gleichgestellt, nie gesehen (WEICHE_HEILFUERSORGE_BAY)' },
   heilfuersorgeBay: { klasse: 'gleichgestellt', ziel: 'bayerische', grund: null, beleg: 'Bayerische fragt die Krankenversicherung nicht, PIB lässt freie Heilfürsorge zu (nur mit WEICHE_HEILFUERSORGE_BAY)' },
-  freiwilligBay: { klasse: 'gleichgestellt', ziel: 'bayerische', grund: null, beleg: 'Bayerische fragt die Art der GKV nicht, „alles nein“ gesehen (Lauf 5); UKV offen (TABELLE Nr. 14)' },
-  freiwilligOffen: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'UKV „freiwillig gesetzlich“ online nie gefahren (TABELLE Nr. 14, UKV_BELEGT.freiwilligGkv)' },
-  regelfall: { klasse: 'belegt', ziel: 'ukv', grund: null, beleg: 'Alles nein gesehen bei 36 und 61 (UKV lauf1, Bayerische Lauf 5); Wahlregel 1.3' },
+  freiwilligBay: { klasse: 'gleichgestellt', ziel: 'bayerische', grund: null, beleg: 'Bayerische fragt die Art der GKV nicht, „alles nein“ gesehen (Lauf 5); greift seit UKV_BELEGT.freiwilligGkv = true nur, wenn die UKV aus anderem Grund nicht in Frage kommt' },
+  // Abschluss UKV (20.11.2026): Mit UKV_BELEGT.freiwilligGkv = true geht „freiwillig gesetzlich“ wie „pflichtversichert“ zur UKV. Diese Zeile
+  // greift nur noch, wenn die UKV aus anderem Grund nicht in Frage kommt oder die Konstante wieder auf false steht.
+  freiwilligOffen: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'UKV „freiwillig gesetzlich“ seit der Messung 20.11.2026 Fall 1 belegt (Z100, Jg. 1990, bis zur Bankseite gleich, UKV_BELEGT.freiwilligGkv); hier nur Fälle, in denen die UKV aus anderem Grund nicht in Frage kommt' },
+  regelfall: { klasse: 'belegt', ziel: 'ukv', grund: null, beleg: 'Alles nein gesehen bei 36 und 61 (UKV lauf1, Bayerische Lauf 5), bei 74 im Z75 und „freiwillig gesetzlich“ im Z100 (Messung 20.11.2026 Fall 3 und 1); Wahlregel 1.3' },
   regelfallBeide: { klasse: 'belegt', ziel: 'beide', grund: null, beleg: 'Alles nein gesehen bei beiden; nur mit WAHLREGEL „beide“' },
-  luecke: { klasse: 'belegt', ziel: 'ukv', grund: null, beleg: 'Online gesehen: 100er 1/2/3, 90er 1/2, 75er 1/3 (nachrechnen 4.2, TABELLE Nr. 4 und 6); offene Kombinationen sperrt die UKV-Definition je Tarif' },
-  lueckeOffen: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: '90er mit 3 und 75er mit 2 Zähnen nur nach Papierantrag 5084 (UKV_BELEGT.z90DreiZaehne, z75ZweiZaehne), keine andere Stufe angeboten' },
+  luecke: { klasse: 'belegt', ziel: 'ukv', grund: null, beleg: 'Online gesehen: 100er 1/2/3, 90er 1/2, 75er 1/3 (nachrechnen 4.2, TABELLE Nr. 4 und 6), 90er mit 3 und 75er mit 2 (Messung 20.11.2026 Fall 4 und 5), 100er mit 1 bei 50 (Fall 6); offene Kombinationen sperrt die UKV-Definition je Tarif' },
+  // Abschluss UKV (20.11.2026): Mit UKV_BELEGT.z90DreiZaehne und .z75ZweiZaehne = true ist keine Kombination mehr gesperrt. Diese Zeile greift
+  // nur noch, wenn eine der beiden Konstanten wieder auf false steht.
+  lueckeOffen: { klasse: 'offen', ziel: 'ukv', grund: 'offen', beleg: 'Nur bei UKV_BELEGT.z90DreiZaehne oder .z75ZweiZaehne = false. Seit 20.11.2026 beide true (Messung Fall 4: 90er mit 3 Zähnen 49,77, Fall 5: 75er mit 2 Zähnen 23,90, je bis zur Bankseite gleich)' },
   mehrAls3: { klasse: 'belegt', ziel: 'telefon', grund: 'mehrAls3', beleg: 'Beide lehnen ab (UKV TF0021 „>3“, Bayerische Frage 1)' },
   behandlungSofort: { klasse: 'gleichgestellt', ziel: 'bayerische-sofort', grund: null, beleg: 'Bayerische fragt nicht nach Behandlungen, „alles nein“ mit ZAHN Sofort gesehen (Lauf 5); UKV GF0073 lehnt ab (lauf4)' },
   behandlungFertig: { klasse: 'gleichgestellt', ziel: 'bayerische', grund: null, beleg: 'Bayerische fragt nicht nach abgerechneten Behandlungen; UKV GF0073 fragt die letzten zwei Jahre' },

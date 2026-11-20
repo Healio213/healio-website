@@ -38,17 +38,41 @@ const VORBEHALT_UKV = 'Dein Beitrag gilt vorbehaltlich der Annahme durch die UKV
 // Paket C (C11, Ergänzung 1.13, 20.11.2026): Fälle, deren Ergebnis bei der UKV online nie gesehen wurde. false heißt: online nicht,
 // Telefon oder Termin. Nach der Messung im Prüfschritt (Teil 6 Nr. 1) je Fall eine Zeile auf true stellen, dann gilt die Regel des
 // Originals (Zuschlag laut Papierantrag 5084 bzw. keine Wirkung). Weiche und Einzelmaske lesen dieselben Werte.
-//   z90DreiZaehne  ZahnPRIVAT 90 mit 3 fehlenden Zähnen (nur Papierantrag S. 12, TABELLE Nr. 4)
-//   z75ZweiZaehne  ZahnPRIVAT 75 mit 2 fehlenden Zähnen (nur Papierantrag S. 12, TABELLE Nr. 6)
-//   kfo1819        ZahnPRIVAT 90 und 100 bei Eintrittsalter 18 und 19 (KFO-Frage 6.2.4 online nie geprüft, TABELLE Nr. 25)
-//   freiwilligGkv  „freiwillig gesetzlich versichert in deutscher GKV“ (online nie gefahren, TABELLE Nr. 14)
-//   alter71bis80   Eintrittsalter 71 bis 80 (Preis gesehen, Annahme nie, raender A11/B10)
+// Messung 20.11.2026, 07:23 bis 07:28 Uhr (Probelauf mit der Testperson, höchstens bis zur Bankseite, nichts abgesendet, keine
+// Bankdaten), Rohdaten und Protokoll: Healio/Antragsstrecken/pruefung-zuschlaege-2026-11-19/bau/paket-c/pruefung/messung/echt-2026-11-20.
+//   z90DreiZaehne  ZahnPRIVAT 90 mit 3 fehlenden Zähnen (vorher nur Papierantrag S. 12, TABELLE Nr. 4)
+//   z75ZweiZaehne  ZahnPRIVAT 75 mit 2 fehlenden Zähnen (vorher nur Papierantrag S. 12, TABELLE Nr. 6)
+//   kfo1819        ZahnPRIVAT 90 und 100 bei Eintrittsalter 18 und 19 (KFO-Frage 6.2.4, TABELLE Nr. 25)
+//   freiwilligGkv  „freiwillig gesetzlich versichert in deutscher GKV“ (vorher online nie gefahren, TABELLE Nr. 14)
+//   alter71bis80   Eintrittsalter 71 bis 80 (Preis gesehen, raender A11/B10)
 export const UKV_BELEGT = Object.freeze({
-  z90DreiZaehne: false,
-  z75ZweiZaehne: false,
+  // 20.11.2026 Fall 4: Jg. 1990, 3 fehlende Zähne, bis zur Bankseite, Grundbeitrag 22,77 und Endpreis 49,77 wie Healio, 14 von 14 Feldern gleich.
+  z90DreiZaehne: true,
+  // 20.11.2026 Fall 5: Jg. 1990, 2 fehlende Zähne, bis zur Bankseite, Grundbeitrag 11,70 und Endpreis 23,90 wie Healio, 14 von 14 Feldern gleich.
+  z75ZweiZaehne: true,
+  // 20.11.2026 Fall 2: ZahnPRIVAT 100, geboren 15.05.2007 (Eintrittsalter 19), Grundbeitrag 20,73 wie Healio. Auf der Seite mit den Zahnfragen
+  // stellt das Original zusätzlich die Frage „Werden aktuell kieferorthopädische Behandlungen durchgeführt oder sind solche notwendig,
+  // angeraten oder beabsichtigt? Wird die Frage mit "ja" beantwortet, gilt: Ich bin damit einverstanden, dass für Kieferorthopädie kein
+  // Versicherungsschutz besteht.“ (Ja/Nein, ohne Vorauswahl). Der Einreicher kennt sie nicht, „Weiter“ blieb gesperrt, der Lauf endete dort.
+  // Annahme nicht gemessen. Bleibt false (Telefon), bis Frank über die Zusatzfrage entscheidet.
   kfo1819: false,
-  freiwilligGkv: false,
-  alter71bis80: false,
+  // 20.11.2026 Fall 1: ZahnPRIVAT 100, Jg. 1990, alles Nein, bis zur Bankseite, Grundbeitrag und Endpreis 30,05 wie Healio, 14 von 14 Feldern gleich.
+  freiwilligGkv: true,
+  // Grenze 80 galt schon vor Paket C (Commit 56844d7, alter.max 80). Beiträge 71 bis 80 in allen drei Stufen aus den gespeicherten
+  // Antworten des Originals (originale/levelnine/roh/ukv-tabelle.log, 12.11.2026, je Alter 0 bis 80), Wächter-Erstlauf 20.11.2026
+  // (Eintrittsalter 80, alle drei Stufen gleich), Messung 20.11.2026 Fall 3 (Eintrittsalter 74, ZahnPRIVAT 75, alles Nein, bis zur
+  // Bankseite, 35,37 wie Healio, 14 von 14 Feldern gleich). Früherer Stand mit Beleg wiederhergestellt.
+  alter71bis80: true,
+});
+
+// Abschluss UKV (20.11.2026): Bestätigungsdialog der Strecke (Schritt 7, Wortlaut aus der Erfassung, im Programmbündel von Level Nine
+// pages/summary/OrderDialog.tsx, gleich für alle Mandanten). Der Einreicher klickt „Kostenpflichtig Beantragen“ nur, wenn der Kunde den
+// Satz bei Healio bestätigt hat (einreicher/levelnine.mjs, bestaetigung_fehlt:bestaetigungsdialog). Gleicher Aufbau wie bei der SDK.
+const DIALOG_UKV = SCHRITTE.find((eintrag) => eintrag.schritt === 7 && eintrag.titel === 'Bestätigungsdialog')?.felder.find((feld) => /^Hiermit bestätige ich/.test(feld.wortlaut || ''));
+if (!DIALOG_UKV) throw new Error('zahnUkv.js: Bestätigungsdialog der UKV-Strecke fehlt in der Erfassung');
+export const UKV_BESTAETIGUNG_VORSPANN = 'Diesen Satz bestätigst du gegenüber der UKV. Healio klickt danach in deinem Auftrag auf „Kostenpflichtig Beantragen“.';
+export const UKV_BESTAETIGUNG = Object.freeze({
+  key: 'angabenBestaetigt', original: 'bestaetigungsdialog', originalSchritt: 7, titel: 'Bestätigung für die UKV', vorspann: UKV_BESTAETIGUNG_VORSPANN, text: DIALOG_UKV.wortlaut, fehler: 'Bitte bestätige diesen Satz, bevor du absendest.',
 });
 
 const LEVEL_NINE_SDK = 'in die Online-Antragsstrecke der SDK, die die cpit comparit GmbH (Level Nine) für die SDK betreibt';
@@ -97,7 +121,7 @@ vn.wirkung = { nein: [{ art: 'keineAufnahme', text: UKV_VN_GEMEINSAM, auswege: [
 const tf0021 = frageAus(f(4, 'TF0021'), { schritt: 4 });
 tf0021.titel = 'Fehlende Zähne';
 tf0021.kurz = 'Fehlende Zähne';
-// C11: 90er mit 3 und 75er mit 2 Zähnen sind online nie gesehen (UKV_BELEGT), bis dahin je Tarif gesperrt.
+// C11: 90er mit 3 und 75er mit 2 Zähnen je Tarif gesperrt, solange UKV_BELEGT sie nicht freigibt (seit 20.11.2026 gemessen, Fall 4 und 5).
 const OFFEN_ZAEHNE = { 3: UKV_BELEGT.z90DreiZaehne ? [] : ['Z90'], 2: UKV_BELEGT.z75ZweiZaehne ? [] : ['Z75'] };
 tf0021.optionen = tf0021.optionen.map((option) => {
   if (option.id === '>3') return { ...option, wirkung: keineAufnahme };
@@ -127,7 +151,7 @@ const vp0004 = { ...frageAus(f(4, 'VP0004'), { schritt: 4 }), titel: 'Beziehung 
 const af0010 = { ...frageAus(f(4, 'AF0010'), { schritt: 4 }), titel: 'Andere Zahnzusatzversicherung', kurz: 'Andere Zahnzusatzversicherung' };
 const afAd0001 = { ...frageAus(f(4, 'AF_AD_0001'), { schritt: 4 }), titel: 'Einzelfallentbindung', kurz: 'Einzelfallentbindung' };
 // C7 (Ergänzung 1.9): „private Krankenversicherung/Heilfürsorge“ lehnt das Original ab (netz lauf4 wh3, „Nicht in der GK
-// versichert#…“). „freiwillig gesetzlich versichert“ ist online nie gefahren (UKV_BELEGT.freiwilligGkv).
+// versichert#…“). „freiwillig gesetzlich versichert“ seit der Messung vom 20.11.2026 belegt (UKV_BELEGT.freiwilligGkv, Fall 1).
 const afAd0005 = { ...frageAus(f(4, 'AF_AD_0005'), { schritt: 4 }), titel: 'Krankenversicherung', kurz: 'Krankenversicherung' };
 afAd0005.optionen = afAd0005.optionen.map((option) => {
   if (option.id === 'private Krankenversicherung/Heilfürsorge') return { ...option, wirkung: keineAufnahme };
@@ -178,7 +202,9 @@ const zahnUkv = {
   // Datei. Auf dem Weg über die Weiche zusätzlich die Texte aus zahnWeiche.js. Der Dienst nimmt 2026-11-20c und 2026-11-20b weiter an.
   // 20.11.2026 (Nachbesserung Paket C): Texte der Weiche (Einstieg bei ausgeschalteter UKV-Maske, Anzahl im Rückweiche-Kasten,
   // Grund bei abgerechneter Behandlung). Der Dienst nimmt 2026-11-20d, 2026-11-20c und 2026-11-20b weiter an.
-  textfassung: '2026-11-20e-ukv-zahn-online',
+  // 20.11.2026 (Abschluss UKV): Bestätigungssatz der UKV vor dem Absenden (absenden.bestaetigung), gemessene Fälle online (UKV_BELEGT).
+  // Der Dienst nimmt 2026-11-20e bis 2026-11-20b weiter an, ohne den Satz; solche Anträge hält der Einreicher mit bestaetigung_fehlt an.
+  textfassung: '2026-11-20f-ukv-zahn-online',
   quelle: 'Online-Strecke der UKV (Level Nine, mandant vmk), erfasst 12.11.2026',
   versicherer: {
     id: 'ukv', name: UKV, kurz: 'UKV', beiDer: 'der UKV',
@@ -341,7 +367,9 @@ const zahnUkv = {
   ],
 
   zusammenfassung: { titel: TEIL_3_TITEL },
-  absenden: { satz: fuerUkv(TEXT_12_KNOPF), vorbehalt: VORBEHALT_UKV, knopf: KNOPF_BEANTRAGEN },
+  absenden: {
+    satz: fuerUkv(TEXT_12_KNOPF), vorbehalt: VORBEHALT_UKV, knopf: KNOPF_BEANTRAGEN, bestaetigung: { ...UKV_BESTAETIGUNG },
+  },
   // C15 (Ergänzung 1.17): Was die Seite oder der Server von sich aus setzt, steht hier nur zur Dokumentation (vomServer: true). Der
   // Einreicher schreibt keins dieser Felder und vergleicht sie nicht (spickzettel.mjs). Frank klärt sie mit der UKV.
   // Belege: netz-beobachtung.md „Was die Strecke ohne Zutun des Kunden mitschickt“, TABELLE Nr. 32 bis 35.
@@ -396,6 +424,8 @@ const zahnUkv = {
       { schritt: 5, feld: 'orderIbanName', wert: [fo.vorname, fo.nachname].map((teil) => String(teil || '').trim()).join(' ') },
       { schritt: 5, feld: 'orderIban', wert: String(daten.iban || '').replace(/\s/g, '').toUpperCase() },
       { schritt: 5, feld: 'sepaMandatConfirmation', wert: daten.erklaerungen?.sepaMandatConfirmation === true ? 'true' : 'false' },
+      // Abschluss UKV: Bestätigungsdialog (Schritt 7), nur mit der Bestätigung des Kunden 'true'.
+      { schritt: 7, feld: UKV_BESTAETIGUNG.original, wert: daten.erklaerungen?.[UKV_BESTAETIGUNG.key] === true ? 'true' : 'false' },
       ...zahnUkv.verdeckt.map((eintrag) => ({ ...eintrag, verdeckt: true })),
     ];
   },

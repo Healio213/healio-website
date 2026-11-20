@@ -616,7 +616,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         const felder = Array.isArray(fehler.daten?.felder) ? fehler.daten.felder : [];
         const ziele = [];
         felder.forEach((pfad) => {
-          const ziel = bildschirmFuerFeld(pfad);
+          const ziel = bildschirmFuerFeld(pfad, definition);
           if (ziel && !ziele.some((eintrag) => eintrag.bildschirm === ziel.bildschirm)) ziele.push(ziel);
         });
         setSendeFehler({ titel: fehlerText(code), felder: ziele });
