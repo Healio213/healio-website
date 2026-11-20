@@ -17,6 +17,7 @@ import useDesktopLayout from '@/hooks/useDesktopLayout';
 import SceneHero, { sceneBelow, scenePrimaryButtonClass, sceneSecondaryButtonClass } from '@/components/desktop/SceneHero';
 import { getPregnancyOnwardPath } from '@/lib/pregnancyBonus';
 import { buildSdkUrl } from '@/lib/sdk-url';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { createFAQSchema } from '@/lib/createSchemaMarkup';
 import KernfeldAnlassKarte from '@/components/sections/shared/KernfeldAnlassKarte';
 import { ANLAESSE as SCHWANGERSCHAFT_ANLAESSE } from '@/content/schwangerschaftAnlaesse/gemeinsam';
@@ -150,10 +151,10 @@ const steps = [
 ];
 
 // Beide Klinik-Rechner, bewusst ohne data-product-link und ohne Tracking.
-function HospitalCalculatorLinks({ sdkUrl, className = '' }) {
+function HospitalCalculatorLinks({ sdkUrl, sdkDirekt = false, className = '' }) {
   return (
     <div className={`flex flex-col gap-3 sm:flex-row sm:flex-wrap ${className}`}>
-      <a href={sdkUrl} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der SDK berechnen (neuer Tab)" className={primary}>Klinik-Tarif der SDK berechnen</a>
+      <a href={sdkUrl} target="_blank" rel="noopener noreferrer" aria-label={sdkDirekt ? 'Klinik-Tarif der SDK berechnen' : 'Klinik-Tarif der SDK berechnen (neuer Tab)'} className={primary}>Klinik-Tarif der SDK berechnen</a>
       <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" aria-label="Klinik-Tarif der Bayerischen berechnen (neuer Tab)" className={primary}>Klinik-Tarif der Bayerischen berechnen</a>
     </div>
   );
@@ -170,6 +171,8 @@ export default function BenefitFunnelPage() {
   const referrer = useReferrer();
   // Dieselbe SDK-Klinikstrecke wie auf /stationaer, Ref-Code wie dort.
   const sdkHospitalUrl = buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär' });
+  // Ist die eigene Maske für Stationär an, öffnet der SDK-Knopf Healios Antrag im selben Tab (LeadCaptureProvider).
+  const sdkDirekt = Boolean(direkteMaske(sdkHospitalUrl, location.pathname));
   const faq = [
     ['Sind Vorsorgetests und Osteopathie automatisch versichert?', 'Nein. Prüfe zuerst die gesetzliche Leistung. Ob Zusatzschutz verbleibende Kosten übernimmt, hängt unter anderem von Tarif, Leistung, Behandler und Versicherungsbeginn ab. Ein neuer Termin allein bedeutet keinen neuen Versicherungsfall.'],
     ['Ich bin in der 20. Woche. Lohnt sich ein ambulanter Tarif überhaupt noch?', 'Der Vorsorgetopf zahlt Untersuchungen ab Versicherungsbeginn, ohne Wartezeit, und gilt je zwei Kalenderjahre. Ob sich der Beitrag für dich rechnet, hängt davon ab, wie viele Selbstzahlerleistungen bei dir noch anstehen.'],
@@ -383,8 +386,8 @@ export default function BenefitFunnelPage() {
                 <h3 id="klinikschutz-heading" className="mt-2 font-display text-2xl font-bold">Klinikschutz für dich und dein Kind</h3>
                 <PointList points={hospitalPoints} />
                 <div className="mt-auto pt-5 sm:pt-7">
-                  <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} />
-                  <p className="mt-3 text-base leading-relaxed text-home-slate">Beide Rechner öffnen sich in einem neuen Tab.</p>
+                  <HospitalCalculatorLinks sdkUrl={sdkHospitalUrl} sdkDirekt={sdkDirekt} />
+                  <p className="mt-3 text-base leading-relaxed text-home-slate">{sdkDirekt ? 'Der Rechner der Bayerischen öffnet sich in einem neuen Tab. Der Klinik-Tarif der SDK führt direkt in unseren Antrag.' : 'Beide Rechner öffnen sich in einem neuen Tab.'}</p>
                 </div>
                 <details id="klinik-wahl" className="mt-5 scroll-mt-28 border-t border-home-slate/15 pt-4">
                   <summary className={`${summaryTap} cursor-pointer font-semibold ${focus}`}>SDK oder Bayerische? Genauer nachlesen</summary>

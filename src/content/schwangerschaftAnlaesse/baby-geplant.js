@@ -22,7 +22,10 @@ const inhalt = {
     h1: 'Baby geplant? Rechne aus, ab wann die Geburt im Klinikschutz mitversichert ist.',
     unterzeile: 'Wer den Klinikschutz abschließt, bevor ein Baby unterwegs ist, kann bei der Geburt Chefarzt, eigenes Zimmer und Familienzimmer mitversichern. Wähl den Monat, in dem dein Vertrag beginnen soll. Der Rechner zeigt dir für beide Tarife, ab welchem Tag die Entbindung und dein Kind versichert sind.',
     knopfRechner: 'Stichtag ausrechnen',
-    knopfAbschluss: 'Gleich online abschließen',
+    // Franks Vorgabe 20.11.2026: Ein Knopf mit „abschließen“ führt direkt in den Antrag. Dieser Knopf
+    // springt zum Vergleich SDK/Bayerische, darum trägt er den Namen des Ablaufknopfs mit demselben Ziel
+    // (Seitenplan 3.1 sagte „Gleich online abschließen“).
+    knopfAbschluss: 'Tarife nebeneinander ansehen',
     fussnote: 'Für beide Tarife gilt: Schließ ab, solange keine Schwangerschaft besteht oder bekannt ist.',
     vertrauenszeile: 'Bedingungen der Versicherer verlinkt · Rechner ohne Anmeldung, nichts wird gespeichert · Healio ist Versicherungsmakler',
     // Geplantes neues Kopfbild (Plan 7): Alt-Text "Ein Paar sitzt zu Hause am Tisch und plant mit einem Kalender". Erst setzen, wenn das Bild da ist.

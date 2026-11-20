@@ -112,7 +112,7 @@ test('Sichtbare Texte kommen wortgleich aus dem Seitenplan', () => {
   const plan = {
     eyebrow: 'Klinikschutz rund um die Geburt',
     knopfRechner: 'Stichtag ausrechnen',
-    knopfAbschluss: 'Gleich online abschließen',
+    knopfAbschluss: 'Tarife nebeneinander ansehen', // 20.11.2026, Franks Vorgabe: „abschließen“ nur, wenn der Knopf in den Antrag führt
     fussnote: 'Für beide Tarife gilt: Schließ ab, solange keine Schwangerschaft besteht oder bekannt ist.',
     vertrauenszeile: 'Bedingungen der Versicherer verlinkt · Rechner ohne Anmeldung, nichts wird gespeichert · Healio ist Versicherungsmakler',
   };

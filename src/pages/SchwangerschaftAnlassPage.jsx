@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, BookOpen, Check, ChevronRight, ExternalLink } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
@@ -12,6 +12,7 @@ import BabyGeplantRueckruf from '@/components/sections/schwangerschaft/BabyGepla
 import { BAYERISCHE_STATIONAER_URL } from '@/components/sections/hospital/hospitalLinks';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl } from '@/lib/sdk-url';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import {
   QUELLEN, QUELLENSTAND, RATGEBER_TITEL, SCHWANGERSCHAFT_SEITE_PFAD,
@@ -93,6 +94,12 @@ const SchwangerschaftAnlassPage = ({ inhalt }) => {
   // 20.11.2026: Die Seite stellt nur SP1 vor, darum ist SP1 im Rechner und im Antrag vorgewählt.
   const referrer = useReferrer();
   const sdkUrl = useMemo(() => buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: 'sp1' }), [referrer]);
+  // Ist die eigene Maske für Stationär an, öffnet der SDK-Knopf Healios Antrag im selben Tab (LeadCaptureProvider).
+  const { pathname } = useLocation();
+  const sdkDirekt = Boolean(direkteMaske(sdkUrl, pathname));
+  const rechnerTexte = sdkDirekt
+    ? { ...rechner, ergebnis: { ...rechner.ergebnis, hinweisKnoepfe: 'Bei der Bayerischen landest du in ihrem Rechner, bei der SDK direkt in unserem Antrag. Dort wählst du Tarif und Beginn.' } }
+    : rechner;
 
   const knopfBayerische = (text, extra = '') => (
     <a href={BAYERISCHE_STATIONAER_URL} target="_blank" rel="noopener noreferrer" onClick={zaehleBayerische} aria-label={`${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
@@ -101,9 +108,9 @@ const SchwangerschaftAnlassPage = ({ inhalt }) => {
     </a>
   );
   const knopfSdk = (text, extra = '') => (
-    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={`${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
+    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={sdkDirekt ? text : `${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
       {text}
-      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+      {sdkDirekt ? <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /> : <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />}
     </a>
   );
 
@@ -196,7 +203,7 @@ const SchwangerschaftAnlassPage = ({ inhalt }) => {
         {/* Rechner */}
         <Abschnitt id="rechner" hell labelledBy="rechner-heading">
           <BabyGeplantRechner
-            texte={rechner}
+            texte={rechnerTexte}
             knopfBayerische={knopfBayerische(rechner.ergebnis.bayerische.knopf)}
             knopfSdk={knopfSdk(rechner.ergebnis.sdk.knopf)}
             abschluss={(
