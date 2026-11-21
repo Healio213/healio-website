@@ -13,6 +13,7 @@ import { KASSENBOOST_COMPARE_URL } from '@/config/kassenBoost';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { useStationaerSelection } from '@/lib/stationaer-selection';
+import { useAmbulantStufe } from '@/lib/ambulant-stufe';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { scrollToTarget } from '@/components/guided/SelfServiceEntryActions';
 import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
@@ -51,14 +52,18 @@ const Header = () => {
   // nur die Startseite behält den Termin.
   const selfServiceTarget = guidedSurface ? { ambulant: 'tarifwahl', zahn: 'zahn-check', stationaer: 'tarife' }[guidedProduct] : undefined;
   // Frank 20.11.2026: Steht „abschließen“ oben, öffnet der Knopf gleich den Antrag,
-  // nicht erst die Tarifwahl. Für Stationär auf deutschen Seiten mit direkter Maske
-  // (LeadCaptureProvider, direkteMaske) zeigt er auf den SDK-Rechner mit dem
-  // gewählten Tarif; LeadCaptureLink führt dann in /antrag/stationaer. Sonst wie bisher.
+  // nicht erst die Tarifwahl. Für Stationär und (seit 21.11.2026) Ambulant auf deutschen
+  // Seiten mit direkter Maske (LeadCaptureProvider, direkteMaske) zeigt er auf den
+  // SDK-Rechner mit dem gewählten Tarif bzw. der gewählten Stufe; LeadCaptureLink führt
+  // dann in /antrag/stationaer bzw. /antrag/ambulant. Sonst wie bisher.
   const stationaerTarif = useStationaerSelection();
-  const stationaerAntragUrl = guidedProduct === 'stationaer'
+  const ambulantStufe = useAmbulantStufe();
+  const selfServiceAntragUrl = guidedProduct === 'stationaer'
     ? buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: stationaerTarif })
-    : null;
-  const selfServiceDirekt = Boolean(stationaerAntragUrl && direkteMaske(stationaerAntragUrl, location.pathname));
+    : guidedProduct === 'ambulant'
+      ? buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: ambulantStufe })
+      : null;
+  const selfServiceDirekt = Boolean(selfServiceTarget && selfServiceAntragUrl && direkteMaske(selfServiceAntragUrl, location.pathname));
   const selfServiceLabel = (placement) => (
     <>
       {placement === 'mobile' ? (lang === 'de' ? 'Abschließen' : 'Apply') : (lang === 'de' ? 'Online abschließen' : 'Apply online')}
@@ -67,12 +72,12 @@ const Header = () => {
   );
   const selfServiceLink = (placement, className, onClick) => (selfServiceDirekt ? (
     <LeadCaptureLink
-      href={stationaerAntragUrl}
-      trackingCategory="sdk-stationaer"
+      href={selfServiceAntragUrl}
+      trackingCategory={`sdk-${guidedProduct}`}
       target="_blank"
       rel="noopener noreferrer"
       data-self-service-header={placement}
-      onClick={() => { onClick?.(); trackSdkClick(`stationaer-header-${placement}`, referrer); }}
+      onClick={() => { onClick?.(); trackSdkClick(`${guidedProduct}-header-${placement}`, referrer); }}
       className={className}
     >
       {selfServiceLabel(placement)}

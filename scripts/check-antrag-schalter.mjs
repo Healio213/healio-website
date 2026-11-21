@@ -47,13 +47,14 @@ function fenster({ pfad = '/ambulant', suche = '', verweis = '' } = {}) {
 }
 function aufraeumen() { delete globalThis.window; delete globalThis.document; }
 
-// Seit 19.11.2026 (Franks Ja): nur Stationär mit Maske und Wahl an, ohne Telefonweg; alles andere aus.
-test('Vorgabe: nur Stationär an (Maske und Wahl, kein Telefonweg), auch im Build mit gesetzten VITE-Werten', async () => {
+// Seit 19.11.2026 (Franks Ja) Stationär, seit 21.11.2026 (Franks Ja „Ambulant an“) auch Ambulant mit Maske und Wahl an,
+// ohne Telefonweg; Zahn und alles andere aus.
+test('Vorgabe: genau Stationär und Ambulant an (Maske und Wahl, kein Telefonweg), auch im Build mit gesetzten VITE-Werten', async () => {
   fenster();
   for (const env of [{}, { DEV: false, VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAG_TELEFON: '1' }]) {
     const m = await lade(env);
     for (const sparte of ['ambulant', 'zahn', 'stationaer']) {
-      const an = sparte === 'stationaer';
+      const an = sparte === 'stationaer' || sparte === 'ambulant';
       assert.equal(m.antragsmaskeAktiv(sparte), an, `Maske ${sparte}`);
       assert.equal(m.antragswahlAktiv(sparte), an, `Wahl ${sparte}`);
       assert.equal(m.antragTelefonAktiv(sparte), false, `Telefon ${sparte}`);
@@ -65,10 +66,10 @@ test('Vorgabe: nur Stationär an (Maske und Wahl, kein Telefonweg), auch im Buil
   aufraeumen();
 });
 
-test('Freigabe im Quelltext: nur Stationär bei Maske und Wahl, Telefonweg überall aus', () => {
+test('Freigabe im Quelltext: genau Stationär und Ambulant bei Maske und Wahl, Zahn aus, Telefonweg überall aus', () => {
   const text = fs.readFileSync(path.join(SRC, 'config/contactChannels.js'), 'utf8');
   for (const name of ['ANTRAGSMASKE_FREIGABE', 'ANTRAGSWAHL_FREIGABE']) {
-    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: false, zahn: false, stationaer: true \\};`), name);
+    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: true, zahn: false, stationaer: true \\};`), name);
   }
   assert.match(text, /const ANTRAG_TELEFON_FREIGABE = \{ ambulant: false, zahn: false, stationaer: false \};/);
   assert.match(text, /const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;/);

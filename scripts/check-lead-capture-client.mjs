@@ -237,6 +237,12 @@ test('DE/EN-Header führt auf Produktseiten zum Onlineabschluss statt zum Termin
           assert.equal(ziel.hostname, 'insurances-online.levelnine.biz', `${path}/${placement}: SDK-Link`);
           assert.equal(ziel.searchParams.get('tarifftypes'), 'Stationär');
           assert.equal(ziel.searchParams.get('tariffs'), 'SDKSP2@', `${path}/${placement}: Vorwahl SP2`);
+        } else if (path === '/ambulant') {
+          // 21.11.2026 (Franks Ja „Ambulant an“): ebenso für Ambulant, mit der gewählten Stufe (ohne Wahl 100 = AP1).
+          const ziel = new URL(link.getAttribute('href'));
+          assert.equal(ziel.hostname, 'insurances-online.levelnine.biz', `${path}/${placement}: SDK-Link`);
+          assert.equal(ziel.searchParams.get('tarifftypes'), 'Ambulant');
+          assert.equal(ziel.searchParams.get('tariffs'), 'SDKAP1@', `${path}/${placement}: Vorwahl Ambulant 100`);
         } else {
           assert.equal(link.getAttribute('href'), `#${selfServiceHeaderTargets[product]}`);
         }

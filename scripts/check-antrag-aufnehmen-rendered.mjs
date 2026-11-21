@@ -205,7 +205,8 @@ async function schalterAus(browser, breite) {
   const s = await neueSeite(browser, breite);
   await s.page.goto(SEITE, { waitUntil: 'networkidle' });
   await erwarteText(s.page, /zwei einfache Wege/, w);
-  pruefe(await s.page.locator('a[href="/ambulant"]').count() >= 1, `${w}: Weg online fehlt`);
+  // Seit 21.11.2026 (Ambulant an) führt der Weg online direkt in den Antrag.
+  pruefe(await s.page.locator('a[href="/antrag/ambulant"]').count() >= 1, `${w}: Weg online fehlt`);
   pruefe(await s.page.locator('a[href="/terminvereinbarung"]').count() >= 1, `${w}: Weg Termin fehlt`);
   pruefe(await s.page.locator('[data-start]').count() === 0, `${w}: Gesprächsknopf trotz Schalter aus`);
   await pruefeSeite(s.page, w);
@@ -256,7 +257,7 @@ async function einstiegUndFehler(browser, breite) {
   await mock('/__test/session-fehler/429');
   await s.page.locator('[data-nochmal]').click();
   await erwarteText(s.page, /Heute sind keine Gespräche mehr frei/, `${w} 429`);
-  pruefe(await s.page.locator('[data-andere-wege] a[href="/ambulant"]').count() === 1 && await s.page.locator('[data-andere-wege] a[href="/terminvereinbarung"]').count() === 1, `${w} 429: zwei Wege fehlen`);
+  pruefe(await s.page.locator('[data-andere-wege] a[href="/antrag/ambulant"]').count() === 1 && await s.page.locator('[data-andere-wege] a[href="/terminvereinbarung"]').count() === 1, `${w} 429: zwei Wege fehlen`);
   pruefe(s.dienst.some((a) => a === 'POST /nita/antrag/session'), `${w}: Anfrage an /session fehlt`);
   await pruefeSeite(s.page, `${w} 429`);
   await foto(s.page, `${breite}-04-fehler-429`);

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, BookOpen, Check, ChevronRight, ExternalLink } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
@@ -10,6 +10,7 @@ import OsteopathieRechner, { Wahlkachel } from '@/components/sections/ambulant/O
 import OsteopathieRueckruf from '@/components/sections/ambulant/OsteopathieRueckruf';
 import { useReferrer } from '@/hooks/useReferrer';
 import { buildSdkUrl } from '@/lib/sdk-url';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { fuelleText } from '@/lib/osteopathieRechner';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import {
@@ -93,13 +94,20 @@ const AmbulantAnlassPage = ({ inhalt }) => {
   // Dieselbe SDK-Strecke wie auf /ambulant, Ref-Code wie dort. An den Link geht nur die Stufe.
   const referrer = useReferrer();
   const sdkUrl = useMemo(() => buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe }), [referrer, stufe]);
+  // 21.11.2026: Ist die eigene Maske für Ambulant an, öffnet der SDK-Knopf Healios Antrag im selben Tab
+  // (LeadCaptureProvider, direkteMaske), mit der gewählten Stufe. Franks Vorgabe 20.11.2026: Steht
+  // „abschließen“ drauf, führt der Knopf gleich in den Antrag, auch der Knopf oben im Kopf der Seite.
+  const { pathname } = useLocation();
+  const sdkDirekt = Boolean(direkteMaske(sdkUrl, pathname));
+  const hinweisSdk = sdkDirekt ? 'Du landest direkt in unserem Antrag. Dort siehst du deinen Beitrag und stellst den Antrag bei der SDK.' : stufen.hinweisSdk;
 
   const knopfSdk = (text, extra = '') => (
-    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={`${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
+    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={sdkDirekt ? text : `${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
       {text}
-      <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+      {sdkDirekt ? <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /> : <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />}
     </a>
   );
+  const knopfAbschlussKlasse = 'inline-flex min-h-14 max-w-full items-center justify-center gap-2 rounded-full border border-white/60 px-6 py-4 text-center font-display text-base font-extrabold leading-6 text-white transition-colors hover:border-[#8ee7ca] hover:text-[#8ee7ca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#06131c]';
 
   const stufenOptionen = rechner.felder.stufe.optionen;
 
@@ -156,13 +164,15 @@ const AmbulantAnlassPage = ({ inhalt }) => {
                     {hero.knopfRechner}
                     <ArrowRight className="hidden h-5 w-5 shrink-0 sm:block" aria-hidden="true" />
                   </button>
-                  <button
-                    type="button"
-                    onClick={() => scrollToId('abschluss')}
-                    className="inline-flex min-h-14 max-w-full items-center justify-center gap-2 rounded-full border border-white/60 px-6 py-4 text-center font-display text-base font-extrabold leading-6 text-white transition-colors hover:border-[#8ee7ca] hover:text-[#8ee7ca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#06131c]"
-                  >
-                    {hero.knopfAbschluss}
-                  </button>
+                  {sdkDirekt ? (
+                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} data-kopf-abschluss="" className={knopfAbschlussKlasse}>
+                      {hero.knopfAbschluss}
+                    </a>
+                  ) : (
+                    <button type="button" onClick={() => scrollToId('abschluss')} className={knopfAbschlussKlasse}>
+                      {hero.knopfAbschluss}
+                    </button>
+                  )}
                 </div>
                 <p className="mt-3 max-w-[36rem] text-base leading-6 text-[#bdced6]">{hero.fussnote}</p>
                 <p className="mt-6 max-w-[36rem] border-t border-white/15 pt-5 text-base font-medium leading-7 text-[#c4d3da] sm:mt-8">{hero.vertrauenszeile}</p>
@@ -316,7 +326,7 @@ const AmbulantAnlassPage = ({ inhalt }) => {
             <div className="mt-6 flex justify-center">
               {knopfSdk(fuelleText(stufen.knopf, { s: stufe }))}
             </div>
-            <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-slate-500">{stufen.hinweisSdk}</p>
+            <p className="mx-auto mt-4 max-w-xl text-center text-sm leading-6 text-slate-500">{hinweisSdk}</p>
             <p className="mx-auto mt-2 max-w-xl text-center text-sm leading-6 text-slate-500">{stufen.hinweisGesundheit}</p>
           </div>
         </Abschnitt>

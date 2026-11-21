@@ -7,7 +7,7 @@ import {
 import SEOHead from '@/components/SEOHead';
 import CampaignShell from '@/components/campaign/CampaignShell';
 import {
-  HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API, antragTelefonAktiv, antragswahlAktiv,
+  HEALIO_ANTRAG_GESPRAECH_AKTIV, HEALIO_ANTRAG_GESPRAECH_API, antragTelefonAktiv, antragsmaskeAktiv, antragswahlAktiv,
 } from '@/config/contactChannels';
 import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
@@ -24,7 +24,8 @@ import {
 // Cookie-Hinweis (wie /antrag/pruefen). Hinter dem Schalter HEALIO_ANTRAG_GESPRAECH_AKTIV (Einstiegsknopf: HEALIO_ANTRAG_KNOPF_AKTIV).
 // Die Zustimmung zur Sprachverbindung lebt nur im Zustand dieser Seite, nichts wird gespeichert.
 
-const ONLINE_LINK = '/ambulant';
+// 21.11.2026: Ist die eigene Maske für Ambulant an, führt „online selbst abschließen“ gleich in den Antrag (Franks Vorgabe 20.11.).
+const ONLINE_LINK = antragsmaskeAktiv('ambulant') ? '/antrag/ambulant' : '/ambulant';
 // Sparte aus der Wahl der zwei Wege (12.11.2026, ?sparte=). Das Gespräch kann heute nur ambulant. Für Zahn und
 // stationär steht oben nur ein Hinweis, ohne mehr zu versprechen.
 const SPARTE_HINWEIS = {

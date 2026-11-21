@@ -55,7 +55,9 @@ export const AMBULANT_FAQS = {
     },
     {
       q: 'Was passiert nach dem Klick auf den Rechner?',
-      a: 'Vor dem externen Rechner gibst du einmal pro Sitzung deinen Vornamen und deine E-Mail-Adresse ein, damit wir dir den Kassenbonus-Leitfaden einmalig per E-Mail senden können. Danach öffnet sich der Rechner in einem neuen Tab. Dort vergleichst du die Tarifstufen, siehst den persönlichen Beitrag und beantwortest die Antragsfragen, bevor du einen Antrag stellst.',
+      // 21.11.2026: Seit Ambulant eingeschaltet ist (ANTRAGSMASKE_FREIGABE.ambulant), führt der Knopf direkt in
+      // Healios Antrag, ohne E-Mail-Fenster und ohne neuen Tab. Wird Ambulant ausgeschaltet, diesen Text zurücknehmen.
+      a: 'Du kommst direkt in unseren Online-Antrag für den Tarif der SDK, ohne Umweg und ohne Termin. Dort wählst du Stufe und Beginn, siehst deinen persönlichen Beitrag und beantwortest die Gesundheitsfragen. Am Ende prüfst du alles in einer Zusammenfassung, bevor du den Antrag abschickst.',
     },
     {
       q: 'Wie verteilen sich die Budgets auf die Leistungen?',
