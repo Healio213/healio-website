@@ -45,6 +45,8 @@ const VERSICHERER_SET = new Set(ZAEHLER_VERSICHERER);
 
 // Wahl der zwei Wege vor dem Abschluss (12.11.2026, docs/supabase/2026-11-12_anonyme_zaehler_antragsweg.sql):
 // je Sparte nur „Wahl gezeigt“, „allein abschließen“ oder „zusammen am Telefon“. Nie Tarif, Antwort oder Person.
+// Seit 21.11.2026 zählt auch das Absenden der eigenen Maske als <sparte>-allein, dann mit von_pfad /antrag/<sparte>
+// (Klick in den Antrag: von_pfad = Seite des Knopfs). Auswertung getrennt nach von_pfad, ohne neue Datenbankregel.
 export const ANTRAGSWEG_ZIELE = Object.freeze(['ambulant', 'zahn', 'stationaer'].flatMap((sparte) => ['gezeigt', 'allein', 'telefon'].map((weg) => `${sparte}-${weg}`)));
 const ANTRAGSWEG_SET = new Set(ANTRAGSWEG_ZIELE);
 

@@ -31,15 +31,26 @@ export function direkteMaske(targetUrl, pathname) {
   return eigene ? { link, eigene } : null;
 }
 
-function zurMaske({ link, eigene }, vorbelegung, { neuerTab = false } = {}) {
+// Messung beim Klick in den Antrag (21.11.2026): Bisher lief die Messung des Knopfs
+// (trackSdkClick: anonymer Zähler sdk_klick, Meta „RechnerStart“, Google Ads „Antrag
+// geöffnet“, GA4 tariff_calculator_click, jeweils mit der Zustimmungsregel des
+// jeweiligen Moduls) erst, wenn der Rechner des Versicherers aufging. Beim direkten
+// Weg in die Maske läuft sie jetzt beim Klick, mit denselben Mitteln, auf der Seite
+// des Knopfs (die Maske selbst misst nie). Mit Zustimmung wartet der Seitenwechsel
+// kurz, damit die Ereignisse vor dem Verlassen der Seite hinausgehen.
+const MESS_WARTEZEIT_MS = 300;
+
+function zurMaske({ link, eigene }, vorbelegung, { neuerTab = false, beimOeffnen = null } = {}) {
   const letzteSeite = window.location.pathname.toLowerCase().replace(/\/+$/, '') || '/';
   const herkunft = sammleHerkunft({ sparte: link.sparte, weg: 'allein', letzteSeite });
   zaehle('antragsweg', { ziel: `${link.sparte}-allein` });
+  try { beimOeffnen?.(); } catch { /* Messung blockiert nie den Weg in den Antrag. */ }
   merkeVorbelegung({
     sparte: eigene.pfad, tarif: link.tarif, geburtsjahr: vorbelegung?.geburtsjahr ?? null, herkunft: hasConsent('analytics') ? herkunft : null,
   });
   const ziel = adresseMitHerkunft(`/antrag/${eigene.pfad}`, herkunft);
   if (neuerTab) window.open(ziel, '_blank', 'noopener');
+  else if (hasConsent('analytics') || hasConsent('marketing')) window.setTimeout(() => window.location.assign(ziel), MESS_WARTEZEIT_MS);
   else window.location.assign(ziel);
 }
 
@@ -73,7 +84,7 @@ export default function LeadCaptureProvider({ children }) {
     if (!shouldCaptureApplicationLink(targetUrl, pathname)) return false;
     const direkt = direkteMaske(targetUrl, pathname);
     if (direkt) {
-      zurMaske(direkt, vorbelegung);
+      zurMaske(direkt, vorbelegung, { beimOeffnen: onExternalOpen });
       return true;
     }
     if (Object.values(HEALIO_ANTRAGSWAHL_SPARTEN).some(Boolean)) {

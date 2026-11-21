@@ -11,6 +11,7 @@ import {
 import { baueSelbstantrag, bildschirmFuerFeld, datumText } from '@/lib/antragsmaske/vertrag';
 import { holeVorbelegung } from '@/lib/antragsmaske/vorbelegung';
 import { sammleHerkunft } from '@/lib/antragsmaske/herkunft';
+import { zaehle } from '@/lib/anonyme-zaehler';
 import {
   AntragFehler, berechneSelbstBeitrag, fehlerText, ladeSelbstUnterlagen, sendeSelbstantrag,
 } from '@/lib/antragApi';
@@ -614,6 +615,11 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
         // „Mein Antrag“ als PDF vom Antragsdienst (nur hier und über den geschützten Link, nie per Mail).
         meinAntrag: antwort.meinAntrag && typeof antwort.meinAntrag.pdf === 'string' ? { name: String(antwort.meinAntrag.name || 'Mein Antrag.pdf'), pdf: antwort.meinAntrag.pdf } : null,
       });
+      // Abgeschickt zählen (21.11.2026): nur der anonyme Zähler ohne Cookies und ohne Zustimmung,
+      // wie beim Klick in den Antrag (LeadCaptureProvider) Ereignis antragsweg mit <sparte>-allein,
+      // aber mit der Antragsseite als Pfad. Kein Tarif, keine Antwort, keine Person.
+      // Die Prüfseite (Telefonantrag) zählt nicht.
+      if (!pruefen) zaehle('antragsweg', { vonPfad: `/antrag/${definition.pfad || definition.sparte}`, ziel: `${definition.sparte}-allein` });
       // Nach dem Absenden bleibt nichts im Speicher der Seite.
       setDaten(startDaten(definition, {}));
     } catch (fehler) {

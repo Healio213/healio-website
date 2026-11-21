@@ -12,7 +12,9 @@
  *                          geöffnet (von_pfad = Seite des Klicks,
  *                          ziel = bayerische oder ukv)
  *   antragsweg             Wahl der zwei Wege vor dem Abschluss (12.11.2026,
- *                          ziel = <sparte>-gezeigt, -allein oder -telefon)
+ *                          ziel = <sparte>-gezeigt, -allein oder -telefon;
+ *                          seit 21.11.2026 auch Absenden der Maske:
+ *                          von_pfad /antrag/<sparte>, ziel <sparte>-allein)
  *
  * Grundregeln, die dieses Modul technisch erzwingt:
  * - Kein Cookie, kein localStorage, kein sessionStorage, keine Nutzer- oder
