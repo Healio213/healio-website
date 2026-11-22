@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
@@ -13,6 +13,8 @@ import AmbulantDreiSchritte from '@/components/sections/ambulant/AmbulantDreiSch
 import AmbulantVergleichTeaser from '@/components/sections/ambulant/AmbulantVergleichTeaser';
 import KernfeldAnlassKarte from '@/components/sections/shared/KernfeldAnlassKarte';
 import { ANLAESSE as AMBULANT_ANLAESSE } from '@/content/ambulantAnlaesse/gemeinsam';
+import { parseGeburtsjahr } from '@/data/sdkAmbulantBeitraege';
+import { setAmbulantGeburtsjahr } from '@/lib/ambulant-geburtsjahr';
 
 const AmbulantPage = () => {
   const { t } = useTranslation('seo');
@@ -20,6 +22,10 @@ const AmbulantPage = () => {
   const { lang } = useLanguage();
   const language = lang === 'en' ? 'en' : 'de';
   const [geburtsjahrEingabe, setGeburtsjahrEingabe] = useState('');
+  // Nachbesserung 22.11.2026: Der Kopfknopf „Abschließen“ gibt das Geburtsjahr aus dem Rechner wie die
+  // Tarifkarte an den Antrag weiter (gleiche Prüfung des Jahrs wie dort). Beim Verlassen der Seite leer.
+  useEffect(() => { setAmbulantGeburtsjahr(parseGeburtsjahr(geburtsjahrEingabe)); }, [geburtsjahrEingabe]);
+  useEffect(() => () => setAmbulantGeburtsjahr(null), []);
   // These codes identify only the entry path, never a completed bonus check
   // or a verified personal result. No amounts or health details are imported.
   const originCode = new URLSearchParams(search).get('src');

@@ -938,7 +938,9 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
               {anzeigePreis && pos.id !== 'beitrag' && (
                 <p className="min-w-0 shrink-0 leading-tight lg:hidden" aria-hidden="true" data-leiste-preis="">
                   <span className="block whitespace-nowrap font-display text-lg font-extrabold text-home-midnight">{euro(anzeigePreis.betrag)}</span>
-                  <span className="block whitespace-nowrap text-base text-home-slate">{anzeigePreis.einheit}</span>
+                  {/* Nachbesserung 22.11.2026: Vor der Beitragsseite steht am Handy wie am Desktop dabei, dass ein Zuschlag
+                      aus den Antworten noch fehlt (nur wo der Tarifhinweis einen Zuschlag nennt, also nicht bei Stationär). */}
+                  <span className="block whitespace-nowrap text-base text-home-slate" data-leiste-einheit="">{anzeigePreis.hinweis ? 'ohne Zuschlag' : anzeigePreis.einheit}</span>
                 </p>
               )}
               {weiterText && (

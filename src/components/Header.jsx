@@ -14,6 +14,7 @@ import LeadCaptureLink from '@/components/LeadCaptureLink';
 import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { useStationaerSelection } from '@/lib/stationaer-selection';
 import { useAmbulantStufe } from '@/lib/ambulant-stufe';
+import { useAmbulantGeburtsjahr } from '@/lib/ambulant-geburtsjahr';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { scrollToTarget } from '@/components/guided/SelfServiceEntryActions';
 import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
@@ -64,6 +65,9 @@ const Header = () => {
       ? buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: ambulantStufe })
       : null;
   const selfServiceDirekt = Boolean(selfServiceTarget && selfServiceAntragUrl && direkteMaske(selfServiceAntragUrl, location.pathname));
+  // Nachbesserung 22.11.2026: Auf /ambulant geht wie bei der Tarifkarte das Geburtsjahr aus dem Rechner mit.
+  const ambulantGeburtsjahr = useAmbulantGeburtsjahr();
+  const selfServiceVorbelegung = guidedProduct === 'ambulant' && ambulantGeburtsjahr ? { geburtsjahr: ambulantGeburtsjahr } : undefined;
   const selfServiceLabel = (placement) => (
     <>
       {placement === 'mobile' ? (lang === 'de' ? 'Abschließen' : 'Apply') : (lang === 'de' ? 'Online abschließen' : 'Apply online')}
@@ -74,6 +78,7 @@ const Header = () => {
     <LeadCaptureLink
       href={selfServiceAntragUrl}
       trackingCategory={`sdk-${guidedProduct}`}
+      vorbelegung={selfServiceVorbelegung}
       target="_blank"
       rel="noopener noreferrer"
       data-self-service-header={placement}

@@ -25,6 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build } from 'esbuild';
 import { JSDOM } from 'jsdom';
+import { antragTelefonAktiv, antragsmaskeAktiv, antragswahlAktiv } from '../src/config/contactChannels.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (relativePath) => fs.readFileSync(path.join(root, relativePath), 'utf8');
@@ -573,7 +574,14 @@ try {
     await warte(600);
     const sdk = log.zaehler.filter((z) => z.body.ereignis === 'sdk_klick').map((z) => z.body);
     check(sdk.length === 1 && JSON.stringify(sdk[0]) === JSON.stringify({ ereignis: 'sdk_klick', von_pfad: '/ambulant', ziel: null }), `SDK-Klick zählt anonym: ${JSON.stringify(sdk)}`);
-    check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Rechner wird weiter geöffnet (Attrappe).');
+    // Seit 21.11.2026 (Ambulant an, ohne Telefonweg) führt der Knopf direkt in Healios Antrag statt zum Rechner der SDK.
+    if (antragsmaskeAktiv('ambulant') && antragswahlAktiv('ambulant') && !antragTelefonAktiv('ambulant')) {
+      const weg = log.zaehler.filter((z) => z.body.ereignis === 'antragsweg').map((z) => z.body);
+      check(weg.length === 1 && weg[0].ziel === 'ambulant-allein' && weg[0].von_pfad === '/ambulant', `Klick in den Antrag zählt anonym: ${JSON.stringify(weg)}`);
+      check(new URL(page.url()).pathname === '/antrag/ambulant', `Der Knopf führt direkt in den Antrag: ${page.url()}`);
+    } else {
+      check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Rechner wird weiter geöffnet (Attrappe).');
+    }
     await page.close();
   }
 

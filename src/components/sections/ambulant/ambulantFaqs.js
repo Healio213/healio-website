@@ -17,6 +17,12 @@
 // Gesundheitsfragen“.
 
 import { SDK_AMBULANT_BEITRAEGE } from '../../../data/sdkAmbulantBeitraege.js';
+import { antragTelefonAktiv, antragsmaskeAktiv, antragswahlAktiv } from '../../../config/contactChannels.js';
+
+// Nachbesserung 22.11.2026: Die Antwort zum Klick auf den Rechner hängt am Schalter (wie direkteMaske im
+// LeadCaptureProvider): Mit eigener Maske und Wahl für Ambulant und ohne Telefonweg führt der Knopf direkt in
+// Healios Antrag, sonst gilt der Text von vorher (E-Mail-Fenster, Rechner der SDK im neuen Tab).
+const AMBULANT_DIREKT = antragsmaskeAktiv('ambulant') && antragswahlAktiv('ambulant') && !antragTelefonAktiv('ambulant');
 
 const TARIF_CODES = ['AP5', 'AP7', 'AP9', 'AP1'];
 const ALLE_BEITRAEGE = SDK_AMBULANT_BEITRAEGE.gruppen.flatMap((gruppe) => TARIF_CODES.map((code) => gruppe[code]));
@@ -56,8 +62,10 @@ export const AMBULANT_FAQS = {
     {
       q: 'Was passiert nach dem Klick auf den Rechner?',
       // 21.11.2026: Seit Ambulant eingeschaltet ist (ANTRAGSMASKE_FREIGABE.ambulant), führt der Knopf direkt in
-      // Healios Antrag, ohne E-Mail-Fenster und ohne neuen Tab. Wird Ambulant ausgeschaltet, diesen Text zurücknehmen.
-      a: 'Du kommst direkt in unseren Online-Antrag für den Tarif der SDK, ohne Umweg und ohne Termin. Dort wählst du Stufe und Beginn, siehst deinen persönlichen Beitrag und beantwortest die Gesundheitsfragen. Am Ende prüfst du alles in einer Zusammenfassung, bevor du den Antrag abschickst.',
+      // Healios Antrag, ohne E-Mail-Fenster und ohne neuen Tab. Seit 22.11.2026 am Schalter (AMBULANT_DIREKT).
+      a: AMBULANT_DIREKT
+        ? 'Du kommst direkt in unseren Online-Antrag für den Tarif der SDK, ohne Umweg und ohne Termin. Dort wählst du Stufe und Beginn, siehst deinen persönlichen Beitrag und beantwortest die Gesundheitsfragen. Am Ende prüfst du alles in einer Zusammenfassung, bevor du den Antrag abschickst.'
+        : 'Vor dem externen Rechner gibst du einmal pro Sitzung deinen Vornamen und deine E-Mail-Adresse ein, damit wir dir den Kassenbonus-Leitfaden einmalig per E-Mail senden können. Danach öffnet sich der Rechner in einem neuen Tab. Dort vergleichst du die Tarifstufen, siehst den persönlichen Beitrag und beantwortest die Antragsfragen, bevor du einen Antrag stellst.',
     },
     {
       q: 'Wie verteilen sich die Budgets auf die Leistungen?',

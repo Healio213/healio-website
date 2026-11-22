@@ -174,3 +174,20 @@ test('Quelltext: Wahl, Maske und Gespräch lesen die Schalter je Sparte', () => 
     assert.doesNotMatch(lies(datei), /HEALIO_ANTRAG_GESPRAECH_AKTIV/, `${datei}: Telefonweg nur über antragTelefonAktiv`);
   }
 });
+
+// Nachbesserung 22.11.2026: Die FAQ auf /ambulant zum Klick auf den Rechner hängt am Schalter (wie direkteMaske),
+// das Geburtsjahr geht vom Kopfknopf (/ambulant) und von den Knöpfen auf /ambulant/osteopathie an die Maske.
+test('Quelltext: FAQ /ambulant am Schalter, Geburtsjahr vom Kopfknopf und von osteopathie', async () => {
+  const lies = (datei) => fs.readFileSync(path.join(SRC, datei), 'utf8');
+  const faqs = lies('components/sections/ambulant/ambulantFaqs.js');
+  assert.match(faqs, /antragsmaskeAktiv\('ambulant'\) && antragswahlAktiv\('ambulant'\) && !antragTelefonAktiv\('ambulant'\)/);
+  assert.match(faqs, /a: AMBULANT_DIREKT\s*\?/);
+  const { AMBULANT_FAQS } = await import('../src/components/sections/ambulant/ambulantFaqs.js');
+  const antwort = AMBULANT_FAQS.de.find((eintrag) => eintrag.q === 'Was passiert nach dem Klick auf den Rechner?').a;
+  assert.match(antwort, /^Du kommst direkt in unseren Online-Antrag/, 'Ambulant an: FAQ nennt den direkten Antrag');
+  const kopf = lies('components/Header.jsx');
+  assert.match(kopf, /vorbelegung=\{selfServiceVorbelegung\}/);
+  assert.match(lies('pages/AmbulantPage.jsx'), /setAmbulantGeburtsjahr\(parseGeburtsjahr\(geburtsjahrEingabe\)\)/);
+  assert.match(lies('pages/AmbulantAnlassPage.jsx'), /'data-vorbelegung-geburtsjahr': geburtsjahrRechner/);
+  assert.match(lies('components/LeadCaptureProvider.jsx'), /getAttribute\('data-vorbelegung-geburtsjahr'\)/);
+});

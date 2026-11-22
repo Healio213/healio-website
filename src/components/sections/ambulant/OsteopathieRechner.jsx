@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Check, Minus, Plus } from 'lucide-react';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import {
@@ -75,7 +75,7 @@ const Ergebniszeile = ({
 );
 
 const OsteopathieRechner = ({
-  texte, stufe, onStufe, knopf = null, abschluss = null, heute = null,
+  texte, stufe, onStufe, knopf = null, abschluss = null, heute = null, onGeburtsjahr = null,
 }) => {
   const [heuteDatum] = useState(() => heute || heuteAlsDatum());
   const listeSichtbar = kassenlisteSichtbar(heuteDatum);
@@ -107,6 +107,8 @@ const OsteopathieRechner = ({
   const jahr = parseGeburtsjahr(geburtsjahr, heuteDatum.jahr);
   const geburtsjahrFehler = geburtsjahr.trim() !== '' && jahr === null;
   const geburtsjahrGrenze = { min: heuteDatum.jahr - 110, max: heuteDatum.jahr };
+  // Nachbesserung 22.11.2026: Das gültige Geburtsjahr geht an die Seite, damit die Abschlussknöpfe es an den Antrag weitergeben.
+  useEffect(() => { onGeburtsjahr?.(jahr); }, [jahr, onGeburtsjahr]);
 
   const ergebnis = useMemo(() => berechneOsteopathie({
     kasse: eigen ? 'eigen' : (kasseWahl || null),

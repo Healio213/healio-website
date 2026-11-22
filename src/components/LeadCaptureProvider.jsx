@@ -73,7 +73,10 @@ export default function LeadCaptureProvider({ children }) {
       const direkt = direkteMaske(anker.href, window.location.pathname);
       if (!direkt) return;
       event.preventDefault();
-      zurMaske(direkt, null, { neuerTab: event.type === 'auxclick' || event.metaKey || event.ctrlKey });
+      // Nachbesserung 22.11.2026: Ein einfacher Link kann das Geburtsjahr aus einem Rechner der Seite mitgeben
+      // (z. B. /ambulant/osteopathie); merkeVorbelegung prüft es wie bei LeadCaptureLink.
+      const jahr = Number(anker.getAttribute('data-vorbelegung-geburtsjahr'));
+      zurMaske(direkt, Number.isInteger(jahr) && jahr > 0 ? { geburtsjahr: jahr } : null, { neuerTab: event.type === 'auxclick' || event.metaKey || event.ctrlKey });
     };
     document.addEventListener('click', beiKlick);
     document.addEventListener('auxclick', beiKlick);

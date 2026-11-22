@@ -99,10 +99,14 @@ const AmbulantAnlassPage = ({ inhalt }) => {
   // „abschließen“ drauf, führt der Knopf gleich in den Antrag, auch der Knopf oben im Kopf der Seite.
   const { pathname } = useLocation();
   const sdkDirekt = Boolean(direkteMaske(sdkUrl, pathname));
+  // Nachbesserung 22.11.2026: Das Geburtsjahr aus dem Rechner geht wie auf /ambulant an den Antrag (nur das Jahr,
+  // einmalig über die Vorbelegung). Der Klickfang im LeadCaptureProvider liest es aus data-vorbelegung-geburtsjahr.
+  const [geburtsjahrRechner, setGeburtsjahrRechner] = useState(null);
+  const jahrAttribut = sdkDirekt && geburtsjahrRechner ? { 'data-vorbelegung-geburtsjahr': geburtsjahrRechner } : {};
   const hinweisSdk = sdkDirekt ? 'Du landest direkt in unserem Antrag. Dort siehst du deinen Beitrag und stellst den Antrag bei der SDK.' : stufen.hinweisSdk;
 
   const knopfSdk = (text, extra = '') => (
-    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={sdkDirekt ? text : `${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
+    <a href={sdkUrl} {...jahrAttribut} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} aria-label={sdkDirekt ? text : `${text} (öffnet in neuem Tab)`} className={`${KNOPF_GRUEN} ${extra}`}>
       {text}
       {sdkDirekt ? <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" /> : <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />}
     </a>
@@ -165,7 +169,7 @@ const AmbulantAnlassPage = ({ inhalt }) => {
                     <ArrowRight className="hidden h-5 w-5 shrink-0 sm:block" aria-hidden="true" />
                   </button>
                   {sdkDirekt ? (
-                    <a href={sdkUrl} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} data-kopf-abschluss="" className={knopfAbschlussKlasse}>
+                    <a href={sdkUrl} {...jahrAttribut} target="_blank" rel="noopener noreferrer" onClick={zaehleSdk} data-kopf-abschluss="" className={knopfAbschlussKlasse}>
                       {hero.knopfAbschluss}
                     </a>
                   ) : (
@@ -205,6 +209,7 @@ const AmbulantAnlassPage = ({ inhalt }) => {
             texte={rechner}
             stufe={stufe}
             onStufe={setStufe}
+            onGeburtsjahr={setGeburtsjahrRechner}
             knopf={(text) => knopfSdk(text)}
             abschluss={(
               <div className="mt-6 flex flex-col items-center gap-2 text-center">

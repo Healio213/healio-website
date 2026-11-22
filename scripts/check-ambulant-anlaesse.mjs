@@ -321,8 +321,10 @@ test('Abschlussknöpfe: fester SDK-Link mit Stufe, nur anonyme Zähler-Ereigniss
   for (const verboten of ['trackSdkClick', 'trackGoogleAdsAntrag', 'trackEvent', 'trackMeta', 'localStorage', 'sessionStorage', 'URLSearchParams', 'ambulant-stufe', 'LeadCaptureLink']) {
     assert.ok(!quelle.includes(verboten), `Seite darf ${verboten} nicht verwenden`);
   }
-  assert.equal((quelle.match(/href=\{sdkUrl\}/g) || []).length, 1, 'Ein gemeinsamer Baustein für alle Knöpfe der SDK');
-  assert.match(quelle, /<a href=\{sdkUrl\} target="_blank" rel="noopener noreferrer" onClick=\{zaehleSdk\}/);
+  // Seit 21.11.2026 zusätzlich der Kopfknopf als Link (Ambulant an, direkt in den Antrag); seit 22.11.2026 gibt
+  // jahrAttribut das Geburtsjahr aus dem Rechner an den Klickfang (nur bei direkter Maske).
+  assert.equal((quelle.match(/href=\{sdkUrl\}/g) || []).length, 2, 'Ein gemeinsamer Baustein für die Knöpfe der SDK und der Kopfknopf');
+  assert.equal((quelle.match(/<a href=\{sdkUrl\} \{\.\.\.jahrAttribut\} target="_blank" rel="noopener noreferrer" onClick=\{zaehleSdk\}/g) || []).length, 2);
   assert.equal((quelle.match(/zaehle\(/g) || []).length, 1, 'Genau ein Zählaufruf');
   const rueckruf = lies('src/components/sections/ambulant/OsteopathieRueckruf.jsx').replace(/\/\*[\s\S]*?\*\//g, '');
   for (const verboten of ['trackEvent', 'zaehle', 'localStorage', 'sessionStorage', 'URLSearchParams']) {

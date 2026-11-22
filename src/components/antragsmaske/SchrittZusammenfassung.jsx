@@ -52,6 +52,11 @@ export default function SchrittZusammenfassung({
   const iban = ibanOhneLeer(daten.iban);
   const bausteine = (definition.bausteine || []).filter((baustein) => daten.bausteine?.includes(baustein.id));
   const anzeige = beitragsAnzeige(definition, daten, beitrag);
+  // Nachbesserung 22.11.2026: Wie auf der Beitragsseite steht ein Zuschlag aus den Antworten auch hier unter dem Beitrag
+  // (nur wenn die Maske ihn selbst rechnet; beim Rechner des Versicherers und bei Stationär gibt es keinen).
+  const zuschlagText = beitrag && !beitrag.dienst
+    ? [beitrag.zuschlagProzent > 0 && `${beitrag.zuschlagProzent} %`, beitrag.zuschlagEuro > 0 && euro(beitrag.zuschlagEuro)].filter(Boolean).join(' und ')
+    : '';
   return (
     <div className="space-y-5">
       <TeilKopf titel={definition.zusammenfassung?.titel || 'Zusammenfassung'} ueberschriftRef={ueberschriftRef} text="Schau noch einmal drüber. Bis du absendest, ist nichts abgeschlossen." />
@@ -63,6 +68,7 @@ export default function SchrittZusammenfassung({
               <p className="text-base text-slate-300">{tarif?.name}{bausteine.map((baustein) => ` + ${baustein.name}`).join('')} bei {schuetze(definition.versicherer.beiDer || `der ${definition.versicherer.kurz}`)}</p>
               <p className="mt-1 text-base text-home-mint-active">{anzeige.label}</p>
               <p className="whitespace-nowrap font-display text-4xl font-extrabold tracking-[-0.03em]">{euro(beitrag?.beitrag)}</p>
+              {zuschlagText && <p className="mt-1 text-base leading-6 text-slate-100" data-zusammenfassung-zuschlag="">darin {zuschlagText} Zuschlag aus deinen Antworten</p>}
             </div>
             <AendernHell onClick={() => aendern('tarif')} label="Tarif und Beginn" />
           </div>
