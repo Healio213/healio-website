@@ -108,6 +108,8 @@ test('Sichtbare Texte kommen wortgleich aus dem Seitenplan', () => {
   assert.equal(seite.rueckruf.startThema, 'angeraten');
   assert.equal(seite.quellen.length, 7);
   assert.equal(seite.rechner.abschluss.knopf, 'Bei der Bayerischen online abschließen');
+  // Nachbesserung 22.11.2026: Mit der gemeinsamen Zahn-Maske nennt der Knopf keine Gesellschaft (Franks Vorgabe 19.11.).
+  assert.equal(seite.direkt.knopf, 'Online abschließen');
   for (const nr of ['p1', 'p2', 'p3', 'p4', 'p5']) assert.ok(seite.rechner.pflichtsaetze[nr].length > 40, `Pflichtsatz ${nr}`);
 });
 

@@ -81,6 +81,14 @@ function Optionen({ id, frage, wert, onWahl }) {
 }
 
 const telefonZiel = () => (antragTelefonAktiv('zahn') ? { text: 'Mit Nita am Telefon', href: telefonLink('zahn') } : { text: WEICHE_TEXTE.telefon.termin, href: TERMIN_LINK });
+// Nachbesserung 22.11.2026 (M6): Die Terminbuchung öffnet wie die übrigen Termin-Knöpfe einen neuen Tab, die Eingaben bleiben stehen.
+const terminTab = (href) => (href === TERMIN_LINK ? { target: '_blank', rel: 'noopener noreferrer' } : {});
+// Nachbesserung 22.11.2026 (M5): Vorfragen, Weiche und Rückweiche stehen im Verlauf des Browsers wie die Schritte der Maske. Im Verlauf
+// steht nur die Tiefe (zahnTiefe), nie eine Antwort; die Antworten bleiben im Arbeitsspeicher der Seite.
+const ohneMaske = (stand) => {
+  const { maskePos, maskeTiefe, maskeWeiche, ...rest } = stand || {}; // eslint-disable-line no-unused-vars
+  return rest;
+};
 
 function Ueberschrift({ titelRef, children, klein = false }) {
   return (
@@ -161,9 +169,10 @@ function TelefonKnoepfe() {
   const ziel = telefonZiel();
   return (
     <div className="flex flex-wrap gap-2">
-      <a href={ziel.href} data-zaehler-ignorieren="" className={buttonClass('primary')} data-weiche-telefon="">
+      <a href={ziel.href} {...terminTab(ziel.href)} data-zaehler-ignorieren="" className={buttonClass('primary')} data-weiche-telefon="">
         {ziel.text}
         <ArrowRight className="h-5 w-5" aria-hidden="true" />
+        {ziel.href === TERMIN_LINK && <NeuerTab />}
       </a>
       <a href={HEALIO_PHONE_TEL} data-zaehler-ignorieren="" className={buttonClass('secondary')}>
         <Phone className="h-5 w-5" aria-hidden="true" />
@@ -272,6 +281,49 @@ export default function ZahnStrecke({ definition }) {
   useEffect(() => {
     if (phase === 'fragen' && schritt === null && v.geburt) setPhase('weiche');
   }, [phase, schritt, v.geburt]);
+
+  // ---- Verlauf des Browsers (M5) -----------------------------------------------------------------------------------------
+  // Jeder neue Bildschirm vor der Maske bekommt einen Eintrag. Browser-Zurück ruft denselben Schritt zurück wie der Knopf
+  // Zurück; den Weg von der Maske zurück zur Weiche führt die Maske selbst aus (vorab.zurueck). Vorwärts lässt sich ohne
+  // gespeicherte Antworten nicht wiederholen und springt deshalb zurück auf den aktuellen Bildschirm.
+  const tiefeRef = useRef(0);
+  const verlaufRef = useRef([]);
+  const zurueckRef = useRef(null);
+  const phaseRef = useRef(phase);
+  phaseRef.current = phase;
+  const vorwaerts = (schluessel) => {
+    tiefeRef.current += 1;
+    verlaufRef.current = [...verlaufRef.current.slice(0, tiefeRef.current), schluessel];
+    window.history.pushState({ ...ohneMaske(window.history.state), zahnTiefe: tiefeRef.current }, '');
+  };
+  // Vor dem Wechsel in die Maske: eigener Eintrag, den die Maske beim Start als ihren übernimmt (Antragsmaske, maskeWeiche).
+  const vorDerMaske = () => { if (verlaufRef.current[tiefeRef.current] !== 'maske') vorwaerts('maske'); };
+  let verlaufSchluessel = null;
+  if (phase === 'maske') verlaufSchluessel = 'maske';
+  else if (phase === 'fragen') verlaufSchluessel = schritt ? `fragen:${schritt}` : null;
+  else if (phase === 'wechsel') verlaufSchluessel = rwSchritt ? `wechsel:${rwSchritt}` : null;
+  else verlaufSchluessel = ziel ? `weiche:${ziel.ziel}` : null;
+  useEffect(() => {
+    if (!verlaufSchluessel) return;
+    if (verlaufRef.current.length === 0) {
+      verlaufRef.current = [verlaufSchluessel];
+      tiefeRef.current = 0;
+      window.history.replaceState({ ...window.history.state, zahnTiefe: 0 }, '');
+      return;
+    }
+    if (verlaufSchluessel === 'maske' || verlaufRef.current[tiefeRef.current] === verlaufSchluessel) return;
+    vorwaerts(verlaufSchluessel);
+  }, [verlaufSchluessel]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    const beiZurueck = (event) => {
+      const zielTiefe = Number.isInteger(event.state?.zahnTiefe) ? event.state.zahnTiefe : 0;
+      if (phaseRef.current === 'maske') { tiefeRef.current = zielTiefe; return; }
+      if (zielTiefe < tiefeRef.current) { tiefeRef.current = zielTiefe; zurueckRef.current?.(); return; }
+      if (zielTiefe > tiefeRef.current) window.history.go(tiefeRef.current - zielTiefe);
+    };
+    window.addEventListener('popstate', beiZurueck);
+    return () => window.removeEventListener('popstate', beiZurueck);
+  }, []);
 
   // ---- Maske ---------------------------------------------------------------------
   if (phase === 'maske') {
@@ -416,6 +468,9 @@ export default function ZahnStrecke({ definition }) {
     if (letzte === 'V2' && v.einwilligung) { setV((alt) => ohneAb(alt, 'einwilligung')); return; }
     setV((alt) => ohneAb(alt, SCHLUESSEL[letzte] || letzte));
   };
+  zurueckRef.current = zurueck;
+  // Knopf Zurück: über den Verlauf, damit Knopf und Browser-Zurück gleich zählen (der Schritt läuft dann in beiZurueck).
+  const zurueckKnopf = () => { if (tiefeRef.current > 0) window.history.back(); else zurueck(); };
 
   let inhalt = null;
   let weiterKnopf = null;
@@ -489,7 +544,7 @@ export default function ZahnStrecke({ definition }) {
         </div>
         <p className="mt-4 flex flex-wrap gap-x-4 gap-y-1">
           <a href={EINWILLIGUNG.datenschutz.href} target="_blank" rel="noopener noreferrer" data-zaehler-ignorieren="" className={LINK}>{EINWILLIGUNG.datenschutz.label}<NeuerTab /></a>
-          <a href={telefonZiel().href} data-zaehler-ignorieren="" className={LINK} data-weiche-telefon="">{EINWILLIGUNG.telefon}</a>
+          <a href={telefonZiel().href} {...terminTab(telefonZiel().href)} data-zaehler-ignorieren="" className={LINK} data-weiche-telefon="">{EINWILLIGUNG.telefon}{telefonZiel().href === TERMIN_LINK && <NeuerTab />}</a>
         </p>
       </div>
     );
@@ -520,7 +575,7 @@ export default function ZahnStrecke({ definition }) {
     // c2 (nur WAHLREGEL 'beide'): beide Karten, der Kunde wählt selbst.
     const plzOk = /^\d{5}$/.test(plz);
     const bayStufen = bayerischeStufen(bayPreis.stufen, false);
-    const waehle = (ziel2) => { setProdukt(ziel2); setMaskenRunde((alt) => alt + 1); setPhase('maske'); };
+    const waehle = (ziel2) => { vorDerMaske(); setProdukt(ziel2); setMaskenRunde((alt) => alt + 1); setPhase('maske'); };
     inhalt = (
       <div data-weiche-ergebnis="beide">
         <p className="text-base font-bold text-emerald-800">{WEICHE_TEXTE.oben}</p>
@@ -595,7 +650,7 @@ export default function ZahnStrecke({ definition }) {
     else if (bereit) {
       weiterKnopf = {
         text: WEICHE_TEXTE.knopf,
-        onClick: () => { setVersucht(false); setProdukt(ziel.produkt); setMaskenRunde((alt) => alt + 1); setPhase('maske'); },
+        onClick: () => { setVersucht(false); vorDerMaske(); setProdukt(ziel.produkt); setMaskenRunde((alt) => alt + 1); setPhase('maske'); },
         data: { 'data-weiche-weiter': '' },
       };
     }
@@ -660,7 +715,7 @@ export default function ZahnStrecke({ definition }) {
               )}
               <p className={cx('mt-6 text-base leading-7 text-home-midnight', TRENNUNG)} data-wechsel-text="">{RUECKWEICHE_TEXTE.zurBayerischen.ergebnisText}</p>
               <p className={cx('mt-3 text-base leading-7 text-home-slate', TRENNUNG)} data-satz-auswahl="">{SATZ_AUSWAHL}</p>
-              <p className="mt-4"><a href={telefonZiel().href} data-zaehler-ignorieren="" className={LINK} data-weiche-telefon="">{RUECKWEICHE_TEXTE.telefon}</a></p>
+              <p className="mt-4"><a href={telefonZiel().href} {...terminTab(telefonZiel().href)} data-zaehler-ignorieren="" className={LINK} data-weiche-telefon="">{RUECKWEICHE_TEXTE.telefon}{telefonZiel().href === TERMIN_LINK && <NeuerTab />}</a></p>
             </>
           )}
         </div>
@@ -688,6 +743,7 @@ export default function ZahnStrecke({ definition }) {
             setPlz(wechsel.zusatz.plz);
             setMaskenDaten((alt) => ({ ...alt, 'zahn-ukv': undefined, zahn: undefined }));
             setWechsel((alt) => ({ ...alt, fertig: true }));
+            vorDerMaske();
             setProdukt('zahn');
             setMaskenRunde((alt) => alt + 1);
             setPhase('maske');
@@ -735,7 +791,7 @@ export default function ZahnStrecke({ definition }) {
           <div className="sticky bottom-0 z-30 -mx-4 mt-auto border-t border-home-midnight/10 bg-white/95 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 shadow-[0_-12px_24px_-16px_rgba(7,17,31,0.25)] backdrop-blur sm:-mx-8 sm:px-8 lg:static lg:mx-0 lg:mb-12 lg:bg-transparent lg:px-0 lg:pb-0 lg:pt-6 lg:shadow-none lg:backdrop-blur-none">
             <div className="flex items-center gap-3 lg:justify-between">
               {zeigeZurueck && (
-                <Button variant="secondary" onClick={zurueck} aria-label="Zurück" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6" data-weiche-zurueck="">
+                <Button variant="secondary" onClick={zurueckKnopf} aria-label="Zurück" className="w-12 shrink-0 !px-0 lg:w-auto lg:!px-6" data-weiche-zurueck="">
                   <ArrowLeft className="h-5 w-5" aria-hidden="true" />
                   <span className="hidden lg:inline" aria-hidden="true">Zurück</span>
                 </Button>

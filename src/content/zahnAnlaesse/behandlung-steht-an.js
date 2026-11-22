@@ -128,6 +128,8 @@ const inhalt = {
   // Online-Antrag /antrag/zahn statt in den Rechner der Bayerischen. Dann ersetzen diese Sätze die zwei,
   // die den Rechner der Bayerischen nennen (ZahnAnlassPage.jsx). Ohne Schalter bleibt alles wie oben.
   direkt: {
+    // Nachbesserung 22.11.2026 (Franks Vorgabe 19.11.): Die Gesellschaft wählt erst die Weiche, der Knopf nennt sie darum nicht.
+    knopf: 'Online abschließen',
     abschlussHinweis: 'Du landest direkt in unserem Online-Antrag. Nach ein paar kurzen Fragen siehst du, wo du mit deinen Angaben online abschließen kannst und was es kostet. Passt ZAHN Sofort zu deinen Angaben, ist der Baustein dort schon dabei.',
     ablaufSchritt3: 'In unserem Online-Antrag beantwortest du zuerst ein paar kurze Fragen. Passt ZAHN Sofort zu deinen Angaben, wählst du Smart, Komfort oder Prestige mit dem Baustein. Später lässt sich der Baustein nicht mehr ergänzen.',
   },

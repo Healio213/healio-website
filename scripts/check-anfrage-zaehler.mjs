@@ -361,8 +361,9 @@ check(/zaehle\('sdk_klick'\);/.test(quellen['src/lib/sdk-url.js']), 'SDK-Klick z
 check(/installiereLeistungswegZaehler\(\)/.test(quellen['src/App.jsx']), 'Leistungsweg-Zähler hängt einmal für alle Seiten in App.jsx.');
 {
   const zahnCheck = quellen['src/components/sections/dental/DentalZahnCheck.jsx'];
-  check(/if \(Object\.hasOwn\(CTA_HREFS, insurer\)\) zaehle\('versicherer_klick', \{ ziel: insurer \}\);/.test(zahnCheck)
-    && /onClick=\{\(\) => countAntragOpened\(result\.ctaType\)\}/.test(zahnCheck), 'Zahn-Check zählt den geöffneten Antrag anonym nur mit dem Versicherer.');
+  // Nachbesserung 22.11.2026: Mit der gemeinsamen Zahn-Maske (direkt) zählt der Zahn-Check keinen versicherer_klick mehr.
+  check(/if \(direkt\) return;\s*if \(Object\.hasOwn\(CTA_HREFS, insurer\)\) zaehle\('versicherer_klick', \{ ziel: insurer \}\);/.test(zahnCheck)
+    && /onClick=\{\(\) => countAntragOpened\(result\.ctaType, direkt\)\}/.test(zahnCheck), 'Zahn-Check zählt den geöffneten Antrag anonym nur mit dem Versicherer, mit der gemeinsamen Maske gar nicht.');
   check((zahnCheck.match(/zaehle\(/g) || []).length === 1, 'Zahn-Check zählt an genau einer Stelle, Antworten nie.');
   const dentalLinks = quellen['src/components/sections/dental/dentalLinks.js'];
   check(/zaehle\('versicherer_klick', \{ ziel: ZAEHLER_VERSICHERER_JE_ZIEL\[destination\] \}\);/.test(dentalLinks)
@@ -586,7 +587,7 @@ try {
   }
 
   // R8: Zahn-Check auf /zahn bis zum Ergebnis, Antrag öffnen (Leitfaden schon
-  // angefordert, ohne Einwilligung): versicherer_klick nur mit Pfad und Versicherer.
+  // angefordert, ohne Einwilligung): seit 22.11.2026 nur antragsweg zahn-allein, kein versicherer_klick.
   for (const [antworten, versicherer, host] of [[[0, 0, 1], 'bayerische', 'diebayerische.de'], [[2, 0, 1, 0], 'ukv', 'levelnine.biz']]) {
     const { page, log } = await neueSeite({ analytics: false, marketing: false, leadErfasst: true, mobil: false });
     await bereit(page, '/zahn');
@@ -599,21 +600,22 @@ try {
       await warte(900);
     }
     const geklickt = await page.evaluate((h) => {
-      const link = [...document.querySelectorAll('#zahn-check-karte a[href]')].find((item) => item.href.includes(h));
+      const link = [...document.querySelectorAll('#zahn-check-karte [data-dental-result-actions] a[href]')].find((item) => item.href.includes(h));
       if (!link) return false;
       link.click();
       return true;
     }, host);
     check(geklickt, `Zahn-Check zeigt den Antragslink zu ${versicherer}.`);
     // 22.11.2026 (Zahn an): Der Knopf führt direkt in den Einstieg der gemeinsamen Maske /antrag/zahn (kein neuer Tab).
-    // Gezählt wird wie bisher versicherer_klick und dazu der Weg in die Maske (antragsweg zahn-allein), je ohne Antworten.
+    // Nachbesserung 22.11.2026: Gezählt wird nur noch der Weg in die Maske (antragsweg zahn-allein), kein versicherer_klick (die Gesellschaft
+    // wählt erst die Weiche), je ohne Antworten.
     for (let i = 0; i < 40 && !new URL(page.url()).pathname.startsWith('/antrag/zahn'); i += 1) await warte(200);
     await warte(600);
     const vk = log.zaehler.filter((z) => z.body.ereignis === 'versicherer_klick').map((z) => z.body);
-    check(vk.length === 1 && JSON.stringify(vk[0]) === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: versicherer }), `Zahn-Check zählt anonym: ${JSON.stringify(vk)}`);
+    check(vk.length === 0, `Zahn-Check zählt keinen versicherer_klick (${versicherer}): ${JSON.stringify(vk)}`);
     const aw = log.zaehler.filter((z) => z.body.ereignis === 'antragsweg').map((z) => z.body);
     check(aw.length === 1 && aw[0].von_pfad === '/zahn' && aw[0].ziel === 'zahn-allein', `Weg in die Maske zählt anonym: ${JSON.stringify(aw)}`);
-    check(log.zaehler.length === 2, `Antworten im Zahn-Check lösen keine Zählung aus (${log.zaehler.length}).`);
+    check(log.zaehler.length === 1, `Antworten im Zahn-Check lösen keine Zählung aus (${log.zaehler.length}).`);
     check(log.ga.length === 0 && !log.fremd.some((entry) => /facebook|google/.test(entry)), 'Zahn-Check ohne Einwilligung: nichts an Google oder Meta.');
     check(new URL(page.url()).pathname === '/antrag/zahn', `Der Knopf öffnet den Einstieg der gemeinsamen Maske (${page.url()}).`);
     check(log.fehler.length === 0, `Keine Seitenfehler: ${log.fehler.join(' | ')}`);

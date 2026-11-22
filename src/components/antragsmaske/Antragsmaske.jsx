@@ -227,7 +227,9 @@ function Danke({ definition, ergebnis, titelRef }) {
       </div>
       <div className={cx(KARTE, 'p-6 sm:p-10')}>
         <h2 className="font-display text-xl font-extrabold text-home-midnight sm:text-2xl">So geht es weiter</h2>
-        <ol className="mt-5 grid gap-5 md:grid-cols-3" data-danke-punkte="">
+        {/* Nachbesserung 22.11.2026 (M7): Die linke Spalte ist auch am Desktop schmal; drei Karten nebeneinander ließen lange Wörter
+            wie „Eingangsbestätigung“ über den Rand laufen. Darum stehen sie untereinander. */}
+        <ol className="mt-5 grid gap-4" data-danke-punkte="">
           {schritte.map(({ icon: Icon, titel, texte }, stelle) => (
             <li key={titel} className="relative rounded-[1.2rem] bg-home-ice p-4 ring-1 ring-emerald-900/10">
               <div className="flex items-center gap-3">
@@ -277,6 +279,12 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
 
   const posRef = useRef(pos);
   posRef.current = pos;
+  // Nachbesserung 22.11.2026 (M5): Browser-Zurück vom ersten Eintrag der Maske führt über die Weiche zurück (vorab.zurueck) mit den
+  // aktuellen Eingaben, wie der Knopf Zurück auf dem ersten Schritt.
+  const datenRef = useRef(daten);
+  datenRef.current = daten;
+  const vorabRef = useRef(vorab);
+  vorabRef.current = vorab;
   const h1Ref = useRef(null);
   const unterRef = useRef(null);
   const leisteRef = useRef(null);
@@ -380,6 +388,14 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
     : null), [definition, tarif, geburtsdatum?.jahr, geburtsdatum?.monat, geburtsdatum?.tag, beginn?.iso, plzFuerPreis, daten.antworten, grenze]); // eslint-disable-line react-hooks/exhaustive-deps
   // Dienst (12.2) nennt die Beiträge aller Tarife „alleStufen“, die Attrappe zusätzlich „alleTarife“.
   const preise = mitDienst ? dienstJetzt.antwort?.alleStufen || dienstJetzt.antwort?.alleTarife || null : preiseLokal;
+  // Nachbesserung 22.11.2026 (M4): Hat die Weiche fehlende Zähne gezählt (UKV), nennt die Tarifseite je Stufe zusätzlich den Beitrag mit
+  // diesem Zuschlag, so wie ihn die Weiche gezeigt hat. Gerechnet wie auf der Beitragsseite (Antwort TF0021 aus der Weiche).
+  const preiseMitZaehnen = useMemo(() => {
+    if (!vorab?.zaehne || vorab.zaehne === '0' || !preiseLokal || !geburtsdatum || !beginn) return null;
+    return Object.fromEntries(definition.tarife.map((eintrag) => [eintrag.id, Number.isFinite(preiseLokal[eintrag.id]) ? berechneBeitrag(definition, {
+      tarif: eintrag.id, geburtsdatum, beginn, plz: plzFuerPreis, antworten: { TF0021: vorab.zaehne },
+    })?.beitrag ?? null : null]));
+  }, [definition, vorab?.zaehne, preiseLokal, geburtsdatum?.jahr, geburtsdatum?.monat, geburtsdatum?.tag, beginn?.iso, plzFuerPreis]); // eslint-disable-line react-hooks/exhaustive-deps
   const beitrag = mitDienst
     ? (dienstJetzt.antwort ? {
       beitrag: dienstJetzt.antwort.beitrag,
@@ -503,8 +519,12 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   }, [wechsle]);
 
   useEffect(() => {
-    window.history.replaceState({ ...window.history.state, maskePos: { id: 'tarif', aendern: null, uebersicht: false }, maskeTiefe: 0 }, '');
+    // Über die Zahn-Weiche (vorab.zurueck) trägt jeder Eintrag der Maske maskeWeiche; ein Eintrag ohne dieses Zeichen gehört zur Weiche.
+    window.history.replaceState({
+      ...window.history.state, maskePos: { id: 'tarif', aendern: null, uebersicht: false }, maskeTiefe: 0, ...(vorab?.zurueck ? { maskeWeiche: true } : {}),
+    }, '');
     const beiZurueck = (event) => {
+      if (vorabRef.current?.zurueck && !event.state?.maskeWeiche) { vorabRef.current.zurueck(datenRef.current); return; }
       const ziel = event.state?.maskePos;
       tiefeRef.current = event.state?.maskeTiefe || 0;
       if (!ziel) { wechsle({ id: 'tarif', aendern: null, uebersicht: false }); return; }
@@ -776,7 +796,7 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
   };
   let inhalt;
   if (pos.id === 'tarif') {
-    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} angeboten={angeboten} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} empfohlen={vorab?.empfohlen} />;
+    inhalt = <SchrittTarif {...gemeinsam} heute={heute} beginnWahl={beginnWahl} preise={preise} grenze={grenze} angeboten={angeboten} vorbelegtJahr={vorbelegung.geburtsjahr} dienst={dienstJetzt} empfohlen={vorab?.empfohlen} mitZaehnen={preiseMitZaehnen ? { preise: preiseMitZaehnen, anzahl: vorab.zaehne } : null} />;
   } else if (pos.id === 'hinweis') {
     inhalt = <SchrittHinweis {...gemeinsam} setAntwort={setAntwort} anzahl={fragen.length} />;
   } else if (aktuell.frage) {

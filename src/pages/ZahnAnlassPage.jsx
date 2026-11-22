@@ -42,7 +42,9 @@ const zaehleBayerische = () => { zaehle('versicherer_klick', { ziel: 'bayerische
 const BAYERISCHE_ATTR = { href: BAYERISCHE_URL, target: '_blank', rel: 'noopener noreferrer', onClick: zaehleBayerische };
 // 22.11.2026 (Zahn an): Mit der gemeinsamen Zahn-Maske fängt LeadCaptureProvider den Link ab und führt im selben Tab
 // in den Einstieg von /antrag/zahn (die Weiche wählt die Gesellschaft). Dann kein neuer Tab, kein Außen-Symbol.
-const BAYERISCHE_ATTR_DIREKT = { ...BAYERISCHE_ATTR, target: undefined, rel: undefined };
+// Nachbesserung 22.11.2026: Dann zählt auch kein versicherer_klick mehr, die Gesellschaft steht erst nach der Weiche fest; den Klick
+// zählt der Weg in die Maske (antragsweg zahn-allein).
+const BAYERISCHE_ATTR_DIREKT = { ...BAYERISCHE_ATTR, target: undefined, rel: undefined, onClick: undefined };
 
 const KNOPF_GRUEN = 'inline-flex min-h-14 max-w-full items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-4 text-center font-display text-base font-extrabold leading-6 text-[#07141d] shadow-[0_12px_36px_rgba(37,201,144,0.18)] transition-colors hover:bg-[#5edcaf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-4';
 
@@ -187,8 +189,8 @@ const ZahnAnlassPage = ({ inhalt }) => {
             texte={rechner}
             abschluss={(
               <div className="mt-8 flex flex-col items-center gap-3 text-center">
-                <a {...abschlussAttr} aria-label={`${rechner.abschluss.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
-                  {rechner.abschluss.knopf}
+                <a {...abschlussAttr} aria-label={`${direkt ? inhalt.direkt.knopf : rechner.abschluss.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
+                  {direkt ? inhalt.direkt.knopf : rechner.abschluss.knopf}
                   <Aussen className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
                 <p className="max-w-md text-base leading-6 text-slate-600">{direkt ? inhalt.direkt.abschlussHinweis : rechner.abschluss.hinweis}</p>
@@ -229,8 +231,8 @@ const ZahnAnlassPage = ({ inhalt }) => {
               ))}
             </MobileSwipeRow>
             <div className="mt-8 flex flex-col items-center gap-3 text-center">
-              <a {...abschlussAttr} aria-label={`${ablauf.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
-                {ablauf.knopf}
+              <a {...abschlussAttr} aria-label={`${direkt ? inhalt.direkt.knopf : ablauf.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
+                {direkt ? inhalt.direkt.knopf : ablauf.knopf}
                 <Aussen className="h-4 w-4 shrink-0" aria-hidden="true" />
               </a>
               <p className="max-w-md text-sm leading-6 text-slate-500">{ablauf.kleingedruckt}</p>

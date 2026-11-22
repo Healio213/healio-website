@@ -310,7 +310,11 @@ function RueckweicheHinweis({ rueckweiche, wirkung, sparte }) {
           </a>
         )}
         {!rueckweiche.nurTelefon && !rueckweiche.href && <button type="button" onClick={rueckweiche.onKlick} className={knopf} data-rueckweiche-knopf="">{rueckweiche.knopf}</button>}
-        <a href={telefon.href} data-zaehler-ignorieren="" data-ausweg="" className={buttonClass('secondary')}>Lieber am Telefon</a>
+        {/* Nachbesserung 22.11.2026 (M6): Die Terminbuchung öffnet wie die übrigen Termin-Knöpfe einen neuen Tab, die Eingaben bleiben stehen. */}
+        <a href={telefon.href} {...(telefon.href === TERMIN_LINK ? { target: '_blank', rel: 'noopener noreferrer' } : {})} data-zaehler-ignorieren="" data-ausweg="" className={buttonClass('secondary')}>
+          Lieber am Telefon
+          {telefon.href === TERMIN_LINK && <span className="sr-only"> (öffnet in neuem Tab)</span>}
+        </a>
       </div>
     </Callout>
   );

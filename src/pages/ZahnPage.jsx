@@ -15,7 +15,7 @@ import SEOHead from '@/components/SEOHead';
 import DesktopLead from '@/components/desktop/DesktopLead';
 import DentalZahnCheck from '@/components/sections/dental/DentalZahnCheck';
 import { zahnBeispielpreisText } from '@/data/zahnBeispielpreis';
-import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
+import DentalEntryActions, { zahnEinstiegHinweis } from '@/components/sections/dental/DentalEntryActions';
 import DentalVideoSection from '@/components/sections/dental/DentalVideoSection';
 import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCards';
 import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
@@ -172,7 +172,7 @@ const ZahnPage = () => {
                 {GUIDED_CALLBACK_ENABLED ? (
                   <div className="mt-6 md:mt-8">
                     <DentalEntryActions />
-                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{lang === 'en' ? 'Three or four short questions, then on to the premium calculator.' : 'Drei bis vier kurze Fragen, dann zum Beitragsrechner.'} {zahnBeispielpreisText(lang)}</p>
+                    <p className="mt-3 max-w-xl text-sm leading-6 text-slate-300">{zahnEinstiegHinweis(lang, zahnDirekt)} {zahnBeispielpreisText(lang)}</p>
                   </div>
                 ) : (<>
                 <a

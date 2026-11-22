@@ -85,8 +85,11 @@ const CTA_HREF_BY_RESULT = {
 // Dazu der anonyme Zähler ohne Cookies (src/lib/anonyme-zaehler.js): nur
 // Ereignis, Pfad der Seite und der Versicherer aus der festen Liste
 // (bayerische, ukv). Keine Antwort, kein Ergebnis, keine Kennung.
-const countAntragOpened = (insurer) => {
+// Nachbesserung 22.11.2026: Führt der Knopf in die gemeinsame Zahn-Maske (direkt), entscheidet erst die Weiche über die
+// Gesellschaft. Dann zählt kein versicherer_klick mehr; den Klick zählt der Weg in die Maske (antragsweg zahn-allein).
+const countAntragOpened = (insurer, direkt = false) => {
   trackGoogleAdsAntrag();
+  if (direkt) return;
   if (Object.hasOwn(CTA_HREFS, insurer)) zaehle('versicherer_klick', { ziel: insurer });
 };
 
@@ -358,8 +361,8 @@ const DentalZahnCheck = () => {
                     {content.resultEyebrow}
                   </div>
 
-                  <p className="mt-5 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-[#087654] md:mt-7">
-                    {result.insurer}
+                  <p className="mt-5 font-display text-sm font-extrabold uppercase tracking-[0.14em] text-[#087654] md:mt-7" data-zahn-ergebnis-kopf="">
+                    {(direkt && ZAHN_DIREKT_CHECK.kopf[resultKey]) || result.insurer}
                   </p>
                   <h3 className="mt-3 max-w-[22ch] font-display text-2xl font-extrabold leading-tight tracking-[-0.03em] sm:text-3xl">
                     {result.title}
@@ -411,12 +414,15 @@ const DentalZahnCheck = () => {
                     </p>
                   )}
 
-                  <p className="mt-6 font-display text-lg font-extrabold text-slate-950">
-                    {result.ctaType === 'contact'
-                      ? (lang === 'en' ? 'Let’s clarify your situation together.' : 'Klären wir deine Situation gemeinsam.')
-                      : (lang === 'en' ? 'Apply online.' : 'Online abschließen.')}
-                  </p>
-                  <div data-dental-result-actions className="mt-3 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                  {/* Mit der gemeinsamen Maske heißt der Knopf selbst „Online abschließen“, die Zeile darüber entfällt dann. */}
+                  {!(direkt && result.ctaType !== 'contact') && (
+                    <p className="mt-6 font-display text-lg font-extrabold text-slate-950">
+                      {result.ctaType === 'contact'
+                        ? (lang === 'en' ? 'Let’s clarify your situation together.' : 'Klären wir deine Situation gemeinsam.')
+                        : (lang === 'en' ? 'Apply online.' : 'Online abschließen.')}
+                    </p>
+                  )}
+                  <div data-dental-result-actions className={`${direkt && result.ctaType !== 'contact' ? 'mt-6' : 'mt-3'} flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center`}>
                     {result.ctaType === 'contact' ? GUIDED_CALLBACK_ENABLED ? (
                       <GuidedCallbackButton product="zahn" tariff={guidedTariff} className="inline-flex min-h-14 items-center justify-center rounded-full bg-home-mint px-6 font-display text-base font-extrabold text-home-midnight transition hover:bg-home-mint-active focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-800 max-w-full whitespace-normal text-center py-3">
                         {lang === 'en' ? 'Book an appointment' : 'Termin buchen'}
@@ -427,10 +433,11 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" {...(direkt ? {} : { target: '_blank', rel: 'noopener noreferrer' })} aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
+                        <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" {...(direkt ? {} : { target: '_blank', rel: 'noopener noreferrer' })} aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType, direkt)}>
                           {lang === 'en'
                             ? (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online'))
-                            : (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen'))}
+                            : direkt ? ZAHN_DIREKT_CHECK.knopf
+                              : (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen'))}
                           {direkt ? <ArrowRight className="ml-2 h-5 w-5 shrink-0" aria-hidden="true" /> : <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />}
                         </LeadCaptureLink>
                       </Button>

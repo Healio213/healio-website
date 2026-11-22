@@ -761,6 +761,19 @@ export const getDentalContent = (lang) => (lang === 'en' ? en : de);
 // ersetzen dann nur die, die sonst nicht mehr stimmen (DentalZahnCheck.jsx, ZahnPage.jsx). Nur deutsch;
 // ohne Schalter bleibt alles wie oben.
 export const ZAHN_DIREKT_CHECK = Object.freeze({
+  // Nachbesserung 22.11.2026 (Franks Vorgabe 19.11.: die Gesellschaft steht nicht vorab im Vordergrund, sie wählt die Weiche):
+  // Der Knopf im Ergebnis heißt einheitlich „Online abschließen“, die Überschrift nennt die Art des Zahntarifs statt der Gesellschaft.
+  knopf: 'Online abschließen',
+  kopf: Object.freeze({
+    sofort: 'Zahntarif mit Sofortschutz',
+    bayerischeOhneSofort: 'Zahntarif ohne Sofortschutz',
+    ukvLuecke: 'Zahntarif mit Zuschlag für die Lücke',
+    ukvVorgeschichte: 'Zahntarif bei Zahn-Vorgeschichte',
+    ukvFamilie: 'Zahntarif für Familie und Kieferorthopädie',
+    ukvPzr: 'Zahntarif mit Zahnreinigung',
+    ukvLeistung: 'Zahntarif mit hoher Leistung',
+    ukvPreis: 'Zahntarif zum günstigen Einstieg',
+  }),
   calculatorHintLabel: 'Wichtig für deinen Antrag:',
   ukvNote: 'Du kommst direkt in unseren Online-Antrag. Nach ein paar kurzen Fragen siehst du, wo du mit deinen Angaben online abschließen kannst und was es kostet. Über die Annahme entscheidet die Gesellschaft nach deinem Antrag.',
   calculatorHints: Object.freeze({

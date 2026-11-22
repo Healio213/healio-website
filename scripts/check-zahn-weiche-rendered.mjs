@@ -323,7 +323,9 @@ async function bayerischeWege(browser, breite) {
     await vorfragen(seite, { antworten: [['V2', 'pflicht'], ['einwilligung'], ['V3', 'nein'], ['V4', '>3']] });
     await seite.waitForSelector('[data-weiche-ergebnis="telefon"]');
     pruefe((await seite.textContent('[data-weiche-ergebnis]')).includes('Fehlen mehr als 3 Zähne, ist online bei keiner der beiden Gesellschaften ein Abschluss möglich.') && (await seite.textContent('[data-weiche-ergebnis]')).includes('Deine Antworten von hier nehmen wir nicht mit.'), `Ausgang ${art} mit Grund`);
-    pruefe((await seite.textContent('[data-weiche-ergebnis] [data-weiche-telefon]')).trim() === knopf, `Ausgang ${art}: Knopf „${knopf}“`);
+    // Nachbesserung 22.11.2026 (M6): Der Termin öffnet in einem neuen Tab, der Vorlesetext sagt es dazu.
+    const knopfText = (await seite.textContent('[data-weiche-ergebnis] [data-weiche-telefon]')).trim();
+    pruefe(knopfText.replace(' (öffnet in neuem Tab)', '') === knopf && (art !== 'termin' || await seite.getAttribute('[data-weiche-ergebnis] [data-weiche-telefon]', 'target') === '_blank'), `Ausgang ${art}: Knopf „${knopf}“`);
     await pruefeSeite(seite, `${breite} Ausgang ${art}`);
     await foto(seite, `${breite}-ausgang-${art}-mehr-als-3`);
     await seite.goto(`${basis}/antrag/zahn`, { waitUntil: 'networkidle' });

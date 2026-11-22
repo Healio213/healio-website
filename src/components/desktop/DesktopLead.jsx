@@ -15,7 +15,7 @@ import { GUIDED_CALLBACK_ENABLED } from '@/lib/guided-callback';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { getGuidedHomeContent } from '@/components/home/guidedHomeContent';
 import { zahnBeispielpreisText } from '@/data/zahnBeispielpreis';
-import DentalEntryActions from '@/components/sections/dental/DentalEntryActions';
+import DentalEntryActions, { useZahnDirekt, zahnEinstiegHinweis } from '@/components/sections/dental/DentalEntryActions';
 import SelfServiceEntryActions from '@/components/guided/SelfServiceEntryActions';
 
 const destinations = { ambulant: '#budget-kompass', zahn: '#zahn-check', stationaer: '#tarife' };
@@ -81,6 +81,8 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
   const guidedCopy = getGuidedHomeContent(language);
   // Frank 01.11.2026: Auf den Produktseiten steht der Onlineabschluss vorne.
   const selfServiceSurface = surface === 'ambulant' || surface === 'stationaer';
+  // Nachbesserung 22.11.2026: Mit der gemeinsamen Zahn-Maske führt der Knopf direkt in den Antrag (DentalEntryActions).
+  const zahnDirekt = useZahnDirekt();
   // Besuchertest 11.10.2026: Auf /zahn und /stationaer steht dieselbe Auswahl (zwei Zahn-Wege,
   // vier Klinik-Tarife) weiter unten ausführlich; die Kurzliste im Kopfbereich entfällt.
   // Frank 01.11.2026: ebenso auf /ambulant, die Töpfe je Stufe zeigt die Tarifwahl.
@@ -117,7 +119,7 @@ const DesktopLead = ({ surface = 'home', language = 'de', fromBonusTopic = false
         </>
       ) : surface === 'zahn' ? copy.description : undefined}
       actionHint={guidedCallbackEnabled && surface === 'zahn'
-        ? (language === 'en' ? `Three or four short questions, then on to the premium calculator. ${zahnBeispielpreisText('en')}` : `Drei bis vier kurze Fragen, dann zum Beitragsrechner. ${zahnBeispielpreisText('de')}`)
+        ? `${zahnEinstiegHinweis(language, zahnDirekt)} ${zahnBeispielpreisText(language === 'en' ? 'en' : 'de')}`
         : guidedCallbackEnabled && selfServiceSurface ? undefined
         : guidedCallbackEnabled ? guidedCopy.hint : isHome ? copy.hint : undefined}
       urgency={isHome || surface === 'zahn' || (fromBonusTopic && surface === 'ambulant') ? undefined : <UrgencyNote surface={surface} />}

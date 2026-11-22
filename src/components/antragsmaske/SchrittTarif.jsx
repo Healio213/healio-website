@@ -139,8 +139,11 @@ function DienstBeitrag({
 const ZEILEN_SICHTBAR = 5;
 const ZEILEN_HANDY = 3;
 
+// Nachbesserung 22.11.2026 (M4): Zuschlag für fehlende Zähne aus der Zahn-Weiche, damit der Betrag der Weiche hier nicht verschwindet.
+const zuschlagZaehneText = (anzahl, betrag) => `Mit Zuschlag für ${anzahl === '1' ? '1 fehlenden Zahn' : `${anzahl} fehlende Zähne`}: ${euro(betrag)}`;
+
 function Stufenkarte({
-  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen, versicherer, platzHalten,
+  tarif, stelle, gewaehlt, betrag, proJahr, empfohlen, platzhalter, fehler, onWaehlen, zeigeZeilen, versicherer, platzHalten, mitZuschlag = null, zaehne = null,
 }) {
   const { kopf, zeilen } = kernZeilen(tarif, versicherer);
   // Zeilen nur, wenn alle Stufen welche haben (gleich große Karten); sonst unter „Alle Leistungen“.
@@ -184,6 +187,9 @@ function Stufenkarte({
                 <>
                   <span className="block whitespace-nowrap font-display text-[1.75rem] font-extrabold leading-none tracking-[-0.02em] text-home-midnight">{euro(betrag)}</span>
                   <span className="mt-1 block text-base text-home-slate">{proJahr ? 'im Jahr' : 'im Monat'}</span>
+                  {Number.isFinite(mitZuschlag) && !proJahr && (
+                    <span className={cx('mt-1 block text-base font-semibold leading-6 text-home-midnight', TRENNUNG)} data-stufe-mit-zuschlag={tarif.id}>{zuschlagZaehneText(zaehne, mitZuschlag)}</span>
+                  )}
                 </>
               )
               : <span className="block text-base leading-6 text-home-slate">{platzhalter}</span>}
@@ -228,7 +234,7 @@ function Stufenkarte({
 }
 
 export default function SchrittTarif({
-  definition, daten, set, fehler, ueberschriftRef, heute, beginnWahl, preise, grenze, vorbelegtJahr, dienst, empfohlen, angeboten = null,
+  definition, daten, set, fehler, ueberschriftRef, heute, beginnWahl, preise, grenze, vorbelegtJahr, dienst, empfohlen, angeboten = null, mitZaehnen = null,
 }) {
   const plzRegel = definition.beitrag?.plz;
   const proJahr = definition.zahlweiseImTarif && daten.zahlweise === 'jaehrlich';
@@ -371,6 +377,8 @@ export default function SchrittTarif({
                 zeigeZeilen={stufen.every((eintrag) => kernZeilen(eintrag, definition.versicherer.id).zeilen.length > 0)}
                 versicherer={definition.versicherer.id}
                 platzHalten={stufen.some((eintrag) => eintrag.details || kernZeilen(eintrag, definition.versicherer.id).zeilen.length > ZEILEN_SICHTBAR)}
+                mitZuschlag={mitZaehnen?.preise?.[tarif.id] ?? null}
+                zaehne={mitZaehnen?.anzahl ?? null}
               />
             </div>
           ))}
