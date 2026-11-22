@@ -185,7 +185,11 @@ const ambulant = {
   beginn: {
     art: 'monatsErster', abMonat: 1, bisMonat: 1 + BEGINN_MONATE_NACH_NAECHSTMOEGLICH, laufenderMonatBisTag: 15, dezemberGanzerMonat: BEGINN_DEZEMBER_GANZER_MONAT,
   },
-  alter: { min: 18, stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG },
+  // Höchstalter (Ambulant-Prüfung 22.11.2026): Die Beitragstabelle ist bis Eintrittsalter 101 geprüft (Jahr des Beginns minus
+  // Geburtsjahr, wie der Beitrag). Ab 102 nicht online, sondern Termin, wie unter 18.
+  alter: {
+    min: 18, max: 101, maxZaehlung: 'kalenderjahr', stichtag: 'heute', hinweisZuJung: HINWEIS_MINDERJAEHRIG, hinweisZuAlt: 'Ab 102 Jahren nehmen wir den Antrag gemeinsam mit dir auf.',
+  },
 
   beitrag: {
     alter: 'kalenderjahr',

@@ -143,6 +143,13 @@ test('Beginn, Altersgrenze und Tabelle mit Preisregion', () => {
   assert.deepEqual(beginnOptionenAus(ambulant.beginn, HEUTE), beginnOptionen(HEUTE), 'gleiche Monatsersten wie die Prüfseite');
   assert.equal(altersgrenze(ambulant, { tag: 1, monat: 1, jahr: 2010 }, { heute: HEUTE }).art, 'zuJung');
   assert.equal(altersgrenze(ambulant, { tag: 12, monat: 11, jahr: 2008 }, { heute: HEUTE }), null, 'heute 18 geworden');
+  // Höchstalter (22.11.2026): Eintrittsalter bis 101 online, ab 102 gemeinsam (Termin), gezählt wie der Beitrag (Jahr des Beginns minus Geburtsjahr).
+  const beginnJahr = beginnOptionenAus(ambulant.beginn, HEUTE).naechstmoeglich;
+  assert.equal(altersgrenze(ambulant, { tag: 31, monat: 12, jahr: beginnJahr.jahr - 101 }, { heute: HEUTE, beginn: beginnJahr }), null, 'Eintrittsalter 101: online');
+  const alt = altersgrenze(ambulant, { tag: 31, monat: 12, jahr: beginnJahr.jahr - 102 }, { heute: HEUTE, beginn: beginnJahr });
+  assert.equal(alt?.art, 'zuAlt', 'Eintrittsalter 102: Termin');
+  assert.equal(alt.text, 'Ab 102 Jahren nehmen wir den Antrag gemeinsam mit dir auf.');
+  assert.equal(altersgrenze(ambulant, { tag: 1, monat: 1, jahr: 1910 }, { heute: HEUTE, beginn: beginnJahr })?.art, 'zuAlt', '116 Jahre: Termin');
 
   // Erfundene Testtabelle, nur für die Rechenregel (keine echten Preise).
   const test = {
