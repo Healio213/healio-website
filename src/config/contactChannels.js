@@ -52,10 +52,13 @@ export const HEALIO_ANTRAG_GESPRAECH_API = import.meta.env?.VITE_ANTRAG_GESPRAEC
 // genau diese ein.
 export const ANTRAG_SPARTEN = Object.freeze(['ambulant', 'zahn', 'stationaer']);
 // 19.11.2026 (Franks Ja): Stationär (SDK) an. 21.11.2026 (Franks Ja „Ambulant an“): Ambulant (SDK) dazu.
+// 22.11.2026 (Franks Vorgabe „wenn dieses Ergebnis dann geklappt hat für den ambulanten Bereich, machst du es für den
+// Zahnbereich“): Zahn dazu, mit der gemeinsamen Maske (Weiche zwischen Bayerischer und UKV) und der UKV.
 // Mit Maske und Wahl an und ohne Telefonweg führt jeder Abschlussknopf für SDK stationär und SDK ambulant
-// direkt in die Maske (LeadCaptureProvider.jsx, direkteMaske). Zahn bleibt aus.
-const ANTRAGSMASKE_FREIGABE = { ambulant: true, zahn: false, stationaer: true };
-const ANTRAGSWAHL_FREIGABE = { ambulant: true, zahn: false, stationaer: true };
+// direkt in die Maske der Sparte, jeder Zahn-Abschlussknopf (Bayerische oder UKV) in den Einstieg der
+// gemeinsamen Maske /antrag/zahn (LeadCaptureProvider.jsx, direkteMaske).
+const ANTRAGSMASKE_FREIGABE = { ambulant: true, zahn: true, stationaer: true };
+const ANTRAGSWAHL_FREIGABE = { ambulant: true, zahn: true, stationaer: true };
 const ANTRAG_TELEFON_FREIGABE = { ambulant: false, zahn: false, stationaer: false };
 
 // freigabe: { sparte: boolean }; lokal: Wert der VITE_-Variable oder undefined. Nur bekannte Sparten zählen.
@@ -81,8 +84,10 @@ export const antragTelefonAktiv = (sparte) => HEALIO_ANTRAG_GESPRAECH_AKTIV && H
 export const HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV = ANTRAG_SPARTEN.some((sparte) => antragsmaskeAktiv(sparte) || antragswahlAktiv(sparte));
 
 // Zweites Zahn-Produkt UKV ZahnPRIVAT 75/90/100 in der eigenen Maske (/antrag/zahn-ukv, 12.11.2026), Standard aus.
-// Erst einschalten, wenn die Makler-Erklärungen der UKV-Strecke mit Fonds Finanz/UKV geklärt sind.
 // Wirkt nur, wenn auch die Sparte zahn (ANTRAGSMASKE_FREIGABE.zahn) an ist.
-const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;
+// 22.11.2026 an (Frank: „Nein, die Oberfläche bleibt nicht gesperrt. Du machst das.“). Die Direktanbindung klärt
+// Frank selbst; das endgültige Absenden sperrt weiter der Dienst (UKV-Riegel, ANTRAG_ABSENDEN_FREIGABE).
+const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = true;
 const ANTRAGSMASKE_UKV_ZAHN_LOKAL = ANTRAG_ENTWICKLUNG ? import.meta.env?.VITE_ANTRAGSMASKE_UKV_ZAHN : undefined;
-export const HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV = ANTRAGSMASKE_UKV_ZAHN_LOKAL === '1' || ANTRAGSMASKE_UKV_ZAHN_FREIGABE;
+// Nur im Entwicklungsmodus: VITE_ANTRAGSMASKE_UKV_ZAHN=0 schaltet die UKV aus (Prüfung „UKV aus“), =1 ein; im Build gilt die Freigabe.
+export const HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV = ANTRAGSMASKE_UKV_ZAHN_LOKAL === '0' ? false : (ANTRAGSMASKE_UKV_ZAHN_LOKAL === '1' || ANTRAGSMASKE_UKV_ZAHN_FREIGABE);

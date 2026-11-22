@@ -18,6 +18,10 @@ const guidedRoutes = [
 // Frank 01.11.2026: Nur die Startseite behält den Termin im Kopf; Produktseiten führen zum Onlineabschluss.
 const guidedHeaderRoutes = guidedRoutes.filter(([, product]) => product === 'any');
 const selfServiceHeaderTargets = { ambulant: 'tarifwahl', zahn: 'zahn-check', stationaer: 'tarife' };
+// 22.11.2026 (Zahn an): Auf deutschen Seiten führt jeder Zahn-Link direkt in die gemeinsame Maske /antrag/zahn, das
+// E-Mail-Fenster kommt dort nicht mehr. Die Prüfungen des Fensters über den Provider laufen darum mit einem Link ohne
+// eigene Maske (DKV auf /stationaer).
+const ohneMaske = { path: '/stationaer', url: 'https://www.beitragsrechner.dkv.com/tarifrechner/600085/UZ1?leitmerk=MAK226487' };
 const rootDirectory = fileURLToPath(new URL('..', import.meta.url));
 const buildBundle = (guidedPreview = false) => buildSync({
   stdin: {
@@ -237,6 +241,12 @@ test('DE/EN-Header führt auf Produktseiten zum Onlineabschluss statt zum Termin
           assert.equal(ziel.hostname, 'insurances-online.levelnine.biz', `${path}/${placement}: SDK-Link`);
           assert.equal(ziel.searchParams.get('tarifftypes'), 'Stationär');
           assert.equal(ziel.searchParams.get('tariffs'), 'SDKSP2@', `${path}/${placement}: Vorwahl SP2`);
+        } else if (path === '/zahn') {
+          // 22.11.2026 (Zahn an): ein Zahn-Link ohne Tarif; LeadCaptureProvider macht daraus den Einstieg von /antrag/zahn.
+          const ziel = new URL(link.getAttribute('href'));
+          assert.equal(ziel.hostname, 'insurances-online.levelnine.biz', `${path}/${placement}: Zahn-Link`);
+          assert.equal(ziel.searchParams.get('tarifftypes'), 'Zahn');
+          assert.equal(ziel.searchParams.get('tariffs'), '', `${path}/${placement}: kein Tarif vorgewählt`);
         } else if (path === '/ambulant') {
           // 21.11.2026 (Franks Ja „Ambulant an“): ebenso für Ambulant, mit der gewählten Stufe (ohne Wahl 100 = AP1).
           const ziel = new URL(link.getAttribute('href'));
@@ -557,7 +567,7 @@ test('Popupblockade zeigt nach erfolgreicher Erfassung einen sicheren manuellen 
 });
 
 test('Provider fängt erste Links ab und öffnet nach Erfassung weitere ohne Formular oder POST', async () => {
-  const h = await harness('provider');
+  const h = await harness('provider', ohneMaske);
   try {
     assert.equal(document.querySelector('[role="dialog"]'), null);
     await h.click('#first-link');
@@ -566,14 +576,14 @@ test('Provider fängt erste Links ab und öffnet nach Erfassung weitere ohne For
     assert.equal(document.querySelector('[role="dialog"]'), null);
     await h.click('#next-link');
     assert.equal(h.requests.length, 1); assert.equal(h.tabs.length, 2);
-    assert.equal(h.tabs[1].destination, targetUrl);
+    assert.equal(h.tabs[1].destination, ohneMaske.url);
     assert.equal(document.querySelector('[role="dialog"]'), null);
     assert.equal(h.callbacks.opened, 2);
   } finally { await h.cleanup(); }
 });
 
 test('gesperrtes sessionStorage behält nur einen neutralen Sitzungsstatus im Arbeitsspeicher', async () => {
-  const h = await harness('provider');
+  const h = await harness('provider', ohneMaske);
   try {
     Object.defineProperty(window, 'sessionStorage', { configurable: true, get() { throw new Error('synthetic blocked storage'); } });
     await h.click('#first-link'); await h.fill(); await h.submit(); await h.respond(0);
@@ -586,7 +596,7 @@ test('gesperrtes sessionStorage behält nur einen neutralen Sitzungsstatus im Ar
 });
 
 test('erneute Popupblockade nach Erfassung verlangt keine zweite Eingabe oder Lieferung', async () => {
-  const h = await harness('provider', { popupBlocked: true });
+  const h = await harness('provider', { ...ohneMaske, popupBlocked: true });
   try {
     await h.click('#first-link'); await h.fill(); await h.submit(); await h.respond(0);
     let manual = document.querySelector('[role="dialog"] a[target="_blank"]');
@@ -596,7 +606,7 @@ test('erneute Popupblockade nach Erfassung verlangt keine zweite Eingabe oder Li
     await h.click('#next-link');
     assert.equal(document.querySelector('form'), null);
     manual = document.querySelector('[role="dialog"] a[target="_blank"]');
-    assert.equal(manual.href, targetUrl);
+    assert.equal(manual.href, ohneMaske.url);
     assert.equal(h.requests.length, 1);
   } finally { await h.cleanup(); }
 });
@@ -666,7 +676,7 @@ test('Provider sperrt weder KassenBoost-Vergleiche noch nicht beauftragte Routen
 });
 
 test('Radix setzt Anfangsfokus, Fokusfalle und Scrollsperre; X stellt Ausgangsfokus wieder her', async () => {
-  const h = await harness('provider');
+  const h = await harness('provider', ohneMaske);
   try {
     await h.click('#first-link');
     assert.equal(document.activeElement.name, 'firstName');
@@ -689,7 +699,7 @@ test('Radix setzt Anfangsfokus, Fokusfalle und Scrollsperre; X stellt Ausgangsfo
 
 test('Escape und Overlay schließen das Formular ohne Datentransfer', async () => {
   for (const dismissal of ['escape', 'overlay']) {
-    const h = await harness('provider');
+    const h = await harness('provider', ohneMaske);
     try {
       await h.click('#first-link');
       await h.act(() => new Promise((resolve) => nativeSetTimeout(resolve, 1)));
@@ -722,9 +732,10 @@ test('Schließen während POST bricht ab und schließt den leeren reservierten T
 
 test('Zahndialog erklärt auf DE/EN den Rechnerwechsel und verspricht ausschließlich den vorhandenen Bonusleitfaden', async () => {
   for (const path of ['/zahn', '/en/dental']) {
-    const h = await harness('provider', { path });
+    // Deutsch: Das Fenster gilt nur noch bei ausgeschalteter Zahn-Maske; es wird darum direkt geöffnet (22.11.2026).
+    const h = await harness(path === '/zahn' ? 'modal' : 'provider', { path });
     try {
-      await h.click('#first-link');
+      if (path !== '/zahn') await h.click('#first-link');
       const dialog = document.querySelector('[role="dialog"]');
       const english = path.startsWith('/en');
       assert.match(dialog.querySelector('h2').textContent, english ? /dental calculator/ : /Zahnrechner/);

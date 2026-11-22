@@ -16,11 +16,13 @@ import {
 import { Button } from '@/components/ui/button';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import LeadCaptureLink from '@/components/LeadCaptureLink';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
+import { useLocation } from 'react-router-dom';
 import { useLanguage } from '@/hooks/useLanguage';
 import { BAYERISCHE_URL, UKV_URL, UKV_ZAHN_100_URL, UKV_ZAHN_75_URL } from './dentalLinks';
 import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 import { zaehle } from '@/lib/anonyme-zaehler';
-import { getDentalContent } from './dentalContent';
+import { ZAHN_DIREKT_CHECK, getDentalContent } from './dentalContent';
 import { ZAHN_CHECK_CARD_ID } from './zahnCheckScroll';
 
 const QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
@@ -106,6 +108,10 @@ const DentalZahnCheck = () => {
   const { lang, getPath } = useLanguage();
   const content = useMemo(() => getDentalContent(lang).check, [lang]);
   const reduceMotion = useReducedMotion();
+  // 22.11.2026 (Zahn an): Mit eingeschalteter gemeinsamer Maske führt der Knopf im Ergebnis direkt in den
+  // Einstieg von /antrag/zahn (selber Tab, Gesellschaft wählt die Weiche). Dann gelten die Sätze aus ZAHN_DIREKT_CHECK.
+  const { pathname } = useLocation();
+  const direkt = Boolean(direkteMaske(UKV_URL, pathname));
 
   // Privacy invariant: Antworten bleiben ausschließlich im lokalen React-State.
   // Der Check speichert und versendet weder Antworten noch Ergebnisdaten.
@@ -400,8 +406,8 @@ const DentalZahnCheck = () => {
 
                   {result.ctaType === 'ukv' && (
                     <p id="zahn-calculator-handoff" className="mt-5 rounded-2xl border border-[#c8deeb] bg-[#eff7fc] px-4 py-3 text-base leading-6 text-[#324d60] md:leading-7">
-                      <strong className="font-display font-extrabold text-home-midnight">{content.calculatorHintLabel}</strong>{' '}
-                      {result.calculatorHint}
+                      <strong className="font-display font-extrabold text-home-midnight">{direkt ? ZAHN_DIREKT_CHECK.calculatorHintLabel : content.calculatorHintLabel}</strong>{' '}
+                      {(direkt && ZAHN_DIREKT_CHECK.calculatorHints[resultKey]) || result.calculatorHint}
                     </p>
                   )}
 
@@ -421,17 +427,17 @@ const DentalZahnCheck = () => {
                       </Button>
                     ) : (
                       <Button asChild className="h-auto min-h-14 max-w-full whitespace-normal rounded-full bg-[#25c990] px-6 py-3 text-center font-display text-base font-extrabold text-[#07111f] shadow-[0_14px_34px_rgba(37,201,144,0.25)] hover:bg-[#5ee0b1]">
-                        <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" target="_blank" rel="noopener noreferrer" aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
+                        <LeadCaptureLink href={CTA_HREF_BY_RESULT[resultKey] || CTA_HREFS[result.ctaType]} trackingCategory="zahn-antrag" {...(direkt ? {} : { target: '_blank', rel: 'noopener noreferrer' })} aria-describedby={result.ctaType === 'ukv' ? 'zahn-calculator-handoff' : undefined} onClick={() => countAntragOpened(result.ctaType)}>
                           {lang === 'en'
                             ? (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV: calculate & apply online' : 'ZAHN Sofort: calculate & apply online'))
                             : (result.ctaLabel || (result.ctaType === 'ukv' ? 'UKV berechnen & abschließen' : 'ZAHN Sofort berechnen & abschließen'))}
-                          <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />
+                          {direkt ? <ArrowRight className="ml-2 h-5 w-5 shrink-0" aria-hidden="true" /> : <ExternalLink className="ml-2 h-4 w-4 shrink-0" aria-hidden="true" />}
                         </LeadCaptureLink>
                       </Button>
                     )}
                     {/* Befund 5 (12.11.2026): Termin nur einmal je Seite, klein im Schlusskasten. Nur die Ergebnisse ohne Online-Abschluss (contact) behalten ihren Termin-Knopf. */}
                   </div>
-                  <p className="mt-3 text-base leading-6 text-slate-600 md:leading-7">{result.note}</p>
+                  <p className="mt-3 text-base leading-6 text-slate-600 md:leading-7">{direkt ? (ZAHN_DIREKT_CHECK.notes[resultKey] || (result.ctaType === 'ukv' ? ZAHN_DIREKT_CHECK.ukvNote : result.note)) : result.note}</p>
                   <button
                     type="button"
                     onClick={restart}

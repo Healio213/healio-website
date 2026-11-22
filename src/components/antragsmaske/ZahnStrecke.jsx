@@ -34,8 +34,8 @@ import { TERMIN_LINK, telefonLink } from './teile';
 // Einwilligung vor den Zahnfragen, Weiche mit Gesellschaft, Tarifen und
 // Beitrag für den Beginn, den die Maske vorbelegt, danach die Maske der
 // gewählten Gesellschaft mit leeren Originalfragen. Regeln und Texte:
-// src/data/antrag/zahnWeiche.js. Kommt der Kunde über die Wahl der zwei Wege
-// von /zahn (Tarif aus dem Link), geht es wie bisher direkt in die Maske.
+// src/data/antrag/zahnWeiche.js. Nur mit einem Tarif aus dem Link (heute keiner)
+// geht es direkt in die Maske; jeder Abschlussknopf beginnt mit dem Einstieg.
 // Die Vorfragen bleiben im Arbeitsspeicher dieser Seite. An den Antragsdienst
 // geht für den Preis der Bayerischen nur Geburtsdatum, PLZ und Beginn, ohne
 // Baustein (1.6); den Baustein rechnet die Seite mit derselben Funktion wie
@@ -229,7 +229,9 @@ const bayerischeStufen = (alle, mitSofort) => (alle
 export default function ZahnStrecke({ definition }) {
   const heute = useMemo(() => new Date(), []);
   const [vorbelegung] = useState(() => holeVorbelegung(definition.pfad));
-  const ueberWahl = 'tarif' in vorbelegung;
+  // 22.11.2026 (Zahn an): Nur ein Tarif aus dem Link überspringt die Weiche. Die Abschlussknöpfe der Seiten
+  // geben keinen mit (direkteMaske), sie führen immer in den Einstieg; Herkunft und Werbercode laufen trotzdem mit.
+  const ueberWahl = Boolean(vorbelegung.tarif);
   const [v, setV] = useState({});
   const [phase, setPhase] = useState(ueberWahl ? 'maske' : 'fragen');
   const [geburtText, setGeburtText] = useState('');

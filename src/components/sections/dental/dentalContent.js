@@ -754,3 +754,24 @@ const en = {
 };
 
 export const getDentalContent = (lang) => (lang === 'en' ? en : de);
+
+// 22.11.2026 (Zahn an): Ist die gemeinsame Zahn-Maske eingeschaltet, führt der Knopf im Ergebnis des
+// Zahn-Checks nicht mehr zur Strecke der UKV oder der Bayerischen in einem neuen Tab, sondern direkt in
+// den Einstieg unseres Online-Antrags /antrag/zahn (LeadCaptureProvider, direkteMaske). Die Sätze hier
+// ersetzen dann nur die, die sonst nicht mehr stimmen (DentalZahnCheck.jsx, ZahnPage.jsx). Nur deutsch;
+// ohne Schalter bleibt alles wie oben.
+export const ZAHN_DIREKT_CHECK = Object.freeze({
+  calculatorHintLabel: 'Wichtig für deinen Antrag:',
+  ukvNote: 'Du kommst direkt in unseren Online-Antrag. Nach ein paar kurzen Fragen siehst du, wo du mit deinen Angaben online abschließen kannst und was es kostet. Über die Annahme entscheidet die Gesellschaft nach deinem Antrag.',
+  calculatorHints: Object.freeze({
+    ukvLeistung: `Im Antrag wählst du deine Stufe selbst. ZahnPRIVAT 100 mit ${ZAHN_BEISPIELPREIS.age} Jahren: ${ZAHN_BEISPIELPREIS.euroPerMonth.toFixed(2).replace('.', ',')} EUR im Monat.`,
+    ukvPreis: 'Im Antrag wählst du deine Stufe selbst. ZahnPRIVAT 75 ist der günstigere Einstieg. Deinen Beitrag siehst du dort.',
+  }),
+  notes: Object.freeze({
+    bayerischeOhneSofort: 'Die Stufe wählst du im Antrag selbst. Beantworte alle Fragen vollständig. Annahme und Beitrag werden erst dort verbindlich geprüft.',
+  }),
+});
+export const ZAHN_DIREKT_FAQ = Object.freeze({
+  q: 'Wie läuft der Abschluss nach dem Zahn-Check ab?',
+  a: 'Mit einem Klick kommst du direkt in unseren Online-Antrag, ohne Zwischenschritt und ohne neuen Tab. Die Antworten aus dem Check nehmen wir nicht mit. Dort stellen wir dir deshalb ein paar kurze Fragen neu. Danach siehst du, bei welcher Gesellschaft du mit deinen Angaben online abschließen kannst, mit Tarifen und Beitrag. Die Stufe wählst du selbst. Dann beantwortest du die Fragen der Gesellschaft und prüfst alles in einer Zusammenfassung, bevor du den Antrag abschickst. Über Annahme und Leistung entscheidet die Gesellschaft nach deinem Antrag.',
+});

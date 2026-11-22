@@ -66,7 +66,8 @@ export const ANLAESSE = [
     slug: 'behandlung-steht-an',
     path: '/zahn/behandlung-steht-an',
     label: 'Behandlung steht an',
-    kurz: 'Heil- und Kostenplan nachrechnen und den Sofortschutz so abschließen, dass der Versicherungsbeginn vor der Rechnung liegt.',
+    // 22.11.2026 (Zahn an): ohne „abschließen“, denn die Karte führt zur Anlassseite, nicht direkt in den Antrag.
+    kurz: 'Heil- und Kostenplan nachrechnen und den Sofortschutz rechtzeitig beantragen, damit der Versicherungsbeginn vor der Rechnung liegt.',
     linkLabel: 'Plan nachrechnen',
     motiv: 'dental',
   },

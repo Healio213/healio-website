@@ -147,7 +147,11 @@ export function dankePunkte(definition, email, mitAntrag = true) {
     'Dein Antrag ist bei Healio eingegangen. Du bekommst gleich eine Eingangsbestätigung von Healio per E-Mail.',
     // Nachbesserung 20.11.2026: „als Nächstes“ statt „jetzt“, Healio reicht nach einer Prüfung von Hand ein.
     `Healio reicht deinen Antrag als Nächstes in deinem Namen bei ${beiDer} ein.`,
-    `Die Antragsbestätigung ${beiDer} kommt per E-Mail${email ? ` an ${email}` : ''}.`,
+    // 22.11.2026 (Zahn an): Dass die UKV eine Antragsbestätigung per E-Mail schickt, ist nicht belegt (Plan Teil 2.9 Nr. 13,
+    // die Eingangsmail sagt es darum auch nicht). Bei der UKV steht hier derselbe Satz wie in der Eingangsmail.
+    definition.versicherer.id === 'ukv'
+      ? `Nimmt die ${definition.versicherer.kurz} deinen Antrag an, schickt sie dir die Police direkt.`
+      : `Die Antragsbestätigung ${beiDer} kommt per E-Mail${email ? ` an ${email}` : ''}.`,
     mitAntrag ? 'In unserer Eingangsbestätigung steht ein geschützter Link zu deinem Antrag und allen Unterlagen.' : 'In unserer Eingangsbestätigung steht ein geschützter Link zu allen Unterlagen.',
     definition.absenden?.vorbehalt,
   ].filter(Boolean);
@@ -195,7 +199,7 @@ function Danke({ definition, ergebnis, titelRef }) {
   const schritte = [
     { icon: Send, titel: 'Wir reichen ein', texte: punkte.slice(0, 2) },
     // Ebene 1, B9: eingegangen heißt nicht angenommen (absenden.nachEingang).
-    { icon: ShieldCheck, titel: definition.absenden?.nachEingang ? `Die ${definition.versicherer.kurz} entscheidet` : `Die ${definition.versicherer.kurz} bestätigt`, texte: [punkte[2], definition.absenden?.nachEingang] },
+    { icon: ShieldCheck, titel: definition.absenden?.nachEingang || definition.versicherer.id === 'ukv' ? `Die ${definition.versicherer.kurz} entscheidet` : `Die ${definition.versicherer.kurz} bestätigt`, texte: [punkte[2], definition.absenden?.nachEingang] },
     { icon: Inbox, titel: 'Unterlagen per E-Mail', texte: [punkte[3], 'Der Link gilt, solange wir deinen Antrag speichern.'] },
   ];
   return (
@@ -618,8 +622,9 @@ export default function Antragsmaske({ definition, pruefen = null, vorab = null 
       // Abgeschickt zählen (21.11.2026): nur der anonyme Zähler ohne Cookies und ohne Zustimmung,
       // wie beim Klick in den Antrag (LeadCaptureProvider) Ereignis antragsweg mit <sparte>-allein,
       // aber mit der Antragsseite als Pfad. Kein Tarif, keine Antwort, keine Person.
-      // Die Prüfseite (Telefonantrag) zählt nicht.
-      if (!pruefen) zaehle('antragsweg', { vonPfad: `/antrag/${definition.pfad || definition.sparte}`, ziel: `${definition.sparte}-allein` });
+      // Die Prüfseite (Telefonantrag) zählt nicht. Über die Zahn-Weiche zählt immer /antrag/zahn (22.11.2026),
+      // damit der Zähler nicht verrät, welche Gesellschaft die Antworten zu den Zähnen ergeben haben.
+      if (!pruefen) zaehle('antragsweg', { vonPfad: vorab?.weiche ? '/antrag/zahn' : `/antrag/${definition.pfad || definition.sparte}`, ziel: `${definition.sparte}-allein` });
       // Nach dem Absenden bleibt nichts im Speicher der Seite.
       setDaten(startDaten(definition, {}));
     } catch (fehler) {

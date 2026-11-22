@@ -4,6 +4,8 @@
 // davon heruntergeladen ist. Leere oder zu kurze Liste und ein fehlgeschlagener
 // Abruf (liste = null) sperren „Weiter“.
 export const UNTERLAGEN_HINWEIS = 'Die Unterlagen lassen sich gerade nicht laden. Versuch es gleich noch einmal oder mach den Antrag zusammen mit uns am Telefon.';
+// 22.11.2026: Ohne Telefonweg der Sparte (heute überall) steht dort der Termin, wie beim Knopf darunter.
+export const UNTERLAGEN_HINWEIS_TERMIN = 'Die Unterlagen lassen sich gerade nicht laden. Versuch es gleich noch einmal oder vereinbare einen Termin mit uns.';
 
 export const unterlagenSchluessel = (unterlage) => `dienst:${unterlage.id ?? unterlage.name}`;
 

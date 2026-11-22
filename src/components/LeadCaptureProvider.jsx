@@ -23,10 +23,15 @@ export const LeadCaptureContext = createContext(null);
 // jeder Abschlussknopf dieser Sparte auf deutschen Seiten gleich nach
 // /antrag/<sparte>, mit Tarif und Herkunft wie bei „Allein abschließen“ in der
 // Wahl (WegeWahl.jsx). Englische Seiten bleiben wie heute (die Maske ist deutsch).
+// Zahn (22.11.2026, Franks Vorgabe 19.11.: eine Maske, die Gesellschaft wählt die Weiche):
+// Jeder Zahn-Link, ob Bayerische oder UKV, führt in den Einstieg der gemeinsamen Maske
+// /antrag/zahn, ohne Tarif und ohne vorab gewählte Gesellschaft (die Definition mit dem
+// Pfad zahn ist nur die Adresse; welche Gesellschaft es wird, entscheidet ZahnStrecke).
 export function direkteMaske(targetUrl, pathname) {
-  const link = antragAusLink(targetUrl);
-  if (!link || !antragswahlAktiv(link.sparte) || !antragsmaskeAktiv(link.sparte) || antragTelefonAktiv(link.sparte)) return null;
+  const roh = antragAusLink(targetUrl);
+  if (!roh || !antragswahlAktiv(roh.sparte) || !antragsmaskeAktiv(roh.sparte) || antragTelefonAktiv(roh.sparte)) return null;
   if (/^\/en(\/|$)/.test(String(pathname || ''))) return null;
+  const link = roh.sparte === 'zahn' ? { sparte: 'zahn', versicherer: 'bayerische', tarif: null } : roh;
   const eigene = eigeneMaskeFuer(link, {});
   return eigene ? { link, eigene } : null;
 }

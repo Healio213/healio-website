@@ -605,12 +605,17 @@ try {
       return true;
     }, host);
     check(geklickt, `Zahn-Check zeigt den Antragslink zu ${versicherer}.`);
+    // 22.11.2026 (Zahn an): Der Knopf führt direkt in den Einstieg der gemeinsamen Maske /antrag/zahn (kein neuer Tab).
+    // Gezählt wird wie bisher versicherer_klick und dazu der Weg in die Maske (antragsweg zahn-allein), je ohne Antworten.
+    for (let i = 0; i < 40 && !new URL(page.url()).pathname.startsWith('/antrag/zahn'); i += 1) await warte(200);
     await warte(600);
     const vk = log.zaehler.filter((z) => z.body.ereignis === 'versicherer_klick').map((z) => z.body);
     check(vk.length === 1 && JSON.stringify(vk[0]) === JSON.stringify({ ereignis: 'versicherer_klick', von_pfad: '/zahn', ziel: versicherer }), `Zahn-Check zählt anonym: ${JSON.stringify(vk)}`);
-    check(log.zaehler.length === 1, `Antworten im Zahn-Check lösen keine Zählung aus (${log.zaehler.length}).`);
+    const aw = log.zaehler.filter((z) => z.body.ereignis === 'antragsweg').map((z) => z.body);
+    check(aw.length === 1 && aw[0].von_pfad === '/zahn' && aw[0].ziel === 'zahn-allein', `Weg in die Maske zählt anonym: ${JSON.stringify(aw)}`);
+    check(log.zaehler.length === 2, `Antworten im Zahn-Check lösen keine Zählung aus (${log.zaehler.length}).`);
     check(log.ga.length === 0 && !log.fremd.some((entry) => /facebook|google/.test(entry)), 'Zahn-Check ohne Einwilligung: nichts an Google oder Meta.');
-    check((await page.evaluate(() => window.__geoeffnet.length)) === 1, 'Der Antrag wird weiter geöffnet (Attrappe).');
+    check(new URL(page.url()).pathname === '/antrag/zahn', `Der Knopf öffnet den Einstieg der gemeinsamen Maske (${page.url()}).`);
     check(log.fehler.length === 0, `Keine Seitenfehler: ${log.fehler.join(' | ')}`);
     await page.close();
   }

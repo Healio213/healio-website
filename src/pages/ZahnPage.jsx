@@ -20,7 +20,9 @@ import DentalVideoSection from '@/components/sections/dental/DentalVideoSection'
 import DentalHighlightCards from '@/components/sections/dental/DentalHighlightCards';
 import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
 import NitaQuickPill from '@/components/sections/shared/NitaQuickPill';
-import { getDentalContent } from '@/components/sections/dental/dentalContent';
+import { ZAHN_DIREKT_FAQ, getDentalContent } from '@/components/sections/dental/dentalContent';
+import { UKV_URL } from '@/components/sections/dental/dentalLinks';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { scrollToZahnCheck } from '@/components/sections/dental/zahnCheckScroll';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
@@ -101,7 +103,14 @@ const ZahnPage = () => {
   const { lang, getPath } = useLanguage();
   const { t: tSeo } = useTranslation('seo');
   const { t: tZahn } = useTranslation('zahn');
-  const content = useMemo(() => getDentalContent(lang), [lang]);
+  // 22.11.2026 (Zahn an): Mit der gemeinsamen Maske beschreibt die FAQ den Weg direkt in unseren Antrag
+  // statt E-Mail-Zwischenschritt und neuem Tab (ZAHN_DIREKT_FAQ). Ohne Schalter und auf Englisch wie bisher.
+  const zahnDirekt = lang !== 'en' && Boolean(direkteMaske(UKV_URL, '/zahn'));
+  const content = useMemo(() => {
+    const basis = getDentalContent(lang);
+    if (!zahnDirekt) return basis;
+    return { ...basis, faq: { ...basis.faq, items: basis.faq.items.map((item) => (item.q === ZAHN_DIREKT_FAQ.q ? ZAHN_DIREKT_FAQ : item)) } };
+  }, [lang, zahnDirekt]);
   const reduceMotion = useReducedMotion();
   const canonicalUrl = lang === 'en' ? 'https://healio.de/en/dental' : 'https://healio.de/zahn';
 

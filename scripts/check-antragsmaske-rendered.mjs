@@ -422,18 +422,21 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
     await zahnCheckBayerische(page);
     const link = page.locator('a[href*="diebayerische.de/diebayerische/online-berechnen/zahn"]').filter({ visible: true }).first();
     await link.scrollIntoViewIfNeeded();
-    // Ohne Telefonweg Zahn (19.11.2026) keine Wahl: der Knopf führt direkt in die eigene Maske, ref läuft mit.
+    // Ohne Telefonweg Zahn (19.11.2026) keine Wahl. Seit 22.11.2026 (Zahn an) führt jeder Zahn-Knopf, auch der der Bayerischen,
+    // in den Einstieg der gemeinsamen Maske: erst die Vorfragen und die Weiche, keine vorab gewählte Gesellschaft. ref läuft mit.
     await Promise.all([page.waitForURL(/\/antrag\/zahn\?/), link.click()]);
     pruefe(new URL(page.url()).searchParams.get('ref') === WERBER.ref, `Zahn: Knopf führt direkt in die eigene Maske mit ref (${page.url()})`);
+    await page.waitForSelector('[data-vorab-frage="V1"]');
+    pruefe(!/Bayerische|UKV/.test(await page.textContent('[data-zahn-vorab] > div')), 'Zahn: Einstieg ohne Gesellschaftsnamen');
     await foto(page, `${breite}-zahn-direkt-maske`);
   } else {
     await page.goto(`${AN}/antrag/zahn`, { waitUntil: 'networkidle' });
-    // Direkt aufgerufen: erst Healios Vorabfrage, dann ohne Bruch die Bayerische.
-    await zahnVorab(page, VORAB_SOFORT, { plz: '94130', ziel: 'bayerische-sofort', starten: false });
-    await page.waitForFunction(() => /63,70 EUR/.test(document.querySelector('[data-weiche-stufe="PRESTIGE"]')?.textContent || ''));
-    pruefe((await page.textContent('[data-weiche-ergebnis]')).includes('Bayerische'), 'Ergebnis nennt den Versicherer');
-    await page.click('[data-weiche-weiter]');
   }
+  // Erst Healios Vorabfrage, dann ohne Bruch die Bayerische.
+  await zahnVorab(page, VORAB_SOFORT, { plz: '94130', ziel: 'bayerische-sofort', starten: false });
+  await page.waitForFunction(() => /63,70 EUR/.test(document.querySelector('[data-weiche-stufe="PRESTIGE"]')?.textContent || ''));
+  pruefe((await page.textContent('[data-weiche-ergebnis]')).includes('Bayerische'), 'Ergebnis nennt den Versicherer');
+  await page.click('[data-weiche-weiter]');
   await bildschirm(page, 'tarif');
   await pruefeSeite(page, `${name} Tarif`);
   pruefe(await page.locator('input[name="tarif"][value="PRESTIGE"]').isChecked(), 'Prestige vorausgewählt wie im Original');
@@ -444,8 +447,7 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   await page.waitForSelector('[data-gesamtbeitrag]');
   pruefe((await page.textContent('[data-stufe-beitrag="PRESTIGE"]')).includes('33,80 EUR'), 'Prestige Land 36 Jahre 33,80 EUR');
   pruefe((await page.textContent('[data-stufe-beitrag="SMART"]')).includes('14,60 EUR'), 'Smart 14,60 EUR');
-  if (viaWahl) await page.locator('label:has(#feld-baustein-ZAHN_SOFORT)').click();
-  else pruefe(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked(), 'ZAHN Sofort aus der Vorabfrage vorgewählt');
+  pruefe(await page.locator('#feld-baustein-ZAHN_SOFORT').isChecked(), 'ZAHN Sofort aus der Vorabfrage vorgewählt');
   await page.waitForFunction(() => /63,70 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
   await page.fill('#feld-plzTarif', '20095');
   await page.waitForFunction(() => /74,00 EUR/.test(document.querySelector('[data-gesamtbeitrag]')?.textContent || ''));
@@ -462,10 +464,8 @@ async function zahnDurchlauf(browser, breite, viaWahl) {
   for (const id of ['z1', 'z2', 'z3', 'z4', 'z5']) {
     await bildschirm(page, `frage:${id}`);
     await page.waitForTimeout(650);
-    if (!viaWahl) {
-      // Paket C (C1): Die Originalfragen kommen leer, nichts aus den Vorfragen vorbelegt.
-      pruefe(await page.locator('[data-vorbelegt]').count() === 0 && await page.locator(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`).count() === 0, `${id}: leer, ohne Vorbelegung`);
-    }
+    // Paket C (C1): Die Originalfragen kommen leer, nichts aus den Vorfragen vorbelegt.
+    pruefe(await page.locator('[data-vorbelegt]').count() === 0 && await page.locator(`[data-bildschirm="frage:${id}"] [aria-pressed="true"]`).count() === 0, `${id}: leer, ohne Vorbelegung`);
     await page.click(`[data-bildschirm="frage:${id}"] [data-antwort="nein"]`);
   }
   await bildschirm(page, 'beitrag');
@@ -999,6 +999,8 @@ async function wahl(browser, breite) {
     if (sparte === 'zahn') {
       await Promise.all([page.waitForURL(/\/antrag\/zahn\?/), link.click()]);
       pruefe(new URL(page.url()).searchParams.get('letzteSeite') === '/zahn' && await page.locator('[data-wegewahl]').count() === 0, `zahn: direkt in die Maske ohne Wahl (${page.url()})`);
+      await page.waitForSelector('[data-vorab-frage="V1"]');
+      pruefe(await page.locator('[data-bildschirm="tarif"]').count() === 0, 'zahn: Einstieg der gemeinsamen Maske, keine Gesellschaft vorab (22.11.2026)');
       continue;
     }
     if (sparte === 'stationaer') {

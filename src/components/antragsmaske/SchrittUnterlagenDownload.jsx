@@ -9,7 +9,7 @@ import {
 } from '@/components/antrag/ui';
 import { antragTelefonAktiv } from '@/config/contactChannels';
 import { TERMIN_LINK, TeilKopf, telefonLink } from './teile';
-import { UNTERLAGEN_HINWEIS, unterlagenUnvollstaendig } from './unterlagenPflicht';
+import { UNTERLAGEN_HINWEIS, UNTERLAGEN_HINWEIS_TERMIN, unterlagenUnvollstaendig } from './unterlagenPflicht';
 
 // „Ihre Vertragsunterlagen“ wie in der SDK-Strecke: Jedes Dokument muss
 // heruntergeladen sein, sonst geht es nicht weiter. Die PDFs kommen über den
@@ -68,7 +68,7 @@ export default function SchrittUnterlagenDownload({
       </p>
       {(unterlagen.fehler || (unterlagen.liste && unterlagenUnvollstaendig(unterlagen.erwartet, unterlagen.liste))) && (
         <Callout tone="hinweis" data-unterlagen-hinweis="">
-          <p>{UNTERLAGEN_HINWEIS}</p>
+          <p>{antragTelefonAktiv(definition.sparte) ? UNTERLAGEN_HINWEIS : UNTERLAGEN_HINWEIS_TERMIN}</p>
           <div className="mt-3 flex flex-wrap gap-2">
             <Button variant="secondary" onClick={unterlagen.nochmal}>Noch einmal versuchen</Button>
             {antragTelefonAktiv(definition.sparte)

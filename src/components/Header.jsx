@@ -18,6 +18,8 @@ import { useAmbulantGeburtsjahr } from '@/lib/ambulant-geburtsjahr';
 import GuidedCallbackButton from '@/components/guided/GuidedCallbackButton';
 import { scrollToTarget } from '@/components/guided/SelfServiceEntryActions';
 import { GUIDED_CALLBACK_ENABLED, getGuidedProduct } from '@/lib/guided-callback';
+import { UKV_URL } from '@/components/sections/dental/dentalLinks';
+import { trackGoogleAdsAntrag } from '@/lib/google-ads';
 
 const AnimatedLeadCaptureLink = motion(LeadCaptureLink);
 
@@ -56,14 +58,16 @@ const Header = () => {
   // nicht erst die Tarifwahl. Für Stationär und (seit 21.11.2026) Ambulant auf deutschen
   // Seiten mit direkter Maske (LeadCaptureProvider, direkteMaske) zeigt er auf den
   // SDK-Rechner mit dem gewählten Tarif bzw. der gewählten Stufe; LeadCaptureLink führt
-  // dann in /antrag/stationaer bzw. /antrag/ambulant. Sonst wie bisher.
+  // dann in /antrag/stationaer bzw. /antrag/ambulant. Seit 22.11.2026 auf /zahn ebenso: ein
+  // Zahn-Link, den LeadCaptureLink in den Einstieg der gemeinsamen Maske /antrag/zahn lenkt
+  // (die Weiche wählt die Gesellschaft, der Link legt keine fest). Sonst wie bisher.
   const stationaerTarif = useStationaerSelection();
   const ambulantStufe = useAmbulantStufe();
   const selfServiceAntragUrl = guidedProduct === 'stationaer'
     ? buildSdkUrl({ ref: referrer, tarifTypes: 'Stationär', tarif: stationaerTarif })
     : guidedProduct === 'ambulant'
       ? buildSdkUrl({ ref: referrer, tarifTypes: 'Ambulant', stufe: ambulantStufe })
-      : null;
+      : guidedProduct === 'zahn' ? UKV_URL : null;
   const selfServiceDirekt = Boolean(selfServiceTarget && selfServiceAntragUrl && direkteMaske(selfServiceAntragUrl, location.pathname));
   // Nachbesserung 22.11.2026: Auf /ambulant geht wie bei der Tarifkarte das Geburtsjahr aus dem Rechner mit.
   const ambulantGeburtsjahr = useAmbulantGeburtsjahr();
@@ -74,15 +78,17 @@ const Header = () => {
       {placement === 'desktop' && <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />}
     </>
   );
+  // Messung beim Klick: Zahn wie der Abschlussknopf im Zahn-Check nur Google Ads „Antrag geöffnet“ (mit
+  // Marketing-Zustimmung); den anonymen Zähler antragsweg zahn-allein setzt der Weg in die Maske (LeadCaptureProvider).
   const selfServiceLink = (placement, className, onClick) => (selfServiceDirekt ? (
     <LeadCaptureLink
       href={selfServiceAntragUrl}
-      trackingCategory={`sdk-${guidedProduct}`}
+      trackingCategory={guidedProduct === 'zahn' ? 'zahn-antrag' : `sdk-${guidedProduct}`}
       vorbelegung={selfServiceVorbelegung}
       target="_blank"
       rel="noopener noreferrer"
       data-self-service-header={placement}
-      onClick={() => { onClick?.(); trackSdkClick(`${guidedProduct}-header-${placement}`, referrer); }}
+      onClick={() => { onClick?.(); if (guidedProduct === 'zahn') trackGoogleAdsAntrag(); else trackSdkClick(`${guidedProduct}-header-${placement}`, referrer); }}
       className={className}
     >
       {selfServiceLabel(placement)}

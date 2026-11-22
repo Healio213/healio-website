@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, BookOpen, Check, ChevronRight, ExternalLink } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import MobileSwipeRow from '@/components/ui/MobileSwipeRow';
@@ -10,6 +10,7 @@ import ZahnSofortRechner from '@/components/sections/dental/ZahnSofortRechner';
 import DentalCallbackForm from '@/components/sections/dental/DentalCallbackForm';
 import { BAYERISCHE_URL } from '@/components/sections/dental/dentalLinks';
 import { zaehle } from '@/lib/anonyme-zaehler';
+import { direkteMaske } from '@/components/LeadCaptureProvider';
 import { QUELLEN, RATGEBER_TITEL, ZAHN_ANLASS_QUELLENSTAND, ZAHN_SEITE_PFAD } from '@/content/zahnAnlaesse/gemeinsam';
 import { zahnAnlassCanonical, zahnAnlassSchema } from '@/content/zahnAnlaesse/seo';
 
@@ -26,6 +27,8 @@ import { zahnAnlassCanonical, zahnAnlassSchema } from '@/content/zahnAnlaesse/se
  * Ads. Der Klick auf die Abschlussknöpfe zur Bayerischen geht nur als
  * Ereignis „versicherer_klick“ mit dem Namen „bayerische“ an den anonymen
  * Zähler (src/lib/anonyme-zaehler.js). Am Link hängt kein Parameter.
+ * Seit 22.11.2026 (Zahn an) führen die Knöpfe direkt in /antrag/zahn; dazu zählt der
+ * Weg in die Maske anonym antragsweg zahn-allein (LeadCaptureProvider).
  */
 
 const scrollToId = (id) => {
@@ -37,6 +40,9 @@ const scrollToId = (id) => {
 const zaehleBayerische = () => { zaehle('versicherer_klick', { ziel: 'bayerische' }); };
 
 const BAYERISCHE_ATTR = { href: BAYERISCHE_URL, target: '_blank', rel: 'noopener noreferrer', onClick: zaehleBayerische };
+// 22.11.2026 (Zahn an): Mit der gemeinsamen Zahn-Maske fängt LeadCaptureProvider den Link ab und führt im selben Tab
+// in den Einstieg von /antrag/zahn (die Weiche wählt die Gesellschaft). Dann kein neuer Tab, kein Außen-Symbol.
+const BAYERISCHE_ATTR_DIREKT = { ...BAYERISCHE_ATTR, target: undefined, rel: undefined };
 
 const KNOPF_GRUEN = 'inline-flex min-h-14 max-w-full items-center justify-center gap-2 rounded-full bg-[#25c990] px-6 py-4 text-center font-display text-base font-extrabold leading-6 text-[#07141d] shadow-[0_12px_36px_rgba(37,201,144,0.18)] transition-colors hover:bg-[#5edcaf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087654] focus-visible:ring-offset-4';
 
@@ -78,7 +84,15 @@ const QuellenLinks = ({ quellen }) => (
 const ZahnAnlassPage = ({ inhalt }) => {
   const canonical = zahnAnlassCanonical(inhalt);
   const schema = useMemo(() => ({ '@context': 'https://schema.org', '@graph': zahnAnlassSchema(inhalt) }), [inhalt]);
-  const { hero, rechner, ablauf, passt, fakten, andereWege, rueckruf } = inhalt;
+  const { hero, rechner, passt, fakten, andereWege, rueckruf } = inhalt;
+  const { pathname } = useLocation();
+  const direkt = Boolean(inhalt.direkt && direkteMaske(BAYERISCHE_URL, pathname));
+  const abschlussAttr = direkt ? BAYERISCHE_ATTR_DIREKT : BAYERISCHE_ATTR;
+  const neuerTab = direkt ? '' : ' (öffnet in neuem Tab)';
+  const Aussen = direkt ? ArrowRight : ExternalLink;
+  const ablauf = direkt
+    ? { ...inhalt.ablauf, schritte: inhalt.ablauf.schritte.map((schritt) => (schritt.nr === 3 ? { ...schritt, text: inhalt.direkt.ablaufSchritt3 } : schritt)) }
+    : inhalt.ablauf;
 
   return (
     <>
@@ -134,12 +148,12 @@ const ZahnAnlassPage = ({ inhalt }) => {
                     <ArrowRight className="hidden h-5 w-5 shrink-0 sm:block" aria-hidden="true" />
                   </button>
                   <a
-                    {...BAYERISCHE_ATTR}
-                    aria-label={`${hero.knopfAbschluss} (öffnet in neuem Tab)`}
+                    {...abschlussAttr}
+                    aria-label={`${hero.knopfAbschluss}${neuerTab}`}
                     className="inline-flex min-h-14 max-w-full items-center justify-center gap-2 rounded-full border border-white/60 px-6 py-4 text-center font-display text-base font-extrabold leading-6 text-white transition-colors hover:border-[#8ee7ca] hover:text-[#8ee7ca] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#8ee7ca] focus-visible:ring-offset-4 focus-visible:ring-offset-[#06131c]"
                   >
                     {hero.knopfAbschluss}
-                    <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    <Aussen className="h-4 w-4 shrink-0" aria-hidden="true" />
                   </a>
                 </div>
                 <p className="mt-3 max-w-[36rem] text-base leading-6 text-[#bdced6]">{hero.fussnote}</p>
@@ -173,11 +187,11 @@ const ZahnAnlassPage = ({ inhalt }) => {
             texte={rechner}
             abschluss={(
               <div className="mt-8 flex flex-col items-center gap-3 text-center">
-                <a {...BAYERISCHE_ATTR} aria-label={`${rechner.abschluss.knopf} (öffnet in neuem Tab)`} className={KNOPF_GRUEN}>
+                <a {...abschlussAttr} aria-label={`${rechner.abschluss.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
                   {rechner.abschluss.knopf}
-                  <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <Aussen className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
-                <p className="max-w-md text-base leading-6 text-slate-600">{rechner.abschluss.hinweis}</p>
+                <p className="max-w-md text-base leading-6 text-slate-600">{direkt ? inhalt.direkt.abschlussHinweis : rechner.abschluss.hinweis}</p>
                 <button
                   type="button"
                   onClick={() => scrollToId('rueckruf')}
@@ -215,9 +229,9 @@ const ZahnAnlassPage = ({ inhalt }) => {
               ))}
             </MobileSwipeRow>
             <div className="mt-8 flex flex-col items-center gap-3 text-center">
-              <a {...BAYERISCHE_ATTR} aria-label={`${ablauf.knopf} (öffnet in neuem Tab)`} className={KNOPF_GRUEN}>
+              <a {...abschlussAttr} aria-label={`${ablauf.knopf}${neuerTab}`} className={KNOPF_GRUEN}>
                 {ablauf.knopf}
-                <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <Aussen className="h-4 w-4 shrink-0" aria-hidden="true" />
               </a>
               <p className="max-w-md text-sm leading-6 text-slate-500">{ablauf.kleingedruckt}</p>
             </div>

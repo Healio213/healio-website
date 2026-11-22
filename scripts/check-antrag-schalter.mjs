@@ -47,32 +47,33 @@ function fenster({ pfad = '/ambulant', suche = '', verweis = '' } = {}) {
 }
 function aufraeumen() { delete globalThis.window; delete globalThis.document; }
 
-// Seit 19.11.2026 (Franks Ja) Stationär, seit 21.11.2026 (Franks Ja „Ambulant an“) auch Ambulant mit Maske und Wahl an,
-// ohne Telefonweg; Zahn und alles andere aus.
-test('Vorgabe: genau Stationär und Ambulant an (Maske und Wahl, kein Telefonweg), auch im Build mit gesetzten VITE-Werten', async () => {
+// Seit 19.11.2026 (Franks Ja) Stationär, seit 21.11.2026 (Franks Ja „Ambulant an“) auch Ambulant, seit 22.11.2026 Zahn
+// (gemeinsame Maske mit UKV) mit Maske und Wahl an, ohne Telefonweg.
+test('Vorgabe: Stationär, Ambulant und Zahn an (Maske und Wahl, kein Telefonweg), UKV an, auch im Build mit gesetzten VITE-Werten', async () => {
   fenster();
   for (const env of [{}, { DEV: false, VITE_ANTRAGSMASKE: '1', VITE_ANTRAGSWAHL: '1', VITE_ANTRAG_TELEFON: '1' }]) {
     const m = await lade(env);
     for (const sparte of ['ambulant', 'zahn', 'stationaer']) {
-      const an = sparte === 'stationaer' || sparte === 'ambulant';
+      const an = true;
       assert.equal(m.antragsmaskeAktiv(sparte), an, `Maske ${sparte}`);
       assert.equal(m.antragswahlAktiv(sparte), an, `Wahl ${sparte}`);
       assert.equal(m.antragTelefonAktiv(sparte), false, `Telefon ${sparte}`);
     }
     assert.equal(m.HEALIO_ANTRAG_IRGENDEINE_SPARTE_AKTIV, true);
     assert.equal(m.antragsmaskeAktiv('zahn-ukv'), false, 'unbekannte Sparte bleibt aus');
+    assert.equal(m.HEALIO_ANTRAGSMASKE_UKV_ZAHN_AKTIV, true, 'UKV ZahnPRIVAT in der gemeinsamen Maske an');
     assert.equal(m.HEALIO_ANTRAG_GESPRAECH_AKTIV, true, 'Antragsgespräch ambulant (heute versteckt live) unverändert an');
   }
   aufraeumen();
 });
 
-test('Freigabe im Quelltext: genau Stationär und Ambulant bei Maske und Wahl, Zahn aus, Telefonweg überall aus', () => {
+test('Freigabe im Quelltext: Stationär, Ambulant und Zahn bei Maske und Wahl, UKV an, Telefonweg überall aus', () => {
   const text = fs.readFileSync(path.join(SRC, 'config/contactChannels.js'), 'utf8');
   for (const name of ['ANTRAGSMASKE_FREIGABE', 'ANTRAGSWAHL_FREIGABE']) {
-    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: true, zahn: false, stationaer: true \\};`), name);
+    assert.match(text, new RegExp(`const ${name} = \\{ ambulant: true, zahn: true, stationaer: true \\};`), name);
   }
   assert.match(text, /const ANTRAG_TELEFON_FREIGABE = \{ ambulant: false, zahn: false, stationaer: false \};/);
-  assert.match(text, /const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = false;/);
+  assert.match(text, /const ANTRAGSMASKE_UKV_ZAHN_FREIGABE = true;/);
   // Kein alter Gesamtschalter mehr, der alle Sparten auf einmal einschaltet.
   const alle = fs.readdirSync(SRC, { recursive: true }).filter((f) => /\.(jsx?|tsx?)$/.test(f));
   const alt = alle.filter((f) => /HEALIO_ANTRAGSMASKE_AKTIV|HEALIO_ANTRAGSWAHL_AKTIV/.test(fs.readFileSync(path.join(SRC, f), 'utf8')));
