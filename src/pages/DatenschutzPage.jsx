@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useLanguage } from '@/hooks/useLanguage';
 import SEOHead from '@/components/SEOHead';
+import { antragsmaskeAktiv } from '@/config/contactChannels';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const DatenschutzPage = () => {
@@ -186,7 +187,8 @@ const DatenschutzPage = () => {
               {/* Eigene Antragsmaske (19.11.2026, zunächst nur Klinikschutz der SDK); die Maske gibt es nur auf Deutsch. */}
               {lang !== 'en' && (
                 <>
-                  <h3 id="online-antrag" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.onlineAntragTitle')}</h3>
+                  {/* 22.11.2026: Zahn (Bayerische und UKV über die gemeinsame Maske) nur, solange die Sparte an ist. */}
+                  <h3 id="online-antrag" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t(antragsmaskeAktiv('zahn') ? 'datenschutz.onlineAntragTitleZahn' : 'datenschutz.onlineAntragTitle')}</h3>
                   <p>{t('datenschutz.onlineAntragText')}</p>
                   <p>{t('datenschutz.onlineAntragDaten')}</p>
                   <p>{t('datenschutz.onlineAntragZweck')}</p>
@@ -194,6 +196,12 @@ const DatenschutzPage = () => {
                   <p>{t('datenschutz.onlineAntragMails')}</p>
                   <p>{t('datenschutz.onlineAntragHerkunft')}</p>
                   <p>{t('datenschutz.onlineAntragRechte')}</p>
+                  {antragsmaskeAktiv('zahn') && (
+                    <>
+                      <p>{t('datenschutz.onlineAntragZahnAuswahl')}</p>
+                      <p>{t('datenschutz.onlineAntragZahnAntrag')}</p>
+                    </>
+                  )}
                 </>
               )}
               <h3 id="partnercode" className="scroll-mt-28 text-xl font-semibold mt-6 mb-3">{t('datenschutz.partnerCodeTitle')}</h3>

@@ -13,6 +13,7 @@ import {
 import SEOHead from '@/components/SEOHead';
 import FriendlyIcon from '@/components/ui/FriendlyIcon';
 import { useLanguage } from '@/hooks/useLanguage';
+import { antragsmaskeAktiv } from '@/config/contactChannels';
 import { createOrganizationSchema, createWebPageSchema } from '@/lib/createSchemaMarkup';
 
 const SITE_URL = 'https://healio.de';
@@ -302,6 +303,8 @@ const ErstinformationPage = () => {
                 <p className="font-display text-xl font-bold leading-8 text-white print:text-slate-950">{t('erstinformation.advisoryBasis.lead')}</p>
                 <p className="mt-4">{t('erstinformation.advisoryBasis.text')}</p>
                 <p className="mt-4">{t('erstinformation.advisoryBasis.restricted')}</p>
+                {/* 22.11.2026 (Zahn an, Plan Teil 2.9 Nr. 8, Entwurf bis Anwalt B2): nur deutsch und nur, solange die gemeinsame Zahn-Maske an ist. */}
+                {isGerman && antragsmaskeAktiv('zahn') && <p className="mt-4" data-erstinformation-zahn="">{t('erstinformation.advisoryBasis.zahnOnline')}</p>}
               </div>
             </SectionHeading>
 
