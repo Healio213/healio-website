@@ -336,7 +336,7 @@ const kurzcheck = quellen['src/components/campaign/KurzCheck.jsx'];
 const erfolg = kurzcheck.indexOf("zaehle('kurzcheck_abgeschickt'");
 check(erfolg > kurzcheck.indexOf('await sendToEuRoute();') && erfolg > kurzcheck.indexOf("setStatus('error');") && erfolg < kurzcheck.indexOf('navigate(`${config.thankYouPath}'), 'Kurzcheck zählt anonym erst nach bestätigtem Eingang.');
 check(/zaehle\('kurzcheck_abgeschickt', \{ vonPfad: config\.path, ziel: config\.key \}\)/.test(kurzcheck), 'Kurzcheck-Zähler nur mit Pfad und Variante.');
-check(/\}, config\.pageSource, \{ track: false, campaign: false \}\);/.test(kurzcheck), 'Kurzcheck per Mail zählt nicht doppelt (track: false).');
+check(/\}, config\.pageSource, \{ track: false, campaign: false(?:, whatsapp: whatsappOption\([^)]*\}\))? \}\);/.test(kurzcheck), 'Kurzcheck per Mail zählt nicht doppelt (track: false).');
 check(!/trackEvent|trackMeta|trackGoogleAds/.test(kurzcheck), 'Kurzcheck selbst sendet nichts an GA4, Meta oder Google Ads.');
 
 const leitfaden = quellen['src/components/sections/partner/PraxisLeitfadenForm.jsx'];

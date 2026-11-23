@@ -2,7 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, X } from 'lucide-react';
 import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot';
+import WhatsAppHaekchen from '@/components/forms/WhatsAppHaekchen';
 import { emailjsService } from '@/services/emailjsService';
+import { whatsappDankeText, whatsappOption } from '@/lib/whatsapp-nita';
 import { trackEvent } from '@/lib/analytics';
 import { isCampaignLandingRoute } from '@/lib/campaign-landing';
 import { getConsentState, subscribeConsent } from '@/lib/consent';
@@ -276,7 +278,7 @@ const RueckrufStyles = () => (
   `}</style>
 );
 
-const RueckrufDialog = ({ copy, lang, topic, pathname, sent, onClose, onSent }) => {
+const RueckrufDialog = ({ copy, lang, topic, pathname, sent, sentWhatsapp, onClose, onSent }) => {
   const dialogRef = useRef(null);
   const nameRef = useRef(null);
   const phoneRef = useRef(null);
@@ -286,6 +288,7 @@ const RueckrufDialog = ({ copy, lang, topic, pathname, sent, onClose, onSent }) 
   const [firstName, setFirstName] = useState('');
   const [phone, setPhone] = useState('');
   const [consent, setConsent] = useState(false);
+  const [whatsapp, setWhatsapp] = useState(false);
   const [errors, setErrors] = useState({ name: false, phone: false, consent: false });
   const [status, setStatus] = useState('idle');
 
@@ -330,10 +333,10 @@ const RueckrufDialog = ({ copy, lang, topic, pathname, sent, onClose, onSent }) 
         from_email: '',
         phone: normalizedPhone,
         message: buildRueckrufMessage({ pathname: page, topic, lang }),
-      }, `Rückruf-Hinweis ${page === '/' ? 'Startseite' : page}`), SEND_TIMEOUT_MS);
+      }, `Rückruf-Hinweis ${page === '/' ? 'Startseite' : page}`, { whatsapp: whatsappOption({ checked: whatsapp, phone: normalizedPhone, lang }) }), SEND_TIMEOUT_MS);
       if (!mountedRef.current) return;
       setStatus('idle');
-      onSent();
+      onSent(whatsapp);
     } catch {
       if (mountedRef.current) setStatus('error');
     }
@@ -366,6 +369,7 @@ const RueckrufDialog = ({ copy, lang, topic, pathname, sent, onClose, onSent }) 
           <div className="healio-rueckruf-success" role="status">
             <h3>{copy.successTitle}</h3>
             <p>{copy.successText}</p>
+            {sentWhatsapp && <p data-whatsapp-danke>{whatsappDankeText(lang)}</p>}
             <Link
               ref={successRef}
               to={copy.terminPath}
@@ -450,6 +454,7 @@ const RueckrufDialog = ({ copy, lang, topic, pathname, sent, onClose, onSent }) 
               </label>
               {errors.consent && <p id="healio-rueckruf-einwilligung-fehler" className="healio-rueckruf-error">{copy.consentError}</p>}
             </div>
+            <WhatsAppHaekchen variant="rueckruf" id="healio-rueckruf-whatsapp" phone={phone} checked={whatsapp} disabled={sending} lang={lang} onChange={setWhatsapp} />
             {status === 'error' && <p className="healio-rueckruf-send-error" role="alert">{copy.sendError}</p>}
             <button type="submit" className="healio-rueckruf-submit" disabled={sending}>
               {sending ? copy.sending : status === 'error' ? copy.retry : copy.submit}
@@ -469,6 +474,7 @@ const ActiveRueckrufHinweis = ({ path, topic, lang }) => {
   const [surroundings, setSurroundings] = useState({ blocked: false, launcherSuppressed: false });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [sent, setSent] = useState(false);
+  const [sentWhatsapp, setSentWhatsapp] = useState(false);
   const launcherRef = useRef(null);
   const teaserRef = useRef(null);
   const restoreFocusRef = useRef(null);
@@ -589,8 +595,9 @@ const ActiveRueckrufHinweis = ({ path, topic, lang }) => {
     setDialogOpen(false);
   }, []);
 
-  const handleSent = useCallback(() => {
+  const handleSent = useCallback((whatsapp = false) => {
     writeSessionMark('gesendet');
+    setSentWhatsapp(Boolean(whatsapp));
     setSent(true);
   }, []);
 
@@ -645,6 +652,7 @@ const ActiveRueckrufHinweis = ({ path, topic, lang }) => {
           topic={topic}
           pathname={path}
           sent={sent}
+          sentWhatsapp={sentWhatsapp}
           onClose={closeDialog}
           onSent={handleSent}
         />

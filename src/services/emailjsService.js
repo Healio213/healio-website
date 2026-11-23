@@ -34,7 +34,9 @@ export const emailjsService = {
   // track: false nur fuer die Meta-Zielseiten unter /check. Dort zaehlt die
   // Dankeseite den Lead, damit er nicht doppelt gemessen wird.
   // campaign: false, wenn das Formular den Block „Kampagne“ schon selbst schreibt.
-  sendEmail: async (formData, pageSource, { track = true, campaign = true } = {}) => {
+  // whatsapp: nur Privatkunden-Formulare mit dem freiwilligen WhatsApp-Häkchen
+  // (whatsappOption aus @/lib/whatsapp-nita). Ohne Option bleibt alles wie bisher.
+  sendEmail: async (formData, pageSource, { track = true, campaign = true, whatsapp = null } = {}) => {
     let response;
     const normalizedParams = emailjsService.normalizeData(formData, pageSource);
     // utm-Werte der Einstiegsseite, damit jede Anfrage ihre Herkunft
@@ -49,10 +51,17 @@ export const emailjsService = {
     // Gleichzeitig direkt in die Anfragen-Zentrale: Sofort-Mitteilung auf Franks
     // Handy und Sicherung, falls die Mail nicht ankommt.
     const zentraleAnfrage = baueZentraleAnfrage({ params: normalizedParams, utm, gclid });
+    // Das Häkchen gilt nur mit Telefonnummer. Angehakt geht der angezeigte
+    // Wortlaut als Beleg an die Zentrale, sonst fehlt das Feld ganz.
+    const whatsappJa = Boolean(whatsapp?.einwilligung) && String(normalizedParams.phone).trim() !== '';
+    if (whatsappJa) zentraleAnfrage.whatsapp = { einwilligung: true, text: String(whatsapp.text || '') };
     const zentrale = sendeAnZentrale(zentraleAnfrage);
     try {
       if (campaign && readCampaignUtm(window.location.search)) {
         normalizedParams.message = [normalizedParams.message, '', 'Kampagne:', describeCampaignSource(window.location.search)].join('\n');
+      }
+      if (whatsapp?.angeboten) {
+        normalizedParams.message = [normalizedParams.message, '', `WhatsApp: ${whatsappJa ? 'ja' : 'nein'}`].join('\n');
       }
       response = await emailjs.send(
         EMAILJS_CONFIG.SERVICE_ID,

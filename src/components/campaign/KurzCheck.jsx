@@ -5,14 +5,16 @@ import FormHoneypot, { isHoneypotFilled } from '@/components/forms/FormHoneypot'
 import { emailjsService } from '@/services/emailjsService';
 import { describeCampaignSource, markCheckLeadPending, readCampaignSearch } from '@/lib/campaign-landing';
 import { buildKurzcheckRequest, readKurzcheckContact } from '@/lib/kurzcheck-request';
+import WhatsAppHaekchen from '@/components/forms/WhatsAppHaekchen';
 import { hasConsent } from '@/lib/consent';
+import { whatsappOption } from '@/lib/whatsapp-nita';
 import { zaehle } from '@/lib/anonyme-zaehler';
 import { isValidKurzcheckEmail, isValidKurzcheckPhone, normalizeKurzcheckPhone, PHONE_MIN_DIGITS } from '../../../shared/kurzcheck.js';
 
 const HEALIO_PHONE_DISPLAY = '040 89755705';
 // Länger als der ungünstigste Lauf der Funktion (Speichern plus Benachrichtigung).
 const SUBMIT_TIMEOUT_MS = 15000;
-const EMPTY_CONTACT = { vorname: '', telefon: '', email: '', einwilligung: false };
+const EMPTY_CONTACT = { vorname: '', telefon: '', email: '', einwilligung: false, whatsapp: false };
 const DEFAULT_SUBMIT_ERROR = `Das hat gerade nicht geklappt. Bitte versuch es noch einmal oder ruf uns an: ${HEALIO_PHONE_DISPLAY}.`;
 const PHONE_FORMAT_ERROR = 'Bitte prüfe die Schreibweise deiner Telefonnummer, zum Beispiel 040 1234567 oder +49 40 1234567.';
 // Passt der offene Seitenstand nicht mehr zum Server, hilft nur Neuladen.
@@ -145,7 +147,7 @@ const KurzCheck = ({ config }) => {
     }
   };
 
-  const sendByMail = async ({ firstName, telefon, email }) => {
+  const sendByMail = async ({ firstName, telefon, email, whatsapp }) => {
     // Sicherung gegen eine falsche Konfiguration: nie eine Gesundheitsangabe per EmailJS.
     if (config.consent.healthData) throw new Error('health_data_requires_eu_route');
     await emailjsService.sendEmail({
@@ -161,7 +163,7 @@ const KurzCheck = ({ config }) => {
         'Kampagne:',
         describeCampaignSource(location.search),
       ].join('\n'),
-    }, config.pageSource, { track: false, campaign: false });
+    }, config.pageSource, { track: false, campaign: false, whatsapp: whatsappOption({ checked: whatsapp, phone: telefon }) });
   };
 
   const handleSubmit = async (event) => {
@@ -179,12 +181,15 @@ const KurzCheck = ({ config }) => {
 
     setStatus('sending');
     const { firstName, phone: telefon, email } = readKurzcheckContact(contact);
+    // Das WhatsApp-Häkchen gibt es nur auf dem Mailweg ohne Gesundheitsangabe.
+    const whatsappAngeboten = !config.endpoint && !config.consent.healthData;
+    const whatsapp = whatsappAngeboten && contact.whatsapp && Boolean(telefon);
 
     try {
       if (config.endpoint) {
         await sendToEuRoute();
       } else {
-        await sendByMail({ firstName, telefon, email });
+        await sendByMail({ firstName, telefon, email, whatsapp });
       }
     } catch (error) {
       const fieldError = FIELD_ERRORS[error?.code];
@@ -210,7 +215,7 @@ const KurzCheck = ({ config }) => {
     if (config.metaContentName && (hasConsent('marketing') || hasConsent('analytics'))) {
       markCheckLeadPending(config.key);
     }
-    navigate(`${config.thankYouPath}${readCampaignSearch(location.search)}`, { state: { firstName } });
+    navigate(`${config.thankYouPath}${readCampaignSearch(location.search)}`, { state: { firstName, whatsapp: Boolean(whatsapp) } });
   };
 
   return (
@@ -298,6 +303,11 @@ const KurzCheck = ({ config }) => {
               className={inputClass}
             />
             {errors.telefon ? <p id="check-telefon-fehler" className="mt-2 text-sm font-semibold text-[#c2412d]">{errors.telefon}</p> : null}
+            {!config.endpoint && !config.consent.healthData ? (
+              <div className="mt-2">
+                <WhatsAppHaekchen id="check-whatsapp" phone={contact.telefon} checked={contact.whatsapp} onChange={(value) => setField('whatsapp', value)} />
+              </div>
+            ) : null}
           </div>
 
           <div>
