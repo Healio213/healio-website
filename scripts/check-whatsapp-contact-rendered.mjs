@@ -318,10 +318,44 @@ try {
   assert(privacySection, 'Die Datenschutzerklärung enthält keinen WhatsApp-Abschnitt.');
   const whatsappPolicyLink = await page.$('a[href="https://www.whatsapp.com/legal/privacy-policy-eea"]');
   assert(whatsappPolicyLink, 'Die Datenschutzerklärung verlinkt die WhatsApp-Datenschutzerklärung nicht.');
-  const whatsappPrivacyText = await privacySection.evaluate((section) => section.parentElement?.textContent ?? section.textContent ?? '');
-  assert.match(whatsappPrivacyText, /Twilio Ireland Limited/i, 'Die Datenschutzerklärung muss Twilio als Übermittlungsdienst nennen.');
-  assert.match(whatsappPrivacyText, /OpenAI Ireland Limited/i, 'Die Datenschutzerklärung muss OpenAI als KI-Dienst nennen.');
-  assert.match(whatsappPrivacyText, /bis zu 30 Tage/i, 'Die Datenschutzerklärung muss die mögliche OpenAI-Aufbewahrung transparent nennen.');
+  // Nur der WhatsApp-Abschnitt selbst: von der Überschrift bis zur nächsten Überschrift.
+  const whatsappSectionText = () => page.$eval('#whatsapp-kontakt', (heading) => {
+    const parts = [heading.textContent ?? ''];
+    for (let node = heading.nextElementSibling; node && !/^H[23]$/.test(node.tagName); node = node.nextElementSibling) {
+      parts.push(node.textContent ?? '');
+    }
+    return parts.join(' ').replace(/\s+/g, ' ');
+  });
+  const whatsappPrivacyText = await whatsappSectionText();
+  assert.match(whatsappPrivacyText, /Twilio Ireland Limited/, 'Die Datenschutzerklärung muss Twilio als Übermittlungsdienst nennen.');
+  // Nita antwortet per WhatsApp seit dem 09.11.2026 über Claude (Anthropic), nicht mehr über OpenAI.
+  assert.match(whatsappPrivacyText, /Claude der Anthropic Ireland, Limited, 6th Floor, South Bank House, Barrow Street, Dublin 4, D04 TR29, Irland/, 'Die Datenschutzerklärung muss Claude und Anthropic mit Anschrift als KI-Dienst nennen.');
+  assert.doesNotMatch(whatsappPrivacyText, /OpenAI/, 'Der WhatsApp-Abschnitt darf OpenAI nicht mehr als KI-Dienst nennen.');
+  assert.match(whatsappPrivacyText, /nicht zum Training seiner Modelle/, 'Die Datenschutzerklärung muss den Ausschluss des Trainings nennen.');
+  assert.match(whatsappPrivacyText, /im Regelfall innerhalb von 30 Tagen/, 'Die Datenschutzerklärung muss die Löschfrist bei Anthropic transparent nennen.');
+  assert.match(whatsappPrivacyText, /Für Anthropic gelten die EU-Standardvertragsklauseln/, 'Die Datenschutzerklärung muss die Grundlage der Übermittlung an Anthropic nennen.');
+  assert.match(whatsappPrivacyText, /Spätestens 24 Stunden nach Beginn des Gesprächs wird der Verlauf automatisch gelöscht/, 'Die Datenschutzerklärung muss die Löschfrist des Gesprächsverlaufs nennen.');
+  assert.match(whatsappPrivacyText, /Rufnummer und Ihr WhatsApp-Profilname werden nicht an Anthropic übermittelt/, 'Die Datenschutzerklärung muss sagen, dass Rufnummer und Profilname nicht an Anthropic gehen.');
+  assert.match(whatsappPrivacyText, /Healio-Kontaktsystem \(Anfragen-Zentrale\)/, 'Die Datenschutzerklärung muss die Übergabe an die Anfragen-Zentrale nennen.');
+  assert.match(whatsappPrivacyText, /spätestens nach 90 Tagen/, 'Die Datenschutzerklärung muss die Löschfrist in der Anfragen-Zentrale nennen.');
+  assert.match(whatsappPrivacyText, /geht diese Nachricht nicht an Anthropic/, 'Die Datenschutzerklärung muss die Gesundheitsgrenze ohne KI nennen.');
+  assert.match(whatsappPrivacyText, /Mit STOP beenden Sie die Antworten jederzeit/, 'Die Datenschutzerklärung muss STOP erklären.');
+  assert.doesNotMatch(whatsappPrivacyText, /[–—]/, 'Der WhatsApp-Abschnitt darf keine Gedankenstriche enthalten.');
+  assert(await page.$('#whatsapp-kontakt ~ p a[href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data"]'), 'Die Datenschutzerklärung muss die Speicherangaben von Anthropic verlinken.');
+  const fullPrivacyText = await page.$eval('main', (main) => main.textContent ?? '');
+  assert.doesNotMatch(fullPrivacyText, /nicht als Anfrage erfasst/, 'Die Datenschutzerklärung darf nicht mehr behaupten, WhatsApp-Nachrichten würden nicht als Anfrage erfasst.');
+
+  await page.goto(`${baseUrl}/en/privacy`, { waitUntil: 'networkidle0', timeout: 30_000 });
+  const whatsappPrivacyTextEn = await whatsappSectionText();
+  assert.match(whatsappPrivacyTextEn, /Contact via WhatsApp/, 'Die englische Datenschutzerklärung braucht den WhatsApp-Abschnitt.');
+  assert.match(whatsappPrivacyTextEn, /Claude from Anthropic Ireland, Limited, 6th Floor, South Bank House, Barrow Street, Dublin 4, D04 TR29, Ireland/, 'Die englische Fassung muss Claude und Anthropic mit Anschrift nennen.');
+  assert.doesNotMatch(whatsappPrivacyTextEn, /OpenAI/, 'Der englische WhatsApp-Abschnitt darf OpenAI nicht mehr nennen.');
+  assert.match(whatsappPrivacyTextEn, /within 30 days/, 'Die englische Fassung muss die Löschfrist bei Anthropic nennen.');
+  assert.match(whatsappPrivacyTextEn, /no later than 24 hours after the conversation began/, 'Die englische Fassung muss die Löschfrist des Gesprächsverlaufs nennen.');
+  assert.match(whatsappPrivacyTextEn, /after 90 days at the latest/, 'Die englische Fassung muss die Löschfrist in der Anfragen-Zentrale nennen.');
+  assert.doesNotMatch(whatsappPrivacyTextEn, /[–—]/, 'Der englische WhatsApp-Abschnitt darf keine Gedankenstriche enthalten.');
+  const fullPrivacyTextEn = await page.$eval('main', (main) => main.textContent ?? '');
+  assert.doesNotMatch(fullPrivacyTextEn, /not recorded as an enquiry/, 'Die englische Fassung darf nicht mehr behaupten, WhatsApp-Nachrichten würden nicht als Anfrage erfasst.');
 
   console.log('WhatsApp contact rendered checks passed.');
 } finally {
