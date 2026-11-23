@@ -181,7 +181,7 @@ try {
   // 4. Rückruf-Fenster „Sprich mit einem Experten“
   for (const [viewport, name] of [[MOBILE, 'rueckruf-390'], [DESKTOP, 'rueckruf-1440']]) {
     const { page, mails, zentrale } = await openPage(viewport);
-    await goto(page, '/ambulant');
+    await goto(page, '/kassenbonus');
     let geoeffnet = false;
     for (let schritt = 0; schritt < 10 && !geoeffnet; schritt += 1) {
       await page.evaluate(() => window.scrollBy(0, 320));
